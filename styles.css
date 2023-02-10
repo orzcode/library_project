@@ -60,16 +60,21 @@ button{
 	background-color: var(--header);
 	width: 100%;
 	text-align: center;
+	flex-grow: 0;
+	flex-shrink: 0;
 }
 
 #header2{
 	display:flex;
 	align-items: center;
+	flex-grow: 0;
+	flex-shrink: 0;
 }
 
 #library{
 	background-color: var(--main);
 	display: grid;
+	flex-grow: 1;
 	width: 100vw;
 	gap: 4rem;
 	padding: 4rem;
@@ -80,6 +85,8 @@ button{
 #footer{
 	margin-top: auto;
 	padding-bottom: 10rem;
+	flex-grow: 0;
+	flex-shrink: 0;
 }
 
 .card{
