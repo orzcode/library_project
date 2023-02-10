@@ -53,6 +53,7 @@ button{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	min-height: 100vh;
 }
 
 #header{
@@ -77,8 +78,8 @@ button{
 }
 
 #footer{
-	justify-self: end;
-	margin: auto;
+	margin-top: auto;
+	padding-bottom: 10rem;
 }
 
 .card{
