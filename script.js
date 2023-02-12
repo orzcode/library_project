@@ -37,8 +37,9 @@ function propagateSeries(){
 		let newCard = document.querySelector('#library').createElement("div");
 		newCard.classList.add("card");
 		let newCardTitle = newCard.createElement("p");
-		newCardTitle.createTextNode("Hi there and greetings!")
+		newCardTitle.createElement("strong")
 		console.log("fuck");
+		//figure out if you really need multiple variables for each P and Strong???
 	}
 }
 propagateSeries();
