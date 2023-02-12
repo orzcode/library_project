@@ -1,42 +1,38 @@
 let library = [];
 ///////////////////
-let sampleBook1 = {
-	"title": "Dune",
-	"author": "Frank Herbert",
-	"pages": 300,
-	"genre": "Sci-fi",
-	"comments": "Exciting and fun"
+let sampleSeries1 = {
+	"title": "The Wire",
+	"seasons": 6,
+	"complete": true,
+	"viewed": true,
    }
-library.push(sampleBook1);
+library.push(sampleSeries1);
 
-let sampleBook2 = {
-	"title": "Dune Messiah",
-	"author": "Frank Herbert",
-	"pages": 250,
-	"genre": "Sci-fi",
-	"comments": "More political than the first"
+let sampleSeries2 = {
+	"title": "Walking Dead",
+	"seasons": 11,
+	"complete": true,
+	"viewed": true,
    }
-library.push(sampleBook2);
+library.push(sampleSeries2);
 ////////////////////
-
-
-function Book(title, author, pages, genre, comments) {
+function Series(title, seasons, complete, viewed) {
 	this.title = title;
-	this.author = author;
-	this.pages = pages;
-	this.genre = genre;
-	this.comments = comments;
+	this.seasons = seasons;
+	this.complete = complete;
+	this.viewed = viewed;
 }
-
 ///////////////
-library.push(new Book("The Bible", "God", "1000", "Fantasy", "Boring"));
+let newSeries = new Series();
+library.push(newSeries);
+//////////////
+library.push(new Series("Mr Inbetween", 3, true, false));
 
 
 console.log(library);
 ///////////////
-function propagateBooks(){
+function propagateSeries(){
 	for(let i = 0; i < library.length; i++){
 		console.log(library[i].title);
 	}
 }
-propagateBooks();
