@@ -33,6 +33,12 @@ console.log(library);
 ///////////////
 function propagateSeries(){
 	for(let i = 0; i < library.length; i++){
-		console.log(library[i].title);
+		//library[i].title//
+		let newCard = document.querySelector('#library').createElement("div");
+		newCard.classList.add("card");
+		let newCardTitle = newCard.createElement("p");
+		newCardTitle.createTextNode("Hi there and greetings!")
+		console.log("fuck");
 	}
 }
+propagateSeries();
