@@ -1,6 +1,13 @@
 let library = [];
 let libraryDiv = document.querySelector('#library');
-
+let newSeries = new Series();
+///////////////////
+function Series(title, seasons, complete, viewed) {
+	this.title = title;
+	this.seasons = seasons;
+	this.complete = complete;
+	this.viewed = viewed;
+}
 ///////////////////
 let sampleSeries1 = {
 	"title": "The Wire",
@@ -18,34 +25,23 @@ let sampleSeries2 = {
    }
 library.push(sampleSeries2);
 ////////////////////
-function Series(title, seasons, complete, viewed) {
-	this.title = title;
-	this.seasons = seasons;
-	this.complete = complete;
-	this.viewed = viewed;
-}
-///////////////
-let newSeries = new Series();
-library.push(newSeries);
-//////////////
 library.push(new Series("Mr Inbetween", 3, true, false));
+library.push(new Series("Mr Inbetween", 3, true, false));
+library.push(new Series("Mr Inbetween", 3, true, false));
+library.push(new Series("Mr Inbetween", 3, true, false));
+////////////////////
+// const library = [
+// 	new Series('Series 1', '10 seasons', 'Yes', 'No'),
+// 	new Series('Series 2', '5 seasons', 'No', 'Yes'),
+// 	new Series('Series 3', '3 seasons', 'Yes', 'Yes')
+//   ];
+////////////////////
 
-
-console.log(library);
-console.log(Series);
 ///////////////
-function propagateSeries(){
-	for(let i = 0; i < library.length; i++){
-		//library[i].title//
-		let newCard = libraryDiv.createElement("div");
-		newCard.classList.add("card");
-		let newCardTitle = newCard.createElement("p");
-		newCardTitle.createElement("strong")
-		console.log("fuck");
-		//figure out if you really need multiple variables for each P and Strong???
-	}
-}
 
+//////////////
+
+///////////////
 
 ////////Creates a card based on array object, but doesn't append tp page yet////////////
 //Note that 'card' here is different in scope!! And is therefore separate. Confusing huh
@@ -90,10 +86,11 @@ function createCard(obj) {
 
 
 ////////////Actually runs the card-creation function, and then appends that card to the page
-  function renderCards(library) {	
-	library.forEach(series => {	  
+  function renderCards(givenLibrary) {	
+	givenLibrary.forEach(ObjFromArray => {	  
 		//Note that 'card' here is different in scope!! And is therefore separate. Confusing huh
-		const card = createCard(series);
+		const card = createCard(ObjFromArray);
+		card.setAttribute('data-complete', ObjFromArray.complete);
 		libraryDiv.appendChild(card);	  
 	});	
   }

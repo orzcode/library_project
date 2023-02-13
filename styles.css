@@ -7,6 +7,7 @@
 :root{
 	--header: #402c2c;
 	--main: #746565;
+	--highlighted: #849070;
 }
 html {
 	background-color: var(--main);
@@ -112,3 +113,6 @@ p:first-child{
 	font-size: xx-large;
 	margin-bottom: 1rem;
 }
+.card[data-complete="true"] {
+	background-color: var(--highlighted);
+  }
