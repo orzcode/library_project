@@ -2,6 +2,12 @@
 Library project involving prototypes
 ~~~
 TODO: Replace 'viewed' with 'Remove?' button
+    --Remove should have a confirmation
+TODO: Add modal for 'new' button, with form, to run function
+TODO: Click to change from Complete? Yes to No
+
+Todo: Add wikipedia link?
+Todo: Add cover art?
 
 All of your book objects are going to be stored in a simple array, so add a function to the script (not the constructor) that can take user’s input and store the new book objects into an array. Your code should look something like this:
 
