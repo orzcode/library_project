@@ -1,7 +1,7 @@
 # library_project
 Library project involving prototypes
 ~~~
-
+TODO: Replace 'viewed' with 'Remove?' button
 
 All of your book objects are going to be stored in a simple array, so add a function to the script (not the constructor) that can take user’s input and store the new book objects into an array. Your code should look something like this:
 

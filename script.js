@@ -66,7 +66,7 @@ function createCard(obj) {
 	
 	const completeP = document.createElement('p');
 	const completeStrong = document.createElement('strong');
-	completeStrong.textContent = 'Complete? ';
+	completeStrong.textContent = 'Complete: ';
 	completeP.appendChild(completeStrong);
 	completeP.appendChild(document.createTextNode(obj.complete ? 'Yes' : 'No'));
 	
