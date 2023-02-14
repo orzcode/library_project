@@ -157,7 +157,7 @@ async function getSeasonsFromWikipedia(show) {
 //------------------------------------------------------//
 //BOTH  //
 async function getInfoFromWikipedia(searchTerm) {
-	const url = `https://en.wikipedia.org/w/api.php?action=query&titles=${searchTerm}&prop=revisions&rvprop=content|pageimages&format=json&pithumbsize=500`;
+	const url = `https://corsproxy.io/?https://en.wikipedia.org/w/api.php?action=query&titles=${searchTerm}&prop=revisions&rvprop=content|pageimages&format=json&pithumbsize=500`;
 	const response = await fetch(url);
 	const data = await response.json();
 	const pages = data.query.pages;
