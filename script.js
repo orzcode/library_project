@@ -61,7 +61,9 @@ function createCard(obj) {
 	seasonsStrong.textContent = 'Seasons: ';
 	seasonsP.appendChild(seasonsStrong);
 	// seasonsP.appendChild(document.createTextNode(obj.seasons));
-	let apiSeasons = getInfoFromWikipedia(obj.title).seasons;
+	let apiSeasons = getSeasonsFromWikipedia(obj.title).then(seasons => {
+		return seasons;
+	  });
 	seasonsP.appendChild(document.createTextNode(apiSeasons));
 	
 	card.appendChild(seasonsP);
@@ -150,9 +152,9 @@ async function getSeasonsFromWikipedia(show) {
 	return match ? parseInt(match[1]) : 0;
   }
   
-  getSeasonsFromWikipedia('The Simpsons').then(seasons => {
-	console.log(`The show has ${seasons} seasons.`);
-  });
+//   getSeasonsFromWikipedia('The Simpsons').then(seasons => {
+// 	return seasons;
+//   });
 //------------------------------------------------------//
 //BOTH  //
 async function getInfoFromWikipedia(searchTerm) {
