@@ -2,7 +2,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	outline: 1px solid black;
+	/* outline: 1px solid black; */
 }
 :root{
 	--header: #402c2c;
@@ -123,17 +123,30 @@ dialog {
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%) scale(0);
-  }
-  
-  dialog::backdrop {
+	/*Transform function above*/
+	/*Other properties below*/
+	width: 60%;
+	height: 60%;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+
+}
+
+dialog * {outline: 1px solid pink;}
+
+
+dialog::backdrop {
 	background: rgba(0, 0, 0, 0.5);
-  }
+}
   
-  dialog[open] {
-	animation: show 0.3s ease normal forwards; /* added forwards value */
-  }
+dialog[open] {
+	animation: show 0.4s ease normal forwards; /* added forwards value!! */
+}
   
-  @keyframes show {
+@keyframes show {
 	from {
 	  transform: translate(-50%, -50%) scale(0);
 	  opacity: 0;
@@ -142,5 +155,5 @@ dialog {
 	  transform: translate(-50%, -50%) scale(1);
 	  opacity: 1;
 	}
-  }
+}
 /*------------*/
