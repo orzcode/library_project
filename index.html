@@ -12,12 +12,32 @@
 	<link rel='icon' type='image/x-icon' href='favicon.ico'>
 </head>
 <body>
+	<dialog>
+		<h2>Add a TV series</h2>
+		<form>
+			<label for="seriesName">Series name:</label>
+			<input type="text" id="seriesName">
+			<br><br>
+			<label for="filmingComplete">Filming complete?</label>
+				<label for="yes">Yes</label>
+			<input type="radio" id="yes" name="filmingComplete" value="Yes">
+			~  
+				<label for="no">No</label>
+			<input type="radio" id="no" name="filmingComplete" value="No">
+				
+			</select>
+			<br><br>
+			<button id="confirmBtn" type="submit" value="default">Submit</button>
+			<button id="cancelFormButton" type="button" value="cancel" onclick="document.querySelector('dialog').close()">Cancel</button>
+		  </form>
+	</dialog>
 	<div id="container">
 		<div id="header">
-			<h1>We got TV shows 'n shit, yo, and API's!</h1>
+			<h1>We got TV shows 'n shit, yo, and API's! (soon)</h1>
 		</div>
 		<div id="header2">
-			<button class="btnShadow">Add a show</button>
+			<button id="newShowBtn" class="btnShadow" onclick="document.querySelector('dialog').showModal()">Add a show</button>
+			
 		</div>
 		
 		<div id="library">

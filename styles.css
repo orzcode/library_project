@@ -42,7 +42,7 @@ a {
 	transform: translate3d(0.5px, 1px, 0);
 }
 /* ---------------------------------------------------- */
-button{
+#newShowBtn{
 	height: 10rem;
 	width: 20rem;
 	border-radius: 28px;
@@ -116,3 +116,31 @@ p:first-child{
 .card[data-complete="true"] {
 	background-color: var(--highlighted);
   }
+/*------------*/
+/*--Modal Dialog--*/
+dialog {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%) scale(0);
+  }
+  
+  dialog::backdrop {
+	background: rgba(0, 0, 0, 0.5);
+  }
+  
+  dialog[open] {
+	animation: show 0.3s ease normal forwards; /* added forwards value */
+  }
+  
+  @keyframes show {
+	from {
+	  transform: translate(-50%, -50%) scale(0);
+	  opacity: 0;
+	}
+	to {
+	  transform: translate(-50%, -50%) scale(1);
+	  opacity: 1;
+	}
+  }
+/*------------*/
