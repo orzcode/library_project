@@ -61,9 +61,8 @@ function createCard(obj) {
 	seasonsStrong.textContent = 'Seasons: ';
 	seasonsP.appendChild(seasonsStrong);
 	// seasonsP.appendChild(document.createTextNode(obj.seasons));
-	seasonsP.appendChild(document.createTextNode(getInfoFromWikipedia(obj.title).then(info => {
-		return info.seasons;
-})));
+	seasonsP.appendChild(document.createTextNode((getInfoFromWikipedia(obj.title).seasons)
+));
 	
 	card.appendChild(seasonsP);
 	
