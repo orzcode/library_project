@@ -60,7 +60,10 @@ function createCard(obj) {
 	const seasonsStrong = document.createElement('strong');
 	seasonsStrong.textContent = 'Seasons: ';
 	seasonsP.appendChild(seasonsStrong);
-	seasonsP.appendChild(document.createTextNode(obj.seasons));
+	// seasonsP.appendChild(document.createTextNode(obj.seasons));
+	seasonsP.appendChild(document.createTextNode(getInfoFromWikipedia(obj.title).then(info => {
+		return info.seasons;
+})));
 	
 	card.appendChild(seasonsP);
 	
@@ -124,3 +127,50 @@ function getWikipediaLink(input) {
 	return `https://en.wikipedia.org/wiki/${encodedInput}`;
   }
 //--Should work--//
+//EVEN BETTER://////////
+async function getWikiLink(term) {
+	const apiUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${term}&format=json`;
+	const response = await fetch(apiUrl);
+	const data = await response.json();
+	const firstResult = data.query.search[0];
+	const pageId = firstResult.pageid;
+	const link = `https://en.wikipedia.org/?curid=${pageId}`;
+	return link;
+  }
+//--------------------------------------------------//
+//-------------------------------------------------//
+async function getSeasonsFromWikipedia(show) {
+	const url = `https://en.wikipedia.org/w/api.php?action=query&titles=${show}&prop=revisions&rvprop=content&format=json`;
+	const response = await fetch(url);
+	const data = await response.json();
+	const pages = data.query.pages;
+	const page = Object.values(pages)[0];
+	const content = page.revisions[0]['*'];
+	const regex = /Seasons?[\s\S]*?(\d+)/i;
+	const match = content.match(regex);
+	return match ? parseInt(match[1]) : 0;
+  }
+  
+  getSeasonsFromWikipedia('The Simpsons').then(seasons => {
+	console.log(`The show has ${seasons} seasons.`);
+  });
+//------------------------------------------------------//
+//BOTH  //
+async function getInfoFromWikipedia(searchTerm) {
+	const url = `https://en.wikipedia.org/w/api.php?action=query&titles=${searchTerm}&prop=revisions&rvprop=content|pageimages&format=json&pithumbsize=500`;
+	const response = await fetch(url);
+	const data = await response.json();
+	const pages = data.query.pages;
+	const page = Object.values(pages)[0];
+	const content = page.revisions[0]['*'];
+	const image = page.thumbnail ? page.thumbnail.source : null;
+	const regex = /Seasons?[\s\S]*?(\d+)/i;
+	const match = content.match(regex);
+	const seasons = match ? parseInt(match[1]) : 0;
+	return { seasons, image };
+  }
+
+  getInfoFromWikipedia('The Simpsons').then(info => {
+	console.log(`The show has ${info.seasons} seasons.`);
+	console.log(`The main image is ${info.image}.`);
+  });
