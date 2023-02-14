@@ -64,6 +64,9 @@ function createCard(obj) {
 	let apiSeasons = getSeasonsFromWikipedia(obj.title).then(seasons => {
 		return seasons;
 	  });
+	  console.log(getSeasonsFromWikipedia(obj.title).then(seasons => {
+		return seasons;
+	  }));
 	seasonsP.appendChild(document.createTextNode(apiSeasons));
 	
 	card.appendChild(seasonsP);
@@ -175,3 +178,7 @@ async function getInfoFromWikipedia(searchTerm) {
 	console.log(`The show has ${info.seasons} seasons.`);
 	console.log(`The main image is ${info.image}.`);
   });
+
+  console.log(getSeasonsFromWikipedia('The Simpsons').then(seasons => {
+	return seasons;
+  }));
