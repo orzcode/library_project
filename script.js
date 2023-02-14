@@ -30,19 +30,17 @@ library.push(new Series("Mr Inbetween", 3, true, false));
 library.push(new Series("Mr Inbetween", 3, true, false));
 library.push(new Series("Mr Inbetween", 3, true, false));
 ////////////////////
-// const library = [
-// 	new Series('Series 1', '10 seasons', 'Yes', 'No'),
-// 	new Series('Series 2', '5 seasons', 'No', 'Yes'),
-// 	new Series('Series 3', '3 seasons', 'Yes', 'Yes')
-//   ];
-////////////////////
-
-///////////////
-
-//////////////
-
-///////////////
-
+////////////Actually runs the card-creation function, and then appends that card to the page
+function renderCards(givenLibrary) {	
+	givenLibrary.forEach(ObjFromArray => {	  
+		//Note that 'card' here is different in scope!! And is therefore separate. Confusing huh
+		const card = createCard(ObjFromArray);
+		card.setAttribute('data-complete', ObjFromArray.complete);
+		libraryDiv.appendChild(card);	  
+	});	
+  }
+renderCards(library);
+///////
 ////////Creates a card based on array object, but doesn't append tp page yet////////////
 //Note that 'card' here is different in scope!! And is therefore separate. Confusing huh
 function createCard(obj) {
@@ -60,14 +58,7 @@ function createCard(obj) {
 	const seasonsStrong = document.createElement('strong');
 	seasonsStrong.textContent = 'Seasons: ';
 	seasonsP.appendChild(seasonsStrong);
-	// seasonsP.appendChild(document.createTextNode(obj.seasons));
-	let apiSeasons = getSeasonsFromWikipedia(obj.title).then(seasons => {
-		return seasons;
-	  });
-	  console.log(getSeasonsFromWikipedia(obj.title).then(seasons => {
-		return seasons;
-	  }));
-	seasonsP.appendChild(document.createTextNode(apiSeasons));
+	seasonsP.appendChild(document.createTextNode(obj.seasons));
 	
 	card.appendChild(seasonsP);
 	
@@ -89,22 +80,6 @@ function createCard(obj) {
 	
 	return card;
   }
-///////////////////////
-
-
-////////////Actually runs the card-creation function, and then appends that card to the page
-  function renderCards(givenLibrary) {	
-	givenLibrary.forEach(ObjFromArray => {	  
-		//Note that 'card' here is different in scope!! And is therefore separate. Confusing huh
-		const card = createCard(ObjFromArray);
-		card.setAttribute('data-complete', ObjFromArray.complete);
-		libraryDiv.appendChild(card);	  
-	});	
-  }
-renderCards(library);
-///////
-
-
 //------------------------------------------------------------------------------//
 
 
@@ -155,9 +130,6 @@ async function getSeasonsFromWikipedia(show) {
 	return match ? parseInt(match[1]) : 0;
   }
   
-//   getSeasonsFromWikipedia('The Simpsons').then(seasons => {
-// 	return seasons;
-//   });
 //------------------------------------------------------//
 //BOTH  //
 async function getInfoFromWikipedia(searchTerm) {
