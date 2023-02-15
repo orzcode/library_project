@@ -125,16 +125,20 @@ dialog {
 	transform: translate(-50%, -50%) scale(0);
 	/*Transform function above*/
 	/*Other properties below*/
-	width: 75%;
+	width: 80%;
 	height: 90%;
 	border-radius: 20px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
 	align-items: center;
+	opacity: 0;
+	pointer-events: none;
+	visibility: hidden;
+	transition: all 0.4s ease;
 }
 
-dialog * {outline: 1px solid pink;}
+/* dialog * {outline: 1px solid pink;} */
 
 
 dialog::backdrop {
@@ -142,30 +146,16 @@ dialog::backdrop {
 }
   
 dialog[open] {
-	animation: open 0.4s ease normal forwards; /* added forwards value!! */
+	transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
 }
 dialog:not([open]) {
-    animation: notopen 0.2s ease normal forwards;
-}
-@keyframes open {
-	from {
-	  transform: translate(-50%, -50%) scale(0);
-	  opacity: 0;
-	}
-	to {
-	  transform: translate(-50%, -50%) scale(1);
-	  opacity: 1;
-	}
-}
-@keyframes notopen {
-    from {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
-    }
-    to {
-        transform: translate(-50%, -50%) scale(0);
-        opacity: 0;
-    }
+    transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
 }
 /*------------*/
 dialog img:nth-child(1){
@@ -209,4 +199,11 @@ dialog button{
 }
 dialog button:hover{
 	background-color: var(--highlighted);
+}
+form > div{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
 }
