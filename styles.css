@@ -132,7 +132,6 @@ dialog {
 	flex-direction: column;
 	justify-content: space-evenly;
 	align-items: center;
-
 }
 
 dialog * {outline: 1px solid pink;}
@@ -171,12 +170,43 @@ dialog:not([open]) {
 /*------------*/
 dialog img:nth-child(1){
 	position: absolute;
-	top: 5px;
-	right: 5px;
+	top: 8px;
+	right: 8px;
 	width: clamp(50px, 9%, 80px);
 }
-
+dialog img:nth-child(1):active {
+	transform: translate3d(1px, 1px, 0);
+}
 dialog img:nth-child(2){
 	width: clamp(256px, 40%, 320px);
-	margin-top: -8rem;
+	/* margin-top: -4rem;
+	margin-right: -1.5rem; */
+}
+dialog h2{
+	font-size: 6rem;
+}
+dialog form{
+	margin: 0 1rem;
+}
+dialog form *{
+	font-size: 4rem;
+	font-family: Oswald;
+}
+dialog input[type=text]{
+	border: 1px solid rgba(0, 0, 0, 0.4);
+	border-radius: 5px;
+	height: 4rem;
+	width:30rem;
+}
+dialog input[type=radio]{
+	height: 4rem;
+	width: 4rem;
+}
+dialog button{
+	border-radius: 10px;
+	padding: 0 1rem;
+	font-size: 3rem;
+}
+dialog button:hover{
+	background-color: var(--highlighted);
 }
