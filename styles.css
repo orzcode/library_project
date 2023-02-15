@@ -116,7 +116,7 @@ p:first-child{
 .card[data-complete="true"] {
 	background-color: var(--highlighted);
   }
-/*------------*/
+/*------------------------------------------*/
 /*--Modal Dialog--*/
 dialog {
 	position: absolute;
