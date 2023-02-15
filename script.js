@@ -36,12 +36,15 @@ function renderCards(givenLibrary) {
 		//Note that 'card' here is different in scope!! And is therefore separate. Confusing huh
 		const card = createCard(ObjFromArray);
 		card.setAttribute('data-complete', ObjFromArray.complete);
+		//IF 'complete' is true, it highlights the card
 		libraryDiv.appendChild(card);	  
 	});	
   }
 renderCards(library);
 ///////
 ////////Creates a card based on array object, but doesn't append tp page yet////////////
+//In other words, even though this is a long function, it's all just creating the card structure
+//
 //Note that 'card' here is different in scope!! And is therefore separate. Confusing huh
 function createCard(obj) {
 	const card = document.createElement('div');
