@@ -80,6 +80,8 @@ a {
   text-align: center;
   flex-grow: 0;
   flex-shrink: 0;
+  padding: 2rem;
+  margin:auto;
 }
 
 #header2 {
