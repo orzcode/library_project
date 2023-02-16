@@ -13,7 +13,7 @@
 }
 html {
   background-color: var(--main);
-  font-family: Oswald;
+  font-family: 'A-OTF Shin Go Pro R';
   font-size: 62.5%;
   /* FONTSIZE TRICK-- 1 rem = 10 px here, usually 1 rem = 16px */
   caret-color: transparent;
@@ -25,6 +25,20 @@ body {
   /* FONTSIZE TRICK-- 1 rem = 10 px here, usually 1 rem = 16px */
   /* FONTSIZE - Adding the 0.4 is for responsivity */
 }
+
+@font-face {
+    font-family: 'A-OTF Shin Go Pro R';
+    font-style: normal;
+    font-weight: normal;
+    src: local('A-OTF Shin Go Pro R'), url('AOTFShinGoProRegular.woff') format('woff');
+}
+@font-face {
+    font-family: 'A-OTF Shin Go Pro L';
+    font-style: normal;
+    font-weight: normal;
+    src: local('A-OTF Shin Go Pro L'), url('AOTFShinGoProLight.woff') format('woff');
+}
+
 li {
   list-style-type: none;
 }
