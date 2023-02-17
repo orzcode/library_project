@@ -1,6 +1,5 @@
 let library = [];
 let libraryDiv = document.querySelector('#library');
-let newSeries = new Series();
 ///////////////////
 function Series(title, seasons, complete, viewed) {
 	this.title = title;
