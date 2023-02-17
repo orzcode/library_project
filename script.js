@@ -1,39 +1,40 @@
 let library = [];
 let libraryDiv = document.querySelector('#library');
 ///////////////////
-function Series(title, seasons, complete, viewed) {
+function Series(title, complete, link, image) {
 	this.title = title;
-	this.seasons = seasons;
 	this.complete = complete;
-	this.viewed = viewed;
+	this.link = link;
+	this.image = image;
 }
 ///////////////////
 let sampleSeries1 = {
-	"title": "The Wire",
-	"seasons": 6,
+	"title": "Twin Peaks wrong",
 	"complete": true,
-	"viewed": true,
+	"link": 'https://en.wikipedia.org/wiki/The_Expanse_(TV_series)',
+	"image": 'https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg',
    }
 library.push(sampleSeries1);
 
 let sampleSeries2 = {
-	"title": "Walking Dead",
-	"seasons": 11,
+	"title": "Wrong peaks wrong",
 	"complete": true,
-	"viewed": true,
+	"link": 'https://en.wikipedia.org/wiki/The_Expanse_(TV_series)',
+	"image": 'https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg',
    }
 library.push(sampleSeries2);
 ////////////////////
-library.push(new Series("Mr Inbetween", 3, true, false));
-library.push(new Series("Mr Inbetween", 3, true, false));
-library.push(new Series("Mr Inbetween", 3, true, false));
-library.push(new Series("Mr Inbetween", 3, true, false));
+library.push(new Series("Mr Inbetween", true, undefined, undefined));
+library.push(new Series("Mr Inbetween", true, undefined, undefined));
+library.push(new Series("Mr Inbetween", true, undefined, undefined));
+library.push(new Series("Mr Curious Man Doing Curious Things", true, undefined, undefined));
 ////////////////////
 ////////////Actually runs the card-creation function, and then appends that card to the page
 function renderCards(givenLibrary) {	
 	givenLibrary.forEach(ObjFromArray => {	  
 		//Note that 'card' here is different in scope!! And is therefore separate. Confusing huh
 		const card = createCard(ObjFromArray);
+		//passing it the object to 'construct' a card from
 		card.setAttribute('data-complete', ObjFromArray.complete);
 		//IF 'complete' is true, it highlights the card
 		libraryDiv.appendChild(card);	  
@@ -49,20 +50,14 @@ function createCard(obj) {
 	const card = document.createElement('div');
 	card.className = 'card';
 	
+	//INSERT CODE HERE TO INSERT THIS.IMAGE INTO BANNER SECTION OF CARD?
+
 	const titleP = document.createElement('p');
 	const titleStrong = document.createElement('strong');
 	titleStrong.textContent = obj.title;
 	titleP.appendChild(titleStrong);
 	
 	card.appendChild(titleP);
-	
-	const seasonsP = document.createElement('p');
-	const seasonsStrong = document.createElement('strong');
-	seasonsStrong.textContent = 'Seasons: ';
-	seasonsP.appendChild(seasonsStrong);
-	seasonsP.appendChild(document.createTextNode(obj.seasons));
-	
-	card.appendChild(seasonsP);
 	
 	const completeP = document.createElement('p');
 	const completeStrong = document.createElement('strong');
@@ -72,13 +67,13 @@ function createCard(obj) {
 	
 	card.appendChild(completeP);
 	
-	const viewedP = document.createElement('p');
-	const viewedStrong = document.createElement('strong');
-	viewedStrong.textContent = 'Viewed? ';
-	viewedP.appendChild(viewedStrong);
-	viewedP.appendChild(document.createTextNode(obj.viewed ? 'Yes' : 'No'));
+	const linkP = document.createElement('p');
+	const linkStrong = document.createElement('strong');
+	linkStrong.textContent = 'Link: ';
+	linkP.appendChild(linkStrong);
+	linkP.appendChild(document.createTextNode(obj.link ? 'Yes' : 'No'));
 	
-	card.appendChild(viewedP);
+	card.appendChild(linkP);
 	
 	return card;
   }
