@@ -110,7 +110,7 @@ function getWikipediaLink(input) {
 //--Should work--//
 //EVEN BETTER://////////
 async function getWikiLink(term) {
-	const apiUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${term}&format=json`;
+	const apiUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${term}&format=json&origin=*`;
 	const response = await fetch(apiUrl);
 	const data = await response.json();
 	const firstResult = data.query.search[0];
@@ -121,7 +121,7 @@ async function getWikiLink(term) {
 //--------------------------------------------------//
 //-------------------------------------------------//
 async function getSeasonsFromWikipedia(show) {
-	const url = `https://en.wikipedia.org/w/api.php?action=query&titles=${show}&prop=revisions&rvprop=content&format=json`;
+	const url = `https://corsproxy.io/?https://en.wikipedia.org/w/api.php?action=query&titles=${show}&prop=revisions&rvprop=content&format=json&origin=*`;
 	const response = await fetch(url);
 	const data = await response.json();
 	const pages = data.query.pages;
@@ -135,7 +135,7 @@ async function getSeasonsFromWikipedia(show) {
 //------------------------------------------------------//
 //BOTH  //
 async function getInfoFromWikipedia(searchTerm) {
-	const url = `https://corsproxy.io/?https://en.wikipedia.org/w/api.php?action=query&titles=${searchTerm}&prop=revisions&rvprop=content|pageimages&format=json&pithumbsize=500`;
+	const url = `https://corsproxy.io/?https://en.wikipedia.org/w/api.php?action=query&titles=${searchTerm}&prop=revisions&rvprop=content|pageimages&format=json&pithumbsize=500&origin=*`;
 	const response = await fetch(url);
 	const data = await response.json();
 	const pages = data.query.pages;
@@ -148,8 +148,13 @@ async function getInfoFromWikipedia(searchTerm) {
 	return { seasons, image };
   }
 
-  getInfoFromWikipedia('The Simpsons').then(info => {
-	console.log(`The show has ${info.seasons} seasons.`);
-	console.log(`The main image is ${info.image}.`);
+  const term = "the expanse";
+  getWikiLink(term).then(wikiLink => {
+	console.log(wikiLink);
   });
+
+//   getInfoFromWikipedia('The Expanse').then(info => {
+// 	console.log(`The show has ${info.seasons} seasons.`);
+// 	console.log(`The main image is ${info.image}.`);
+//   });
 
