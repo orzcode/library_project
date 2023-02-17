@@ -153,6 +153,3 @@ async function getInfoFromWikipedia(searchTerm) {
 	console.log(`The main image is ${info.image}.`);
   });
 
-  console.log(getSeasonsFromWikipedia('The Simpsons').then(seasons => {
-	return seasons;
-  }));
