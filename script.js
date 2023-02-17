@@ -147,13 +147,28 @@ async function getInfoFromWikipedia(searchTerm) {
 	const seasons = match ? parseInt(match[1]) : 0;
 	return { seasons, image };
   }
+////////////////
+async function getMainImageFromWikipedia(searchTerm) {
+	const url = `https://en.wikipedia.org/w/api.php?action=query&titles=${searchTerm}&prop=pageimages&format=json&pithumbsize=500&origin=*`;
+	const response = await fetch(url);
+	const data = await response.json();
+	const pages = data.query.pages;
+	const page = Object.values(pages)[0];
+	const mainImage = page.thumbnail ? page.thumbnail.source : null;
+	return mainImage;
+  }
+////
 
-  const term = "the expanse";
-  getWikiLink(term).then(wikiLink => {
-	console.log(wikiLink);
-  });
+// getMainImageFromWikipedia("The Simpsons").then(mainImage =>{
+// 	document.body.style.backgroundImage = `url(${mainImage})`;
+// })//WORKS!!!
 
-//   getInfoFromWikipedia('The Expanse').then(info => {
+
+//   getWikiLink("mr inbetween").then(wikiLink => {
+// 	console.log(wikiLink);
+//   });//WORKS BEAUTIFULLY
+
+//   getInfoFromWikipedia('The Simpsons').then(info => {
 // 	console.log(`The show has ${info.seasons} seasons.`);
 // 	console.log(`The main image is ${info.image}.`);
 //   });
