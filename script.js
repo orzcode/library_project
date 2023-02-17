@@ -50,11 +50,16 @@ function createCard(obj) {
 	const card = document.createElement('div');
 	card.className = 'card';
 	
-	//INSERT CODE HERE TO INSERT THIS.IMAGE INTO BANNER SECTION OF CARD?
+	const banner = document.createElement('img');
+	banner.src = obj.image;
+	banner.alt = "Thumbnail";
+	
+	card.appendChild(banner);
 
 	const titleP = document.createElement('p');
 	const titleStrong = document.createElement('strong');
 	titleStrong.textContent = obj.title;
+	titleStrong.className = 'title';
 	titleP.appendChild(titleStrong);
 	
 	card.appendChild(titleP);
@@ -69,12 +74,25 @@ function createCard(obj) {
 	
 	const linkP = document.createElement('p');
 	const linkStrong = document.createElement('strong');
-	linkStrong.textContent = 'Link: ';
+	const linkA = document.createElement('a');
+	linkA.textContent = 'Link';
+	linkA.href = obj.link;
 	linkP.appendChild(linkStrong);
-	linkP.appendChild(document.createTextNode(obj.link ? 'Yes' : 'No'));
+	linkStrong.appendChild(linkA);
 	
 	card.appendChild(linkP);
 	
+	const removeP = document.createElement('p');
+	const removeStrong = document.createElement('strong');
+	const removeEm = document.createElement('em');
+	removeEm.textContent = 'Remove?';
+	removeP.appendChild(removeStrong);
+	removeStrong.appendChild(removeEm);
+	//NEED TO TURN THIS INTO A BUTTON
+	//DECIDE HOW THIS SHOULD FLOW
+	
+	card.appendChild(removeP);
+
 	return card;
   }
 //------------------------------------------------------------------------------//

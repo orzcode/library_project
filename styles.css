@@ -120,13 +120,14 @@ a {
   height: 480px;
   width: clamp(420px, 90%, 520px);
   display: flex;
+  text-align: center;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: larger;
   letter-spacing: 1px;
 }
-p:first-child {
+.title {
   /*OR target by ID*/
   font-size: xx-large;
   margin-bottom: 1rem;
