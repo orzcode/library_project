@@ -27,7 +27,7 @@ library.push(sampleSeries2);
 library.push(new Series("Mr Inbetween", true, undefined, undefined));
 library.push(new Series("Mr Inbetween", true, undefined, undefined));
 library.push(new Series("Mr Inbetween", true, undefined, undefined));
-library.push(new Series("Mr Curious Man Doing Curious Things", true, undefined, undefined));
+library.push(new Series("Mr Curious Man Doing Curious Things and He Takes Up Three Lines", true, undefined, undefined));
 ////////////////////
 ////////////Actually runs the card-creation function, and then appends that card to the page
 function renderCards(givenLibrary) {	
