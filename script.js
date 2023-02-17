@@ -84,31 +84,10 @@ function createCard(obj) {
   }
 //------------------------------------------------------------------------------//
 
-
-
-//Wikipedia function? NOT TESTED YET//
-async function getWikipediaArticle(input) {
-	const encodedInput = encodeURIComponent(input);
-	const url = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodedInput}&format=json`;
-	
-	const response = await fetch(url);
-	const data = await response.json();
-	
-	const pageId = Object.keys(data.query.pages)[0];
-	if (pageId === '-1') {
-	  return null;
-	}
-	
-	return `https://en.wikipedia.org/?curid=${pageId}`;
-  }
-//Wikipedia function? NOT TESTED YET//
-//--OR--//
-function getWikipediaLink(input) {
-	const encodedInput = encodeURIComponent(input);
-	return `https://en.wikipedia.org/wiki/${encodedInput}`;
-  }
-//--Should work--//
-//EVEN BETTER://////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+/////////WIKI LINK FETCHER/////////////
+////////////////////////////////////////
 async function getWikiLink(term) {
 	const apiUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${term}&format=json&origin=*`;
 	const response = await fetch(apiUrl);
@@ -119,57 +98,94 @@ async function getWikiLink(term) {
 	return link;
   }
 //--------------------------------------------------//
-//-------------------------------------------------//
-async function getSeasonsFromWikipedia(show) {
-	const url = `https://corsproxy.io/?https://en.wikipedia.org/w/api.php?action=query&titles=${show}&prop=revisions&rvprop=content&format=json&origin=*`;
-	const response = await fetch(url);
-	const data = await response.json();
-	const pages = data.query.pages;
-	const page = Object.values(pages)[0];
-	const content = page.revisions[0]['*'];
-	const regex = /Seasons?[\s\S]*?(\d+)/i;
-	const match = content.match(regex);
-	return match ? parseInt(match[1]) : 0;
-  }
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+/////////IMAGE FETCHER/////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+async function getMainImageFromTVMaze(searchTerm) {
+	const searchUrl = `https://api.tvmaze.com/search/shows?q=${searchTerm}`;
+	let searchResults;
+	try {
+	  const searchResponse = await fetch(searchUrl);
+	  if (!searchResponse.ok) {
+		throw new Error(`Error fetching search results: ${searchResponse.status}`);
+	  }
+	  searchResults = await searchResponse.json();
+	} catch (error) {
+	  console.error(error);
+	  return 'errorImage.png'; // replace with path to your default image
+	}
   
-//------------------------------------------------------//
-//BOTH  //
-async function getInfoFromWikipedia(searchTerm) {
-	const url = `https://corsproxy.io/?https://en.wikipedia.org/w/api.php?action=query&titles=${searchTerm}&prop=revisions&rvprop=content|pageimages&format=json&pithumbsize=500&origin=*`;
-	const response = await fetch(url);
-	const data = await response.json();
-	const pages = data.query.pages;
-	const page = Object.values(pages)[0];
-	const content = page.revisions[0]['*'];
-	const image = page.thumbnail ? page.thumbnail.source : null;
-	const regex = /Seasons?[\s\S]*?(\d+)/i;
-	const match = content.match(regex);
-	const seasons = match ? parseInt(match[1]) : 0;
-	return { seasons, image };
+	const bestMatch = searchResults[0]?.show;
+	if (!bestMatch) {
+	  console.error('No search results found');
+	  return 'errorImage.png'; // replace with path to your default image
+	}
+  
+	const id = bestMatch.id;
+	const showUrl = `https://api.tvmaze.com/shows/${id}/images`;
+	let imagesData;
+	try {
+	  const showResponse = await fetch(showUrl);
+	  if (!showResponse.ok) {
+		throw new Error(`Error fetching show data: ${showResponse.status}`);
+	  }
+	  imagesData = await showResponse.json();
+	} catch (error) {
+	  console.error(error);
+	  return 'errorImage.png'; // replace with path to your default image
+	}
+  
+	let smallestBannerImage = 'errorImage.png'; // replace with path to your default image
+	let smallestBannerImageSize = Infinity;
+	let smallestGeneralImage = 'errorImage.png'; // replace with path to your default image
+	let smallestGeneralImageSize = Infinity;
+  
+	imagesData.forEach(image => {
+	  const { width, height, url } = image.resolutions?.original || {};
+	  if (width && height && url) {
+		if (image.type === 'banner') {
+		  const imageSize = width * height;
+		  if (imageSize < smallestBannerImageSize) {
+			if (imageSize < 10000) {
+			  smallestBannerImage = url;
+			  smallestBannerImageSize = imageSize;
+			} else {
+			  smallestBannerImage = image.resolutions.medium.url;
+			  smallestBannerImageSize = image.resolutions.medium.width * image.resolutions.medium.height;
+			}
+		  }
+		} else if (image.type === 'poster' || image.type === 'background') {
+		  const imageSize = width * height;
+		  if (imageSize < smallestGeneralImageSize) {
+			if (imageSize < 10000) {
+			  smallestGeneralImage = url;
+			  smallestGeneralImageSize = imageSize;
+			} else {
+			  smallestGeneralImage = image.resolutions.medium.url;
+			  smallestGeneralImageSize = image.resolutions.medium.width * image.resolutions.medium.height;
+			}
+		  }
+		}
+	  }
+	});
+  
+	if (smallestBannerImage !== 'errorImage.png') {
+	  return smallestBannerImage;
+	}
+	return smallestGeneralImage;
   }
-////////////////
-async function getMainImageFromWikipedia(searchTerm) {
-	const url = `https://en.wikipedia.org/w/api.php?action=query&titles=${searchTerm}&prop=pageimages&format=json&pithumbsize=500&origin=*`;
-	const response = await fetch(url);
-	const data = await response.json();
-	const pages = data.query.pages;
-	const page = Object.values(pages)[0];
-	const mainImage = page.thumbnail ? page.thumbnail.source : null;
-	return mainImage;
-  }
-////
+////////////////////////////////////////////////////////////////////////////////////////////
+/////////IMAGE FETCHER/////////////
+////////////////////////////////////////////////////////////////////////////////////////////
 
-// getMainImageFromWikipedia("The Simpsons").then(mainImage =>{
+// getMainImageFromTVMaze("twin peaks").then(mainImage =>{
 // 	document.body.style.backgroundImage = `url(${mainImage})`;
-// })//WORKS!!!
+// })//WORKS...
 
 
-//   getWikiLink("mr inbetween").then(wikiLink => {
-// 	console.log(wikiLink);
-//   });//WORKS BEAUTIFULLY
-
-//   getInfoFromWikipedia('The Simpsons').then(info => {
-// 	console.log(`The show has ${info.seasons} seasons.`);
-// 	console.log(`The main image is ${info.image}.`);
-//   });
+  getWikiLink("the expanse").then(wikiLink => {
+	console.log(wikiLink);
+  });//WORKS BEAUTIFULLY
 
