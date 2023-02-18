@@ -8,31 +8,37 @@ function Series(title, complete, link, image) {
 	this.image = image;
 }
 ///////////////////
-const gistId = '5030015d1b6612eed934612108b3e63f';
-const filename = 'library.txt';
-const accessToken = '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';
-let content;
+async function getContentFromGist() {
+	const gistId = '5030015d1b6612eed934612108b3e63f';
+	const filename = 'library.txt';
+	const accessToken = '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';
 
-fetch(`https://api.github.com/gists/${gistId}`, {
-  headers: {
-    Authorization: `token ${accessToken}`
-  }
-})
-  .then(response => response.json())
-  .then(data => {
-    const file = data.files[filename];
-    if (file) {
-      content = JSON.parse(file.content);
+	const response = await fetch(`https://api.github.com/gists/${gistId}`, {
+	  headers: {
+		Authorization: `token ${accessToken}`
+	  }
+	});
+	const data = await response.json();
+	const file = data.files[filename];
+	if (file) {
+	  const content = JSON.parse(file.content);
 	  console.log(content);
 	  return content;
-    } else {
-      console.error(`File ${filename} not found in Gist ${gistId}`);
-    }
-  })
-  .catch(error => {
-    console.error(`Error retrieving Gist ${gistId}:`, error);
-  });
-console.log(content);
+	} else {
+	  console.error(`File ${filename} not found in Gist ${gistId}`);
+	  return null;
+	}
+  }
+
+  async function myFunction() {
+	const content = await getContentFromGist();
+	console.log(content);
+	// Use the content value here
+  }
+  
+  myFunction();
+///////////////////
+
 ///////////////////
 let sampleSeries1 = {
 	"title": "Twin Peaks wrong",
@@ -66,7 +72,7 @@ function renderCards(givenLibrary) {
 		libraryDiv.appendChild(card);	  
 	});	
   }
-renderCards(content);
+renderCards(library);
 ///////
 ////////Creates a card based on array object, but doesn't append tp page yet////////////
 //In other words, even though this is a long function, it's all just creating the card structure
