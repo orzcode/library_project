@@ -79,6 +79,7 @@ function createCard(obj) {
 	linkA.href = obj.link;
 	linkP.appendChild(linkStrong);
 	linkStrong.appendChild(linkA);
+	//FIX THIS TO LOOK LIKE HTML EXAMPLE
 	
 	card.appendChild(linkP);
 	
@@ -201,4 +202,3 @@ async function getMainImageFromTVMaze(searchTerm) {
   getWikiLink("the expanse").then(wikiLink => {
 	console.log(wikiLink);
   });//WORKS BEAUTIFULLY
-
