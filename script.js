@@ -8,6 +8,32 @@ function Series(title, complete, link, image) {
 	this.image = image;
 }
 ///////////////////
+const gistId = '5030015d1b6612eed934612108b3e63f';
+const filename = 'library.txt';
+const accessToken = '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';
+let content;
+
+fetch(`https://api.github.com/gists/${gistId}`, {
+  headers: {
+    Authorization: `token ${accessToken}`
+  }
+})
+  .then(response => response.json())
+  .then(data => {
+    const file = data.files[filename];
+    if (file) {
+      content = JSON.parse(file.content);
+	  console.log(content);
+	  return content;
+    } else {
+      console.error(`File ${filename} not found in Gist ${gistId}`);
+    }
+  })
+  .catch(error => {
+    console.error(`Error retrieving Gist ${gistId}:`, error);
+  });
+console.log(content);
+///////////////////
 let sampleSeries1 = {
 	"title": "Twin Peaks wrong",
 	"complete": true,
@@ -40,12 +66,13 @@ function renderCards(givenLibrary) {
 		libraryDiv.appendChild(card);	  
 	});	
   }
-renderCards(library);
+renderCards(content);
 ///////
 ////////Creates a card based on array object, but doesn't append tp page yet////////////
 //In other words, even though this is a long function, it's all just creating the card structure
 //
 //Note that 'card' here is different in scope!! And is therefore separate. Confusing huh
+//This function gets called from something else (renderCards)
 function createCard(obj) {
 	const card = document.createElement('div');
 	card.className = 'card';
