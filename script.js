@@ -11,11 +11,11 @@ function Series(title, complete, link, image) {
 async function getContentFromGist() {
 	const gistId = '5030015d1b6612eed934612108b3e63f';
 	const filename = 'library.txt';
-	const accessToken = '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';
+	const token = process.env.accessToken;
 
 	const response = await fetch(`https://api.github.com/gists/${gistId}`, {
 	  headers: {
-		Authorization: `token ${accessToken}`
+		Authorization: `token ${token}`
 	  }
 	});
 	const data = await response.json();
