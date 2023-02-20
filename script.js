@@ -45,7 +45,7 @@ async function getContentFromGist() {
 	// Use the content value here
   }
   
- let content = myFunction();
+ let content = await myFunction();
 
    console.log(content)
 ///////////////////
