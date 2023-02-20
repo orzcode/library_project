@@ -1,5 +1,6 @@
 let library = [];
 let libraryDiv = document.getElementById('#library');
+import { ACCESSTOKEN } from './secret.js';
 ///////////////////
 function Series(title, complete, link, image) {
 	this.title = title;
@@ -11,7 +12,7 @@ function Series(title, complete, link, image) {
 async function getContentFromGist() {
 	const gistId = '5030015d1b6612eed934612108b3e63f';
 	const filename = 'library.txt';
-	const token = process.env.ACCESSTOKEN;
+	const token = ACCESSTOKEN;
 
 	const response = await fetch(`https://api.github.com/gists/${gistId}`, {
 	  headers: {
