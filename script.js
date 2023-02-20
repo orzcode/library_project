@@ -1,10 +1,12 @@
 let library = [];
 let libraryDiv = document.getElementById('#library');
 
-const dotenv = require('dotenv');
-dotenv.config();
+// const dotenv = require('dotenv');
+// dotenv.config();
 
-const ACCESSTOKEN = process.env.ACCESSTOKEN;
+const ACCESS = "github_pat_11AQ5WB5Y07d4zqin16RYv_";
+const TOKEN = "cRato9Mi5aBLugbBNQ1dD0Oem8LD8e1BqGZw5kBqe90UHNTBZYD4Jb7FFiN";
+const ACCESSTOKEN = ACCESS + TOKEN;
 
 ///////////////////
 function Series(title, complete, link, image) {
