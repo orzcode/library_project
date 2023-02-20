@@ -31,7 +31,7 @@ async function getContentFromGist() {
 	const file = data.files[filename];
 	if (file) {
 	  const content = JSON.parse(file.content);
-	  console.log(content);
+	//   console.log(content);
 	  return content;
 	} else {
 	  console.error(`File ${filename} not found in Gist ${gistId}`);
@@ -41,11 +41,13 @@ async function getContentFromGist() {
 
   async function myFunction() {
 	const content = await getContentFromGist();
-	console.log(content);
+	return content
 	// Use the content value here
   }
   
-  myFunction();
+ let content = myFunction();
+
+   console.log(content)
 ///////////////////
 
 ///////////////////
@@ -81,7 +83,7 @@ function renderCards(givenLibrary) {
 		libraryDiv.appendChild(card);	  
 	});	
   }
-renderCards(library);
+renderCards(content);
 ///////
 ////////Creates a card based on array object, but doesn't append tp page yet////////////
 //In other words, even though this is a long function, it's all just creating the card structure
