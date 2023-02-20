@@ -46,7 +46,7 @@ async function getContentFromGist() {
   }
   
  let content = await myFunction();
-
+//mayben eed async on rendercards?
    console.log(content)
 ///////////////////
 
