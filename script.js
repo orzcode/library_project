@@ -1,6 +1,11 @@
 let library = [];
 let libraryDiv = document.getElementById('#library');
-import { ACCESSTOKEN } from './secret.js';
+
+const dotenv = require('dotenv');
+dotenv.config();
+
+const ACCESSTOKEN = process.env.ACCESSTOKEN;
+
 ///////////////////
 function Series(title, complete, link, image) {
 	this.title = title;
