@@ -1,3 +1,1 @@
-module.exports = {
-	ACCESSTOKEN: process.env.ACCESSTOKEN
-  }
+export const ACCESSTOKEN = process.env.ACCESSTOKEN;

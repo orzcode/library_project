@@ -1,6 +1,6 @@
 let library = [];
 let libraryDiv = document.getElementById('#library');
-const { ACCESSTOKEN } = require('./secret.js');
+import { ACCESSTOKEN } from './secret.js';
 ///////////////////
 function Series(title, complete, link, image) {
 	this.title = title;
