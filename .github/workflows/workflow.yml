@@ -11,7 +11,7 @@ jobs:
       - name: Use secret in JavaScript
         env:
           MY_SECRET: ${{ secrets.ACCESSTOKEN }}
-          CI: false
+          CI: true
         run: |
           echo $MY_SECRET
           node script.js
