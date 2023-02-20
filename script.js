@@ -41,13 +41,15 @@ async function getContentFromGist() {
 
   async function myFunction() {
 	const content = await getContentFromGist();
-	return content
+	let parsedArray = Array.from(content);
+	console.log(parsedArray)
+	// renderCards(content)
 	// Use the content value here
   }
-  
- let content = await myFunction();
-//mayben eed async on rendercards?
-   console.log(content)
+  myFunction();
+//  let content = await myFunction();
+// //mayben eed async on rendercards?
+//    console.log(content)
 ///////////////////
 
 ///////////////////
@@ -83,7 +85,9 @@ function renderCards(givenLibrary) {
 		libraryDiv.appendChild(card);	  
 	});	
   }
-renderCards(content);
+
+// renderCards(content);
+
 ///////
 ////////Creates a card based on array object, but doesn't append tp page yet////////////
 //In other words, even though this is a long function, it's all just creating the card structure
