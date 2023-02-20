@@ -1,5 +1,5 @@
 let library = [];
-let libraryDiv = document.querySelector('#library');
+let libraryDiv = document.getElementById('#library');
 ///////////////////
 function Series(title, complete, link, image) {
 	this.title = title;
