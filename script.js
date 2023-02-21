@@ -1,6 +1,7 @@
 let library = [];
-let libraryDiv = document.getElementById('#library');
+let libraryDiv = document.querySelector('#library');
 
+////////////////////////////////////////////////////////////
 const ACCESS = "github_pat_11AQ5WB5Y07d4zqin16RYv_";
 const TOKEN = "cRato9Mi5aBLugbBNQ1dD0Oem8LD8e1BqGZw5kBqe90UHNTBZYD4Jb7FFiN";
 const ACCESSTOKEN = ACCESS + TOKEN;
@@ -9,7 +10,7 @@ const ACCESSTOKEN = ACCESS + TOKEN;
 //I spent literally several hours trying half a dozen fixes and methods and none of them worked
 //Since this is not a sensitive or critical app and nothing can be lost, I decided to say
 //a great big "Fuck this" and use the API key in the above way.
-///////////////////
+////////////////////////////////////////////////////////////
 function Series(title, complete, link, image) {
 	this.title = title;
 	this.complete = complete;
@@ -31,7 +32,6 @@ async function getContentFromGist() {
 	const file = data.files[filename];
 	if (file) {
 	  const content = JSON.parse(file.content);
-	//   console.log(content);
 	  return content;
 	} else {
 	  console.error(`File ${filename} not found in Gist ${gistId}`);
@@ -41,38 +41,34 @@ async function getContentFromGist() {
 
   async function myFunction() {
 	const content = await getContentFromGist();
-	let parsedArray = Array.from(content);
-	console.log(parsedArray)
-	// renderCards(content)
+	renderCards(content);
 	// Use the content value here
   }
+
   myFunction();
-//  let content = await myFunction();
-// //mayben eed async on rendercards?
-//    console.log(content)
 ///////////////////
 
 ///////////////////
-let sampleSeries1 = {
-	"title": "Twin Peaks wrong",
-	"complete": true,
-	"link": 'https://en.wikipedia.org/wiki/The_Expanse_(TV_series)',
-	"image": 'https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg',
-   }
-library.push(sampleSeries1);
+// let sampleSeries1 = {
+// 	"title": "Twin Peaks wrong",
+// 	"complete": true,
+// 	"link": 'https://en.wikipedia.org/wiki/The_Expanse_(TV_series)',
+// 	"image": 'https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg',
+//    }
+// library.push(sampleSeries1);
 
-let sampleSeries2 = {
-	"title": "Wrong peaks wrong",
-	"complete": true,
-	"link": 'https://en.wikipedia.org/wiki/The_Expanse_(TV_series)',
-	"image": 'https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg',
-   }
-library.push(sampleSeries2);
-////////////////////
-library.push(new Series("Mr Inbetween", true, undefined, undefined));
-library.push(new Series("Mr Inbetween", true, undefined, undefined));
-library.push(new Series("Mr Inbetween", true, undefined, undefined));
-library.push(new Series("Mr Curious Man Doing Curious Things and He Takes Up Three Lines", true, undefined, undefined));
+// let sampleSeries2 = {
+// 	"title": "Wrong peaks wrong",
+// 	"complete": true,
+// 	"link": 'https://en.wikipedia.org/wiki/The_Expanse_(TV_series)',
+// 	"image": 'https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg',
+//    }
+// library.push(sampleSeries2);
+// ////////////////////
+// library.push(new Series("Mr Inbetween", true, undefined, undefined));
+// library.push(new Series("Mr Inbetween", true, undefined, undefined));
+// library.push(new Series("Mr Inbetween", true, undefined, undefined));
+// library.push(new Series("Mr Curious Man Doing Curious Things and He Takes Up Three Lines", true, undefined, undefined));
 ////////////////////
 ////////////Actually runs the card-creation function, and then appends that card to the page
 function renderCards(givenLibrary) {	
@@ -82,7 +78,7 @@ function renderCards(givenLibrary) {
 		//passing it the object to 'construct' a card from
 		card.setAttribute('data-complete', ObjFromArray.complete);
 		//IF 'complete' is true, it highlights the card
-		libraryDiv.appendChild(card);	  
+		libraryDiv.appendChild(card);
 	});	
   }
 
@@ -244,9 +240,9 @@ async function getMainImageFromTVMaze(searchTerm) {
 
 // getMainImageFromTVMaze("twin peaks").then(mainImage =>{
 // 	document.body.style.backgroundImage = `url(${mainImage})`;
-// })//WORKS...
+// })//WORKS...BUT NEED TO TEST ON LIVE PAGE BUTTON OR SOMETHING
 
 
-  getWikiLink("the expanse").then(wikiLink => {
-	console.log(wikiLink);
-  });//WORKS BEAUTIFULLY
+//   getWikiLink("the expanse").then(wikiLink => {
+// 	console.log(wikiLink);
+//   });//WORKS BEAUTIFULLY_ SHOULD TEST LIVE TOO
