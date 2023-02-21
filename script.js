@@ -243,6 +243,4 @@ async function getMainImageFromTVMaze(searchTerm) {
 // })//WORKS...BUT NEED TO TEST ON LIVE PAGE BUTTON OR SOMETHING
 
 
-//   getWikiLink("the expanse").then(wikiLink => {
-// 	console.log(wikiLink);
-//   });//WORKS BEAUTIFULLY_ SHOULD TEST LIVE TOO
+// //WORKS BEAUTIFULLY_ SHOULD TEST LIVE TOO
