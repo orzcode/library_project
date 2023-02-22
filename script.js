@@ -17,23 +17,25 @@ function Series(title, complete, link, image) {
 	this.image = image;
 }
 ///////////////////
-import { initializeApp } from "firebase/app";
-import { getDatabase } from "firebase/database";
+// import { initializeApp } from "firebase/app";
+// import { getDatabase } from "firebase/database";
 
-const firebaseConfig = {
-	apiKey: "AIzaSyCgWOsD40-y422erIMNultdmSBmcP5c_VY",
-	authDomain: "tv-series-library.firebaseapp.com",
-	databaseURL: "https://tv-series-library-default-rtdb.firebaseio.com",
-	projectId: "tv-series-library",
-	storageBucket: "tv-series-library.appspot.com",
-	messagingSenderId: "371898195484",
-	appId: "1:371898195484:web:6d181e6ccf75b8410ec9d9"
-  };
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// const firebaseConfig = {
+// 	apiKey: "AIzaSyCgWOsD40-y422erIMNultdmSBmcP5c_VY",
+// 	authDomain: "tv-series-library.firebaseapp.com",
+// 	databaseURL: "https://tv-series-library-default-rtdb.firebaseio.com",
+// 	projectId: "tv-series-library",
+// 	storageBucket: "tv-series-library.appspot.com",
+// 	messagingSenderId: "371898195484",
+// 	appId: "1:371898195484:web:6d181e6ccf75b8410ec9d9"
+//   };
+// // Initialize Firebase
+
+// const app = initializeApp(firebaseConfig);
 // Initialize Realtime Database and get a reference to the service
-const database = getDatabase(app);
-console.log("Hey, database from firebase is: " + database);
+
+// const database = getDatabase(app);
+// console.log("Hey, database from firebase is: " + database);
 ///////////////////
 async function getContentFromGist() {
 	const response = await fetch(`https://api.github.com/gists/${gistId}`, {
@@ -60,28 +62,17 @@ async function getContentFromGist() {
   
 	gulpAndRender();
 ///////////////////
-
-///////////////////
-// let sampleSeries1 = {
-// 	"title": "Twin Peaks wrong",
-// 	"complete": true,
-// 	"link": 'https://en.wikipedia.org/wiki/The_Expanse_(TV_series)',
-// 	"image": 'https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg',
-//    }
-// library.push(sampleSeries1);
-
-// let sampleSeries2 = {
-// 	"title": "Wrong peaks wrong",
-// 	"complete": true,
-// 	"link": 'https://en.wikipedia.org/wiki/The_Expanse_(TV_series)',
-// 	"image": 'https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg',
-//    }
-// library.push(sampleSeries2);
-// ////////////////////
-// library.push(new Series("Mr Inbetween", true, undefined, undefined));
-// library.push(new Series("Mr Inbetween", true, undefined, undefined));
-// library.push(new Series("Mr Inbetween", true, undefined, undefined));
-// library.push(new Series("Mr Curious Man Doing Curious Things and He Takes Up Three Lines", true, undefined, undefined));
+////////////////////
+library.push(new Series("Mr Inbetween", true, 'https://en.wikipedia.org/wiki/The_Expanse_(TV_series)', 'https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg'));
+library.push(new Series("Mr Test", false, 'https://en.wikipedia.org/wiki/The_Expanse_(TV_series)', 'https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg'));
+library.push(new Series("Mr Truetest", true, 'https://en.wikipedia.org/wiki/The_Expanse_(TV_series)', 'https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg'));
+library.push(new Series("Mr Curious Man Doing Curious Things", false, 'https://en.wikipedia.org/wiki/The_Expanse_(TV_series)', 'https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg'));
+////////////////////
+console.log(library);
+localStorage.setItem("localContent", JSON.stringify(library));
+let localContent = JSON.parse(localStorage.getItem("localContent"));
+console.log(localContent);
+////////////////////
 ////////////////////
 ////////////Actually runs the card-creation function, and then appends that card to the page
 function renderCards(givenLibrary) {	
