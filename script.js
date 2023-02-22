@@ -17,6 +17,24 @@ function Series(title, complete, link, image) {
 	this.image = image;
 }
 ///////////////////
+import { initializeApp } from "firebase/app";
+import { getDatabase } from "firebase/database";
+
+const firebaseConfig = {
+	apiKey: "AIzaSyCgWOsD40-y422erIMNultdmSBmcP5c_VY",
+	authDomain: "tv-series-library.firebaseapp.com",
+	databaseURL: "https://tv-series-library-default-rtdb.firebaseio.com",
+	projectId: "tv-series-library",
+	storageBucket: "tv-series-library.appspot.com",
+	messagingSenderId: "371898195484",
+	appId: "1:371898195484:web:6d181e6ccf75b8410ec9d9"
+  };
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+// Initialize Realtime Database and get a reference to the service
+const database = getDatabase(app);
+console.log(database);
+///////////////////
 async function getContentFromGist() {
 	const response = await fetch(`https://api.github.com/gists/${gistId}`, {
 	  headers: {
