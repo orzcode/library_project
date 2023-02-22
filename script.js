@@ -33,7 +33,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 // Initialize Realtime Database and get a reference to the service
 const database = getDatabase(app);
-console.log(database);
+console.log("Hey, database from firebase is: " + database);
 ///////////////////
 async function getContentFromGist() {
 	const response = await fetch(`https://api.github.com/gists/${gistId}`, {
@@ -55,7 +55,7 @@ async function getContentFromGist() {
   async function gulpAndRender() {
 	const content = await getContentFromGist();
 	renderCards(content);
-	console.log(content);
+	// console.log(content);
   }
   
 	gulpAndRender();
