@@ -1,15 +1,14 @@
 let library = [];
 let libraryDiv = document.querySelector('#library');
-
 ////////////////////////////////////////////////////////////
-const ACCESS = "github_pat_11AQ5WB5Y07d4zqin16RYv_";
-const TOKEN = "cRato9Mi5aBLugbBNQ1dD0Oem8LD8e1BqGZw5kBqe90UHNTBZYD4Jb7FFiN";
-const ACCESSTOKEN = ACCESS + TOKEN;
+const gistId = '5030015d1b6612eed934612108b3e63f';
+const filename = 'library.txt';
+const ACCESSTOKEN = atob("Z2l0aHViX3BhdF8xMUFRNVdCNVkwN2Q0enFpbjE2Ull2X2NSYXRvOU1pNWFCTHVnYkJOUTFkRDBPZW04TEQ4ZTFCcUdadzVrQnFlOTBVSE5UQlpZRDRKYjdGRmlO");
 //Note to anyone reading:
 //actually using a Github Secret is far, FAR more difficult than it needs to be
 //I spent literally several hours trying half a dozen fixes and methods and none of them worked
 //Since this is not a sensitive or critical app and nothing can be lost, I decided to say
-//a great big "Fuck this" and use the API key in the above way.
+//a great big "Fuck this" and simply use an encoded API key in the above way.
 ////////////////////////////////////////////////////////////
 function Series(title, complete, link, image) {
 	this.title = title;
@@ -19,13 +18,9 @@ function Series(title, complete, link, image) {
 }
 ///////////////////
 async function getContentFromGist() {
-	const gistId = '5030015d1b6612eed934612108b3e63f';
-	const filename = 'library.txt';
-	const token = ACCESSTOKEN;
-
 	const response = await fetch(`https://api.github.com/gists/${gistId}`, {
 	  headers: {
-		Authorization: `token ${token}`
+		Authorization: `token ${ACCESSTOKEN}`
 	  }
 	});
 	const data = await response.json();
@@ -38,14 +33,14 @@ async function getContentFromGist() {
 	  return null;
 	}
   }
-
-  async function myFunction() {
+  
+  async function gulpAndRender() {
 	const content = await getContentFromGist();
 	renderCards(content);
-	// Use the content value here
+	console.log(content);
   }
-
-  myFunction();
+  
+	gulpAndRender();
 ///////////////////
 
 ///////////////////
@@ -123,20 +118,19 @@ function createCard(obj) {
 	linkA.href = obj.link;
 	linkP.appendChild(linkStrong);
 	linkStrong.appendChild(linkA);
-	//FIX THIS TO LOOK LIKE HTML EXAMPLE
+	linkA.after(" • ");
 	
 	card.appendChild(linkP);
 	
-	const removeP = document.createElement('p');
 	const removeStrong = document.createElement('strong');
 	const removeEm = document.createElement('em');
 	removeEm.textContent = 'Remove?';
-	removeP.appendChild(removeStrong);
+	linkP.appendChild(removeStrong);
 	removeStrong.appendChild(removeEm);
 	//NEED TO TURN THIS INTO A BUTTON
 	//DECIDE HOW THIS SHOULD FLOW
 	
-	card.appendChild(removeP);
+	linkP.appendChild(removeStrong);
 
 	return card;
   }
