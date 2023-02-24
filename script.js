@@ -35,7 +35,7 @@ function Series(title, complete, link, image) {
 // Initialize Realtime Database and get a reference to the service
 
 // const database = getDatabase(app);
-// console.log("Hey, database from firebase is: " + database);
+console.log("Hey, JS database from firebase is: " + database);
 ///////////////////
 async function getContentFromGist() {
 	const response = await fetch(`https://api.github.com/gists/${gistId}`, {
