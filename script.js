@@ -10,11 +10,18 @@ const ACCESSTOKEN = atob("Z2l0aHViX3BhdF8xMUFRNVdCNVkwN2Q0enFpbjE2Ull2X2NSYXRvOU
 //Since this is not a sensitive or critical app and nothing can be lost, I decided to say
 //a great big "Fuck this" and simply use an encoded API key in the above way.
 ////////////////////////////////////////////////////////////
+//Series constructor function//
 function Series(title, complete, link, image) {
 	this.title = title;
 	this.complete = complete;
 	this.link = link;
 	this.image = image;
+}
+///////////////////
+//Reconstructs a Series from raw string data - to use, call this onto a new var
+function reSeries(unconstructedArray){
+	return unconstructedArray.map(({title, complete, link, image}) => 
+	new Series(title, complete, link, image));
 }
 ///////////////////
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
@@ -36,7 +43,7 @@ const auth = getAuth(app);
 const database = getDatabase(app);
 // Initialize Realtime Database and get a reference to the service
 
-console.log("Hey, JS database from firebase is: " + database);
+console.log("JS database from firebase is: " + database);
 ///////////////////
 async function getContentFromGist() {
 	const response = await fetch(`https://api.github.com/gists/${gistId}`, {
@@ -58,7 +65,7 @@ async function getContentFromGist() {
   async function gulpAndRender() {
 	const content = await getContentFromGist();
 	renderCards(content);
-	// console.log(content);
+	//console.log(content);
   }
   
 	gulpAndRender();
@@ -72,7 +79,13 @@ library.push(new Series("Mr Curious Man Doing Curious Things", false, 'https://e
 console.log(library);
 localStorage.setItem("localContent", JSON.stringify(library));
 let localContent = JSON.parse(localStorage.getItem("localContent"));
-console.log(localContent);
+// localContent = localContent.map(({title, complete, link, image}) => new Series(title, complete, link, image));
+
+
+let fuck = reSeries(localContent);
+console.log(fuck);
+
+
 ////////////////////
 ////////////////////
 ////////////Actually runs the card-creation function, and then appends that card to the page
