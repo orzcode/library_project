@@ -26,7 +26,7 @@ function reSeries(unconstructedArray){
 ///////////////////
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
 import { getAuth } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js'
-import { getDatabase } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js'
+import { getDatabase, ref, onValue, child, get, push, update, set, increment, runTransaction } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js'
 const firebaseConfig = {
 	apiKey: "AIzaSyCgWOsD40-y422erIMNultdmSBmcP5c_VY",
 	authDomain: "tv-series-library.firebaseapp.com",
@@ -44,6 +44,8 @@ const database = getDatabase(app);
 // Initialize Realtime Database and get a reference to the service
 
 console.log("JS database from firebase is: " + database);
+
+
 ///////////////////
 async function getContentFromGist() {
 	const response = await fetch(`https://api.github.com/gists/${gistId}`, {
@@ -68,7 +70,7 @@ async function getContentFromGist() {
 	//console.log(content);
   }
   
-	gulpAndRender();
+	//gulpAndRender();
 ///////////////////
 ////////////////////
 library.push(new Series("Mr Inbetween", true, 'https://en.wikipedia.org/wiki/The_Expanse_(TV_series)', 'https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg'));
@@ -77,14 +79,11 @@ library.push(new Series("Mr Truetest", true, 'https://en.wikipedia.org/wiki/The_
 library.push(new Series("Mr Curious Man Doing Curious Things", false, 'https://en.wikipedia.org/wiki/The_Expanse_(TV_series)', 'https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg'));
 ////////////////////
 console.log(library);
+
 localStorage.setItem("localContent", JSON.stringify(library));
 let localContent = JSON.parse(localStorage.getItem("localContent"));
-// localContent = localContent.map(({title, complete, link, image}) => new Series(title, complete, link, image));
 
-
-let fuck = reSeries(localContent);
-console.log(fuck);
-
+renderCards(reSeries(localContent));
 
 ////////////////////
 ////////////////////
