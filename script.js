@@ -1,35 +1,50 @@
 let library = [];
-let libraryDiv = document.querySelector('#library');
+let libraryDiv = document.querySelector("#library");
 ////////////////////////////////////////////////////////////
 ///////////////////
 //Reconstructs a Series from raw string data - to use, call this onto a new var
-function reSeries(unconstructedArray){
-	return unconstructedArray.map(({title, complete, link, image}) => 
-	new Series(title, complete, link, image));
+function reSeries(unconstructedArray) {
+  return unconstructedArray.map(
+    ({ title, complete, link, image }) =>
+      new Series(title, complete, link, image)
+  );
 }
 ///////////////////
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
-import { getAuth } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js'
-import { getDatabase, ref, onValue, child, get, push, update, set, increment, runTransaction } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js'
+import { getAuth } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+import {
+  getDatabase,
+  ref,
+  onValue,
+  child,
+  get,
+  push,
+  update,
+  set,
+  increment,
+  runTransaction,
+} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
 const firebaseConfig = {
-	apiKey: "AIzaSyCgWOsD40-y422erIMNultdmSBmcP5c_VY",
-	authDomain: "tv-series-library.firebaseapp.com",
-	databaseURL: "https://tv-series-library-default-rtdb.firebaseio.com",
-	projectId: "tv-series-library",
-	storageBucket: "tv-series-library.appspot.com",
-	messagingSenderId: "371898195484",
-	appId: "1:371898195484:web:6d181e6ccf75b8410ec9d9"
-  };
+  apiKey: "AIzaSyCgWOsD40-y422erIMNultdmSBmcP5c_VY",
+  authDomain: "tv-series-library.firebaseapp.com",
+  databaseURL: "https://tv-series-library-default-rtdb.firebaseio.com",
+  projectId: "tv-series-library",
+  storageBucket: "tv-series-library.appspot.com",
+  messagingSenderId: "371898195484",
+  appId: "1:371898195484:web:6d181e6ccf75b8410ec9d9",
+};
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
 
 ///////////////////
-const gistId = '5030015d1b6612eed934612108b3e63f';
-const filename = 'library.txt';
-const ACCESSTOKEN = atob("Z2l0aHViX3BhdF8xMUFRNVdCNVkwN2Q0enFpbjE2Ull2X2NSYXRvOU1pNWFCTHVnYkJOUTFkRDBPZW04TEQ4ZTFCcUdadzVrQnFlOTBVSE5UQlpZRDRKYjdGRmlO");
+const gistId = "5030015d1b6612eed934612108b3e63f";
+const filename = "library.txt";
+const ACCESSTOKEN = atob(
+  "Z2l0aHViX3BhdF8xMUFRNVdCNVkwN2Q0enFpbjE2Ull2X2NSYXRvOU1pNWFCTHVnYkJOUTFkRDBPZW04TEQ4ZTFCcUdadzVrQnFlOTBVSE5UQlpZRDRKYjdGRmlO"
+);
 //Note to anyone reading:
 //actually using a Github Secret is far, FAR more difficult than it needs to be
 //I spent literally several hours trying half a dozen fixes and methods and none of them worked
@@ -39,43 +54,71 @@ const ACCESSTOKEN = atob("Z2l0aHViX3BhdF8xMUFRNVdCNVkwN2Q0enFpbjE2Ull2X2NSYXRvOU
 
 //Series constructor function//
 function Series(title, complete, link, image) {
-	this.title = title;
-	this.complete = complete;
-	this.link = link;
-	this.image = image;
+  this.title = title;
+  this.complete = complete;
+  this.link = link;
+  this.image = image;
 }
 
 ////////////////////////////////////////////////////////////
 async function getContentFromGist() {
-	const response = await fetch(`https://api.github.com/gists/${gistId}`, {
-	  headers: {
-		Authorization: `token ${ACCESSTOKEN}`
-	  }
-	});
-	const data = await response.json();
-	const file = data.files[filename];
-	if (file) {
-	  const content = JSON.parse(file.content);
-	  return content;
-	} else {
-	  console.error(`File ${filename} not found in Gist ${gistId}`);
-	  return null;
-	}
+  const response = await fetch(`https://api.github.com/gists/${gistId}`, {
+    headers: {
+      Authorization: `token ${ACCESSTOKEN}`,
+    },
+  });
+  const data = await response.json();
+  const file = data.files[filename];
+  if (file) {
+    const content = JSON.parse(file.content);
+    return content;
+  } else {
+    console.error(`File ${filename} not found in Gist ${gistId}`);
+    return null;
   }
-  
-  async function gulpAndRender() {
-	const content = await getContentFromGist();
-	renderCards(content);
-	//console.log(content);
-  }
-  
-	//gulpAndRender();
+}
+
+async function gulpAndRender() {
+  const content = await getContentFromGist();
+  renderCards(content);
+  //console.log(content);
+}
+
+//gulpAndRender();
 ///////////////////
 ////////////////////
-library.push(new Series("Mr Inbetween", true, 'https://en.wikipedia.org/wiki/The_Expanse_(TV_series)', 'https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg'));
-library.push(new Series("Mr Test", false, 'https://en.wikipedia.org/wiki/The_Expanse_(TV_series)', 'https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg'));
-library.push(new Series("Mr Truetest", true, 'https://en.wikipedia.org/wiki/The_Expanse_(TV_series)', 'https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg'));
-library.push(new Series("Mr Curious Man Doing Curious Things", false, 'https://en.wikipedia.org/wiki/The_Expanse_(TV_series)', 'https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg'));
+library.push(
+  new Series(
+    "Mr Inbetween",
+    true,
+    "https://en.wikipedia.org/wiki/The_Expanse_(TV_series)",
+    "https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg"
+  )
+);
+library.push(
+  new Series(
+    "Mr Test",
+    false,
+    "https://en.wikipedia.org/wiki/The_Expanse_(TV_series)",
+    "https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg"
+  )
+);
+library.push(
+  new Series(
+    "Mr Truetest",
+    true,
+    "https://en.wikipedia.org/wiki/The_Expanse_(TV_series)",
+    "https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg"
+  )
+);
+library.push(
+  new Series(
+    "Mr Curious Man Doing Curious Things",
+    false,
+    "https://en.wikipedia.org/wiki/The_Expanse_(TV_series)",
+    "https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg"
+  )
+);
 ////////////////////
 console.log(library);
 
@@ -85,22 +128,46 @@ let localContent = JSON.parse(localStorage.getItem("localContent"));
 renderCards(reSeries(localContent));
 
 ////////////////////
-export function saveData(){
-	console.log(document.querySelector('#seriesName').value);
+export function queryData() {
+	document.querySelector("#formImg").src = 'spinner.svg';
+	// document.querySelector("#formImg").addEventListener('load', () => {
+	// 	// Replace the spinner image with the actual image
+	// 	image.src = mainImage;
+	//   });
+
+  const searchTerm = document.querySelector("#seriesName").value;
+  console.log(searchTerm);
+  const url = `https://api.tvmaze.com/singlesearch/shows?q=${encodeURIComponent(
+    searchTerm
+  )}`;
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      document.querySelector("dialog h2").innerHTML = data.name;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+  getPosterImageFromTVMaze(document.querySelector("#seriesName").value).then(
+    (mainImage) => {
+      document.querySelector("#formImg").src = mainImage;
+    }
+  );
 }
-window.saveData = saveData;
+window.queryData = queryData;
 ////////////////////
 ////////////Actually runs the card-creation function, and then appends that card to the page
-function renderCards(givenLibrary) {	
-	givenLibrary.forEach(ObjFromArray => {	  
-		//Note that 'card' here is different in scope!! And is therefore separate. Confusing huh
-		const card = createCard(ObjFromArray);
-		//passing it the object to 'construct' a card from
-		card.setAttribute('data-complete', ObjFromArray.complete);
-		//IF 'complete' is true, it highlights the card
-		libraryDiv.appendChild(card);
-	});	
-  }
+function renderCards(givenLibrary) {
+  givenLibrary.forEach((ObjFromArray) => {
+    //Note that 'card' here is different in scope!! And is therefore separate. Confusing huh
+    const card = createCard(ObjFromArray);
+    //passing it the object to 'construct' a card from
+    card.setAttribute("data-complete", ObjFromArray.complete);
+    //IF 'complete' is true, it highlights the card
+    libraryDiv.appendChild(card);
+  });
+}
 
 // renderCards(content);
 
@@ -111,54 +178,54 @@ function renderCards(givenLibrary) {
 //Note that 'card' here is different in scope!! And is therefore separate. Confusing huh
 //This function gets called from something else (renderCards)
 function createCard(obj) {
-	const card = document.createElement('div');
-	card.className = 'card';
-	
-	const banner = document.createElement('img');
-	banner.src = obj.image;
-	banner.alt = "Thumbnail";
-	
-	card.appendChild(banner);
+  const card = document.createElement("div");
+  card.className = "card";
 
-	const titleP = document.createElement('p');
-	const titleStrong = document.createElement('strong');
-	titleStrong.textContent = obj.title;
-	titleStrong.className = 'title';
-	titleP.appendChild(titleStrong);
-	
-	card.appendChild(titleP);
-	
-	const completeP = document.createElement('p');
-	const completeStrong = document.createElement('strong');
-	completeStrong.textContent = 'Complete: ';
-	completeP.appendChild(completeStrong);
-	completeP.appendChild(document.createTextNode(obj.complete ? 'Yes' : 'No'));
-	
-	card.appendChild(completeP);
-	
-	const linkP = document.createElement('p');
-	const linkStrong = document.createElement('strong');
-	const linkA = document.createElement('a');
-	linkA.textContent = 'Link';
-	linkA.href = obj.link;
-	linkP.appendChild(linkStrong);
-	linkStrong.appendChild(linkA);
-	linkA.after(" • ");
-	
-	card.appendChild(linkP);
-	
-	const removeStrong = document.createElement('strong');
-	const removeEm = document.createElement('em');
-	removeEm.textContent = 'Remove?';
-	linkP.appendChild(removeStrong);
-	removeStrong.appendChild(removeEm);
-	//NEED TO TURN THIS INTO A BUTTON
-	//DECIDE HOW THIS SHOULD FLOW
-	
-	linkP.appendChild(removeStrong);
+  const banner = document.createElement("img");
+  banner.src = obj.image;
+  banner.alt = "Thumbnail";
 
-	return card;
-  }
+  card.appendChild(banner);
+
+  const titleP = document.createElement("p");
+  const titleStrong = document.createElement("strong");
+  titleStrong.textContent = obj.title;
+  titleStrong.className = "title";
+  titleP.appendChild(titleStrong);
+
+  card.appendChild(titleP);
+
+  const completeP = document.createElement("p");
+  const completeStrong = document.createElement("strong");
+  completeStrong.textContent = "Complete: ";
+  completeP.appendChild(completeStrong);
+  completeP.appendChild(document.createTextNode(obj.complete ? "Yes" : "No"));
+
+  card.appendChild(completeP);
+
+  const linkP = document.createElement("p");
+  const linkStrong = document.createElement("strong");
+  const linkA = document.createElement("a");
+  linkA.textContent = "Link";
+  linkA.href = obj.link;
+  linkP.appendChild(linkStrong);
+  linkStrong.appendChild(linkA);
+  linkA.after(" • ");
+
+  card.appendChild(linkP);
+
+  const removeStrong = document.createElement("strong");
+  const removeEm = document.createElement("em");
+  removeEm.textContent = "Remove?";
+  linkP.appendChild(removeStrong);
+  removeStrong.appendChild(removeEm);
+  //NEED TO TURN THIS INTO A BUTTON
+  //DECIDE HOW THIS SHOULD FLOW
+
+  linkP.appendChild(removeStrong);
+
+  return card;
+}
 //------------------------------------------------------------------------------//
 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -166,14 +233,14 @@ function createCard(obj) {
 /////////WIKI LINK FETCHER/////////////
 ////////////////////////////////////////
 async function getWikiLink(term) {
-	const apiUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${term}&format=json&origin=*`;
-	const response = await fetch(apiUrl);
-	const data = await response.json();
-	const firstResult = data.query.search[0];
-	const pageId = firstResult.pageid;
-	const link = `https://en.wikipedia.org/?curid=${pageId}`;
-	return link;
-  }
+  const apiUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${term}&format=json&origin=*`;
+  const response = await fetch(apiUrl);
+  const data = await response.json();
+  const firstResult = data.query.search[0];
+  const pageId = firstResult.pageid;
+  const link = `https://en.wikipedia.org/?curid=${pageId}`;
+  return link;
+}
 //--------------------------------------------------//
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -181,85 +248,147 @@ async function getWikiLink(term) {
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 async function getMainImageFromTVMaze(searchTerm) {
-	const searchUrl = `https://api.tvmaze.com/search/shows?q=${searchTerm}`;
-	let searchResults;
-	try {
-	  const searchResponse = await fetch(searchUrl);
-	  if (!searchResponse.ok) {
-		throw new Error(`Error fetching search results: ${searchResponse.status}`);
-	  }
-	  searchResults = await searchResponse.json();
-	} catch (error) {
-	  console.error(error);
-	  return 'errorImage.png'; // replace with path to your default image
-	}
-  
-	const bestMatch = searchResults[0]?.show;
-	if (!bestMatch) {
-	  console.error('No search results found');
-	  return 'errorImage.png'; // replace with path to your default image
-	}
-  
-	const id = bestMatch.id;
-	const showUrl = `https://api.tvmaze.com/shows/${id}/images`;
-	let imagesData;
-	try {
-	  const showResponse = await fetch(showUrl);
-	  if (!showResponse.ok) {
-		throw new Error(`Error fetching show data: ${showResponse.status}`);
-	  }
-	  imagesData = await showResponse.json();
-	} catch (error) {
-	  console.error(error);
-	  return 'errorImage.png'; // replace with path to your default image
-	}
-  
-	let smallestBannerImage = 'errorImage.png'; // replace with path to your default image
-	let smallestBannerImageSize = Infinity;
-	let smallestGeneralImage = 'errorImage.png'; // replace with path to your default image
-	let smallestGeneralImageSize = Infinity;
-  
-	imagesData.forEach(image => {
-	  const { width, height, url } = image.resolutions?.original || {};
-	  if (width && height && url) {
-		if (image.type === 'banner') {
-		  const imageSize = width * height;
-		  if (imageSize < smallestBannerImageSize) {
-			if (imageSize < 10000) {
-			  smallestBannerImage = url;
-			  smallestBannerImageSize = imageSize;
-			} else {
-			  smallestBannerImage = image.resolutions.medium.url;
-			  smallestBannerImageSize = image.resolutions.medium.width * image.resolutions.medium.height;
-			}
-		  }
-		} else if (image.type === 'poster' || image.type === 'background') {
-		  const imageSize = width * height;
-		  if (imageSize < smallestGeneralImageSize) {
-			if (imageSize < 10000) {
-			  smallestGeneralImage = url;
-			  smallestGeneralImageSize = imageSize;
-			} else {
-			  smallestGeneralImage = image.resolutions.medium.url;
-			  smallestGeneralImageSize = image.resolutions.medium.width * image.resolutions.medium.height;
-			}
-		  }
-		}
-	  }
-	});
-  
-	if (smallestBannerImage !== 'errorImage.png') {
-	  return smallestBannerImage;
-	}
-	return smallestGeneralImage;
+  const searchUrl = `https://api.tvmaze.com/search/shows?q=${searchTerm}`;
+  let searchResults;
+  try {
+    const searchResponse = await fetch(searchUrl);
+    if (!searchResponse.ok) {
+      throw new Error(
+        `Error fetching search results: ${searchResponse.status}`
+      );
+    }
+    searchResults = await searchResponse.json();
+  } catch (error) {
+    console.error(error);
+    return "errorImage.png"; // replace with path to your default image
   }
+
+  const bestMatch = searchResults[0]?.show;
+  if (!bestMatch) {
+    console.error("No search results found");
+    return "errorImage.png"; // replace with path to your default image
+  }
+
+  const id = bestMatch.id;
+  const showUrl = `https://api.tvmaze.com/shows/${id}/images`;
+  let imagesData;
+  try {
+    const showResponse = await fetch(showUrl);
+    if (!showResponse.ok) {
+      throw new Error(`Error fetching show data: ${showResponse.status}`);
+    }
+    imagesData = await showResponse.json();
+  } catch (error) {
+    console.error(error);
+    return "errorImage.png"; // replace with path to your default image
+  }
+
+  let smallestBannerImage = "errorImage.png"; // replace with path to your default image
+  let smallestBannerImageSize = Infinity;
+  let smallestGeneralImage = "errorImage.png"; // replace with path to your default image
+  let smallestGeneralImageSize = Infinity;
+
+  imagesData.forEach((image) => {
+    const { width, height, url } = image.resolutions?.original || {};
+    if (width && height && url) {
+      if (image.type === "banner") {
+        const imageSize = width * height;
+        if (imageSize < smallestBannerImageSize) {
+          if (imageSize < 10000) {
+            smallestBannerImage = url;
+            smallestBannerImageSize = imageSize;
+          } else {
+            smallestBannerImage = image.resolutions.medium.url;
+            smallestBannerImageSize =
+              image.resolutions.medium.width * image.resolutions.medium.height;
+          }
+        }
+      } else if (image.type === "poster" || image.type === "background") {
+        const imageSize = width * height;
+        if (imageSize < smallestGeneralImageSize) {
+          if (imageSize < 10000) {
+            smallestGeneralImage = url;
+            smallestGeneralImageSize = imageSize;
+          } else {
+            smallestGeneralImage = image.resolutions.medium.url;
+            smallestGeneralImageSize =
+              image.resolutions.medium.width * image.resolutions.medium.height;
+          }
+        }
+      }
+    }
+  });
+
+  if (smallestBannerImage !== "errorImage.png") {
+    return smallestBannerImage;
+  }
+  return smallestGeneralImage;
+}
 ////////////////////////////////////////////////////////////////////////////////////////////
-/////////IMAGE FETCHER/////////////
+//used only for modal dialog//
+///////////////
+async function getPosterImageFromTVMaze(searchTerm) {
+  const searchUrl = `https://api.tvmaze.com/search/shows?q=${searchTerm}`;
+  let searchResults;
+  try {
+    const searchResponse = await fetch(searchUrl);
+    if (!searchResponse.ok) {
+      throw new Error(
+        `Error fetching search results: ${searchResponse.status}`
+      );
+    }
+    searchResults = await searchResponse.json();
+  } catch (error) {
+    console.error(error);
+    return "errorImage.png";
+  }
+
+  const bestMatch = searchResults[0]?.show;
+  if (!bestMatch) {
+    console.error("No search results found");
+    return "errorImage.png";
+  }
+
+  const id = bestMatch.id;
+  const imagesUrl = `https://api.tvmaze.com/shows/${id}/images`;
+  let smallestImage = "errorImage.png";
+  let smallestImageSize = Infinity;
+
+  try {
+    const imagesResponse = await fetch(imagesUrl);
+    if (!imagesResponse.ok) {
+      throw new Error(`Error fetching images: ${imagesResponse.status}`);
+    }
+    const imagesData = await imagesResponse.json();
+    imagesData.forEach((image) => {
+      const { width, height, url } = image.resolutions?.original || {};
+      if (width && height && url && image.type === "poster") {
+        const imageSize = width * height;
+        if (imageSize < smallestImageSize) {
+          if (imageSize < 10000) {
+            smallestImage = url;
+            smallestImageSize = imageSize;
+          } else {
+            smallestImage = image.resolutions.medium.url;
+            smallestImageSize =
+              image.resolutions.medium.width * image.resolutions.medium.height;
+          }
+        }
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    smallestImage = "errorImage.png"; // replace with path to your default image
+  }
+
+  return smallestImage;
+}
+
+//////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 // getMainImageFromTVMaze("twin peaks").then(mainImage =>{
 // 	document.body.style.backgroundImage = `url(${mainImage})`;
 // })//WORKS...BUT NEED TO TEST ON LIVE PAGE BUTTON OR SOMETHING
-
 
 // //WORKS BEAUTIFULLY_ SHOULD TEST LIVE TOO

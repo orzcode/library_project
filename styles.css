@@ -151,6 +151,7 @@ dialog {
   /*Transform function above*/
   /*Other properties below*/
   width: 80%;
+  min-width: 394px;
   height: 90%;
   border-radius: 20px;
   display: flex;
@@ -193,9 +194,12 @@ dialog img:nth-child(1):active {
 }
 dialog img:nth-child(2) {
   width: clamp(256px, 40%, 320px);
+  height: 450px;
+  object-fit: contain;
 }
 dialog h2 {
   font-size: 6rem;
+  line-height: 110%;
 }
 dialog form {
   margin: 0 1rem;
