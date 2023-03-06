@@ -16,7 +16,8 @@
 		<img src="close.svg" onclick="document.querySelector('dialog').close()"></img>
 		<img id="formImg" src="addMedia.svg"></img>
 		<h2>Add a series</h2>
-		<form onsubmit="window.queryData()">
+		<a href="www.google.com" target="_blank">Wikipedia Link to Show</a>
+		<form onsubmit="window.queryData();return false">
 			
 			<div>
 				<label for="seriesName">Series name:</label>
@@ -46,7 +47,7 @@
 			<h1>TV shows 'n shit <a href="https://orzcode.github.io/library_project/">Live Link!</a></h1>
 		</div>
 		<div id="header2">
-			<button id="newShowBtn" class="btnShadow" onclick="document.querySelector('dialog').showModal();document.querySelector('#formImg').src = 'addMedia.svg';">Add a show</button>
+			<button id="newShowBtn" class="btnShadow" onclick="window.modalOpenTasks()">Add a show</button>
 			<!--Shows the Dialog element modal, AND 'resets' the image source (because it gets changed during form use)-->
 			
 		</div>

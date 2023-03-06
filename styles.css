@@ -208,6 +208,12 @@ dialog form * {
   font-size: 4rem;
   font-family: Oswald;
 }
+dialog a {
+  font-size: 4rem;
+  font-family: Oswald;
+  font-style: italic;
+  visibility: hidden;
+}
 dialog input[type="text"] {
   border: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: 5px;

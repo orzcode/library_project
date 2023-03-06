@@ -129,14 +129,9 @@ renderCards(reSeries(localContent));
 
 ////////////////////
 export function queryData() {
-	document.querySelector("#formImg").src = 'spinner.svg';
-	// document.querySelector("#formImg").addEventListener('load', () => {
-	// 	// Replace the spinner image with the actual image
-	// 	image.src = mainImage;
-	//   });
+  document.querySelector("#formImg").src = "spinner.svg";
 
   const searchTerm = document.querySelector("#seriesName").value;
-  console.log(searchTerm);
   const url = `https://api.tvmaze.com/singlesearch/shows?q=${encodeURIComponent(
     searchTerm
   )}`;
@@ -148,6 +143,12 @@ export function queryData() {
     .catch((error) => {
       console.error(error);
     });
+
+	getWikiLink(searchTerm)
+	.then(link => {
+	  document.querySelector('dialog a').href = link;
+	  document.querySelector('dialog a').style.visibility = 'visible';
+	});
 
   getPosterImageFromTVMaze(document.querySelector("#seriesName").value).then(
     (mainImage) => {
@@ -227,7 +228,15 @@ function createCard(obj) {
   return card;
 }
 //------------------------------------------------------------------------------//
-
+function modalOpenTasks(){
+	document.querySelector('form').reset();
+	document.querySelector('dialog').showModal()
+	document.querySelector('#formImg').src = 'addMedia.svg';
+	document.querySelector('dialog h2').innerHTML = "Add a series";
+	document.querySelector('dialog a').href = 'https://en.wikipedia.org/wiki/Main_Page';
+	document.querySelector('dialog a').style.visibility = 'hidden';
+}
+window.modalOpenTasks = modalOpenTasks;
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 /////////WIKI LINK FETCHER/////////////
