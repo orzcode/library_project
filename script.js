@@ -1,22 +1,6 @@
 let library = [];
 let libraryDiv = document.querySelector('#library');
 ////////////////////////////////////////////////////////////
-const gistId = '5030015d1b6612eed934612108b3e63f';
-const filename = 'library.txt';
-const ACCESSTOKEN = atob("Z2l0aHViX3BhdF8xMUFRNVdCNVkwN2Q0enFpbjE2Ull2X2NSYXRvOU1pNWFCTHVnYkJOUTFkRDBPZW04TEQ4ZTFCcUdadzVrQnFlOTBVSE5UQlpZRDRKYjdGRmlO");
-//Note to anyone reading:
-//actually using a Github Secret is far, FAR more difficult than it needs to be
-//I spent literally several hours trying half a dozen fixes and methods and none of them worked
-//Since this is not a sensitive or critical app and nothing can be lost, I decided to say
-//a great big "Fuck this" and simply use an encoded API key in the above way.
-////////////////////////////////////////////////////////////
-//Series constructor function//
-function Series(title, complete, link, image) {
-	this.title = title;
-	this.complete = complete;
-	this.link = link;
-	this.image = image;
-}
 ///////////////////
 //Reconstructs a Series from raw string data - to use, call this onto a new var
 function reSeries(unconstructedArray){
@@ -24,6 +8,7 @@ function reSeries(unconstructedArray){
 	new Series(title, complete, link, image));
 }
 ///////////////////
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
 import { getAuth } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js'
 import { getDatabase, ref, onValue, child, get, push, update, set, increment, runTransaction } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js'
@@ -36,17 +21,31 @@ const firebaseConfig = {
 	messagingSenderId: "371898195484",
 	appId: "1:371898195484:web:6d181e6ccf75b8410ec9d9"
   };
-// Initialize Firebase
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
-// Initialize Realtime Database and get a reference to the service
-
-console.log("JS database from firebase is: " + database);
-
 
 ///////////////////
+const gistId = '5030015d1b6612eed934612108b3e63f';
+const filename = 'library.txt';
+const ACCESSTOKEN = atob("Z2l0aHViX3BhdF8xMUFRNVdCNVkwN2Q0enFpbjE2Ull2X2NSYXRvOU1pNWFCTHVnYkJOUTFkRDBPZW04TEQ4ZTFCcUdadzVrQnFlOTBVSE5UQlpZRDRKYjdGRmlO");
+//Note to anyone reading:
+//actually using a Github Secret is far, FAR more difficult than it needs to be
+//I spent literally several hours trying half a dozen fixes and methods and none of them worked
+//Since this is not a sensitive or critical app and nothing can be lost, I decided to say
+//a great big "Fuck this" and simply use an encoded API key in the above way.
+////////////////////////////////////////////////////////////
+
+//Series constructor function//
+function Series(title, complete, link, image) {
+	this.title = title;
+	this.complete = complete;
+	this.link = link;
+	this.image = image;
+}
+
+////////////////////////////////////////////////////////////
 async function getContentFromGist() {
 	const response = await fetch(`https://api.github.com/gists/${gistId}`, {
 	  headers: {
@@ -86,6 +85,10 @@ let localContent = JSON.parse(localStorage.getItem("localContent"));
 renderCards(reSeries(localContent));
 
 ////////////////////
+export function saveData(){
+	console.log(document.querySelector('#seriesName').value);
+}
+window.saveData = saveData;
 ////////////////////
 ////////////Actually runs the card-creation function, and then appends that card to the page
 function renderCards(givenLibrary) {	

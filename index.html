@@ -16,7 +16,7 @@
 		<img src="close.svg" onclick="document.querySelector('dialog').close()"></img>
 		<img src="addMedia.svg"></img>
 		<h2>Add a series</h2>
-		<form>
+		<form onsubmit="window.saveData()">
 			
 			<div>
 				<label for="seriesName">Series name:</label>
@@ -35,7 +35,7 @@
 			</div>			
 
 			<div>
-				<button id="confirmBtn" type="submit" value="default">Submit</button>
+				<button id="confirmBtn" type="submit" value="Submit">Submit</button>
 				<button id="cancelFormButton" type="button" value="cancel" onclick="document.querySelector('dialog').close()">Cancel</button>
 			</div>
 		  
