@@ -135,26 +135,33 @@ export function queryData() {
   const url = `https://api.tvmaze.com/singlesearch/shows?q=${encodeURIComponent(
     searchTerm
   )}`;
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      document.querySelector("dialog h2").innerHTML = data.name;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
 
-	getWikiLink(searchTerm)
-	.then(link => {
-	  document.querySelector('dialog a').href = link;
-	  document.querySelector('dialog a').style.visibility = 'visible';
-	});
+  Promise.all([
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        document.querySelector("dialog h2").innerHTML = data.name;
+      })
+      .catch((error) => {
+        console.error(error);
+      }),
 
-  getPosterImageFromTVMaze(document.querySelector("#seriesName").value).then(
-    (mainImage) => {
-      document.querySelector("#formImg").src = mainImage;
-    }
-  );
+    getWikiLink(searchTerm)
+      .then(link => {
+        document.querySelector('dialog a').href = link;
+        document.querySelector('dialog a').style.visibility = 'visible';
+      }),
+
+    getPosterImageFromTVMaze(document.querySelector("#seriesName").value)
+      .then((mainImage) => {
+        document.querySelector("#formImg").src = mainImage;
+      })
+  ]).then(() => {
+    // All three parts of the queryData function have completed
+    console.log("All parts of the queryData function have completed");
+  }).catch((error) => {
+    console.error(error);
+  });
 }
 window.queryData = queryData;
 ////////////////////
