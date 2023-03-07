@@ -111,13 +111,13 @@ a {
 }
 
 .card {
-  border-radius: 20px;
+  border-radius: 15px;
   border: 2px solid black;
   background-color: #9b9797;
   /* height: 180px; */
   padding: 1rem;
-  gap: 1rem;
-  height: 480px;
+  gap: 2rem;
+  height: 760px;
   width: clamp(420px, 100%, 520px);
   display: flex;
   text-align: center;
@@ -137,8 +137,9 @@ a {
 }
 .card img{
   width: 100%;
-  height: 45%;
-  border-radius: 20px;
+  height: 65%;
+  border-radius: 15px;
+  outline: 2px solid black;
   object-fit: cover;
 }
 /*------------------------------------------*/

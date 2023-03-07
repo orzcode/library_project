@@ -59,7 +59,11 @@ function Series(title, complete, link, image) {
   this.link = link;
   this.image = image;
 }
-
+// Series.prototype.formSubmission = function(title, complete) {
+//   var link = LinkFunction(title);
+//   var image = ImageFunction(title);
+//   return new Series(title, complete, link, image);
+// }
 ////////////////////////////////////////////////////////////
 async function getContentFromGist() {
   const response = await fetch(`https://api.github.com/gists/${gistId}`, {
