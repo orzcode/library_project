@@ -129,6 +129,10 @@ renderCards(reSeries(localContent));
 
 ////////////////////
 export function queryData() {
+  document.querySelector('dialog a').style.visibility = 'hidden';
+  document.querySelector('#filmingComplete').style.visibility = 'hidden';
+  document.querySelector('#saveSeries').style.visibility = 'hidden';
+
   document.querySelector("#formImg").src = "spinner.svg";
 
   const searchTerm = document.querySelector("#seriesName").value;
@@ -137,6 +141,11 @@ export function queryData() {
   )}`;
 
   Promise.all([
+    getPosterImageFromTVMaze(document.querySelector("#seriesName").value)
+    .then((mainImage) => {
+      document.querySelector("#formImg").src = mainImage;
+    }),
+
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
@@ -149,21 +158,23 @@ export function queryData() {
     getWikiLink(searchTerm)
       .then(link => {
         document.querySelector('dialog a').href = link;
-        document.querySelector('dialog a').style.visibility = 'visible';
-      }),
-
-    getPosterImageFromTVMaze(document.querySelector("#seriesName").value)
-      .then((mainImage) => {
-        document.querySelector("#formImg").src = mainImage;
       })
   ]).then(() => {
     // All three parts of the queryData function have completed
     console.log("All parts of the queryData function have completed");
+    document.querySelector('#filmingComplete').style.visibility = 'visible';
+    document.querySelector('#saveSeries').style.visibility = 'visible';
+    document.querySelector('dialog a').style.visibility = 'visible';
   }).catch((error) => {
     console.error(error);
   });
 }
 window.queryData = queryData;
+////////////////////
+export function saveSeries(H2Title){
+  new Series
+}
+window.saveSeries = saveSeries;
 ////////////////////
 ////////////Actually runs the card-creation function, and then appends that card to the page
 function renderCards(givenLibrary) {
@@ -242,6 +253,8 @@ function modalOpenTasks(){
 	document.querySelector('dialog h2').innerHTML = "Add a series";
 	document.querySelector('dialog a').href = 'https://en.wikipedia.org/wiki/Main_Page';
 	document.querySelector('dialog a').style.visibility = 'hidden';
+  document.querySelector('#filmingComplete').style.visibility = 'hidden';
+  document.querySelector('#saveSeries').style.visibility = 'hidden';
 }
 window.modalOpenTasks = modalOpenTasks;
 ////////////////////////////////////////////////////////////////////////////////////////////

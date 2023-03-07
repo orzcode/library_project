@@ -232,6 +232,13 @@ dialog button {
 dialog button:hover {
   background-color: var(--highlighted);
 }
+#saveSeries {
+  font-size: 4rem;
+  visibility: hidden;
+}
+#filmingComplete {
+  visibility: hidden;
+}
 form > div {
   display: flex;
   flex-wrap: wrap;

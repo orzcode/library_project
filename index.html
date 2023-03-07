@@ -24,7 +24,7 @@
 				<input type="text" id="seriesName">
 			</div>
 			
-			<div>
+			<div id="filmingComplete">
 				<label for="filmingComplete">Filming complete?</label>
 				
 				<div style="width: fit-content">
@@ -37,7 +37,10 @@
 
 			<div>
 				<button id="confirmBtn" type="submit" value="Submit">Query</button>
-				<button id="cancelFormButton" type="button" value="cancel" onclick="document.querySelector('dialog').close()">Cancel</button>
+				<button id="cancelFormButton" type="button" onclick="document.querySelector('dialog').close()">Cancel</button>
+			</div>
+			<div>
+				<button id="saveSeries" type="button" onclick="saveSeries(document.querySelector('dialog h2').innerHTML)">Add Series to Library</button>
 			</div>
 		  
 		</form>
