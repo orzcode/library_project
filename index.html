@@ -29,9 +29,9 @@
 				
 				<div style="width: fit-content">
 					<label for="yes">Yes</label>
-					<input type="radio" id="yes" name="filmingComplete" value="Yes">
+					<input type="radio" id="yes" name="filmingComplete" value="true" required>
 					<label for="no">No</label>
-					<input type="radio" id="no" name="filmingComplete" value="No">
+					<input type="radio" id="no" name="filmingComplete" value="false">
 				</div>
 			</div>			
 
@@ -40,7 +40,7 @@
 				<button id="cancelFormButton" type="button" onclick="document.querySelector('dialog').close()">Cancel</button>
 			</div>
 			<div>
-				<button id="saveSeries" type="button" onclick="saveSeries(document.querySelector('dialog h2').innerHTML)">Add Series to Library</button>
+				<button id="saveSeries" type="button" onclick="console.log(Series.formSubmission())">Add Series to Library</button>
 			</div>
 		  
 		</form>

@@ -53,17 +53,21 @@ const ACCESSTOKEN = atob(
 ////////////////////////////////////////////////////////////
 
 //Series constructor function//
-function Series(title, complete, link, image) {
+export function Series(title, complete, link, image) {
   this.title = title;
   this.complete = complete;
   this.link = link;
   this.image = image;
 }
-// Series.prototype.formSubmission = function(title, complete) {
-//   var link = LinkFunction(title);
-//   var image = ImageFunction(title);
-//   return new Series(title, complete, link, image);
-// }
+Series.formSubmission = function () {
+  return new Series(
+    document.querySelector("dialog h2").innerHTML,
+    document.querySelector('input[name="filmingComplete"]').value,
+    document.querySelector("dialog a").href,
+    document.querySelector("#formImg").src
+  );
+};
+window.Series = Series;
 ////////////////////////////////////////////////////////////
 async function getContentFromGist() {
   const response = await fetch(`https://api.github.com/gists/${gistId}`, {
@@ -133,9 +137,9 @@ renderCards(reSeries(localContent));
 
 ////////////////////
 export function queryData() {
-  document.querySelector('dialog a').style.visibility = 'hidden';
-  document.querySelector('#filmingComplete').style.visibility = 'hidden';
-  document.querySelector('#saveSeries').style.visibility = 'hidden';
+  document.querySelector("dialog a").style.visibility = "hidden";
+  document.querySelector("#filmingComplete").style.visibility = "hidden";
+  document.querySelector("#saveSeries").style.visibility = "hidden";
 
   document.querySelector("#formImg").src = "spinner.svg";
 
@@ -145,10 +149,11 @@ export function queryData() {
   )}`;
 
   Promise.all([
-    getPosterImageFromTVMaze(document.querySelector("#seriesName").value)
-    .then((mainImage) => {
-      document.querySelector("#formImg").src = mainImage;
-    }),
+    getPosterImageFromTVMaze(document.querySelector("#seriesName").value).then(
+      (mainImage) => {
+        document.querySelector("#formImg").src = mainImage;
+      }
+    ),
 
     fetch(url)
       .then((response) => response.json())
@@ -159,26 +164,24 @@ export function queryData() {
         console.error(error);
       }),
 
-    getWikiLink(searchTerm)
-      .then(link => {
-        document.querySelector('dialog a').href = link;
-      })
-  ]).then(() => {
-    // All three parts of the queryData function have completed
-    console.log("All parts of the queryData function have completed");
-    document.querySelector('#filmingComplete').style.visibility = 'visible';
-    document.querySelector('#saveSeries').style.visibility = 'visible';
-    document.querySelector('dialog a').style.visibility = 'visible';
-  }).catch((error) => {
-    console.error(error);
-  });
+    getWikiLink(searchTerm).then((link) => {
+      document.querySelector("dialog a").href = link;
+    }),
+  ])
+    .then(() => {
+      // All three parts of the queryData function have completed
+      console.log("All parts of the queryData function have completed");
+      document.querySelector("#filmingComplete").style.visibility = "visible";
+      document.querySelector("#saveSeries").style.visibility = "visible";
+      document.querySelector("dialog a").style.visibility = "visible";
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 window.queryData = queryData;
 ////////////////////
-export function saveSeries(H2Title){
-  new Series
-}
-window.saveSeries = saveSeries;
+
 ////////////////////
 ////////////Actually runs the card-creation function, and then appends that card to the page
 function renderCards(givenLibrary) {
@@ -250,15 +253,16 @@ function createCard(obj) {
   return card;
 }
 //------------------------------------------------------------------------------//
-function modalOpenTasks(){
-	document.querySelector('form').reset();
-	document.querySelector('dialog').showModal()
-	document.querySelector('#formImg').src = 'addMedia.svg';
-	document.querySelector('dialog h2').innerHTML = "Add a series";
-	document.querySelector('dialog a').href = 'https://en.wikipedia.org/wiki/Main_Page';
-	document.querySelector('dialog a').style.visibility = 'hidden';
-  document.querySelector('#filmingComplete').style.visibility = 'hidden';
-  document.querySelector('#saveSeries').style.visibility = 'hidden';
+function modalOpenTasks() {
+  document.querySelector("form").reset();
+  document.querySelector("dialog").showModal();
+  document.querySelector("#formImg").src = "addMedia.svg";
+  document.querySelector("dialog h2").innerHTML = "Add a series";
+  document.querySelector("dialog a").href =
+    "https://en.wikipedia.org/wiki/Main_Page";
+  document.querySelector("dialog a").style.visibility = "hidden";
+  document.querySelector("#filmingComplete").style.visibility = "hidden";
+  document.querySelector("#saveSeries").style.visibility = "hidden";
 }
 window.modalOpenTasks = modalOpenTasks;
 ////////////////////////////////////////////////////////////////////////////////////////////
