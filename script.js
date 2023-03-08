@@ -69,6 +69,20 @@ Series.formSubmission = function () {
 };
 window.Series = Series;
 ////////////////////////////////////////////////////////////
+//clean this up? 
+function submissionTasks() {
+  const obj = Series.formSubmission();
+  const card = createCard(obj);
+  card.setAttribute("data-complete", obj.complete);
+  //IF 'complete' is true, it highlights the card
+  libraryDiv.appendChild(card);
+
+  document.querySelector("dialog").close();
+  
+  library.push(obj);
+  //stringify and send - use sep funciton?
+}
+////////////////////////////////////////////////////////////
 async function getContentFromGist() {
   const response = await fetch(`https://api.github.com/gists/${gistId}`, {
     headers: {
@@ -136,6 +150,8 @@ let localContent = JSON.parse(localStorage.getItem("localContent"));
 renderCards(reSeries(localContent));
 
 ////////////////////
+//This function runs when you click 'Query'
+/////////////////////
 export function queryData() {
   document.querySelector("dialog a").style.visibility = "hidden";
   document.querySelector("#filmingComplete").style.visibility = "hidden";

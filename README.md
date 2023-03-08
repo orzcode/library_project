@@ -1,6 +1,9 @@
 # library_project
 Library project involving prototypes
 ~~~
+lib is created at pageload - first, 'get' library array at page load
+create functions for this and stringify functions
+
 add function to handle other 'Submit' functions along with prototype (check notes)
 Make Query button the default - two submit buttons with no onsubmit? other way?
 ~~~
