@@ -1,7 +1,8 @@
 # library_project
 Library project involving prototypes
 ~~~
-https://gist.github.com/orzcode/5030015d1b6612eed934612108b3e63f
+add function to handle other 'Submit' functions along with prototype (check notes)
+Make Query button the default - two submit buttons with no onsubmit? other way?
 ~~~
 TODO: 'Remove' btn functionality
     --Remove should have a confirmation
