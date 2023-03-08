@@ -17,7 +17,7 @@
 		<img id="formImg" src="addMedia.svg"></img>
 		<h2>Add a series</h2>
 		<a href="www.google.com" target="_blank">Wikipedia Link to Show</a>
-		<form onsubmit="window.queryData();return false">
+		<form onsubmit="console.log(Series.formSubmission());return false">
 			
 			<div>
 				<label for="seriesName">Series name:</label>
@@ -31,16 +31,16 @@
 					<label for="yes">Yes</label>
 					<input type="radio" id="yes" name="filmingComplete" value="true" required>
 					<label for="no">No</label>
-					<input type="radio" id="no" name="filmingComplete" value="false">
+					<input type="radio" id="no" name="filmingComplete" value="false" required>
 				</div>
 			</div>			
 
 			<div>
-				<button id="confirmBtn" type="submit" value="Submit">Query</button>
+				<button id="confirmBtn" type="button" onclick="window.queryData()" value="Query">Query</button>
 				<button id="cancelFormButton" type="button" onclick="document.querySelector('dialog').close()">Cancel</button>
 			</div>
 			<div>
-				<button id="saveSeries" type="button" onclick="console.log(Series.formSubmission())">Add Series to Library</button>
+				<button id="saveSeries" type="submit" value="Submit">Add Series to Library</button>
 			</div>
 		  
 		</form>

@@ -62,7 +62,7 @@ export function Series(title, complete, link, image) {
 Series.formSubmission = function () {
   return new Series(
     document.querySelector("dialog h2").innerHTML,
-    document.querySelector('input[name="filmingComplete"]').value,
+    document.querySelector('input[name="filmingComplete"]:checked').value,
     document.querySelector("dialog a").href,
     document.querySelector("#formImg").src
   );
@@ -162,6 +162,7 @@ export function queryData() {
       })
       .catch((error) => {
         console.error(error);
+        document.querySelector("dialog h2").innerHTML = "Error searching";
       }),
 
     getWikiLink(searchTerm).then((link) => {
