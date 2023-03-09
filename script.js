@@ -4,7 +4,6 @@ let libraryDiv = document.querySelector("#library");
 
 ///////////////////
 //FIREBASE
-
 // import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
 // import { getAuth } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
 // import {
@@ -34,6 +33,7 @@ let libraryDiv = document.querySelector("#library");
 // const database = getDatabase(app);
 
 //FIREBASE
+///////////////////
 ///////////////////
 //GIST
 // const gistId = "5030015d1b6612eed934612108b3e63f";
@@ -71,7 +71,42 @@ let libraryDiv = document.querySelector("#library");
 //   //console.log(content);
 // }
 ///////////////////
-
+////////////////////
+//TEST LIBRARY
+// library.push(
+//   new Series(
+//     "Mr Inbetween",
+//     true,
+//     "https://en.wikipedia.org/wiki/The_Expanse_(TV_series)",
+//     "https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg"
+//   )
+// );
+// library.push(
+//   new Series(
+//     "Mr Test",
+//     false,
+//     "https://en.wikipedia.org/wiki/The_Expanse_(TV_series)",
+//     "https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg"
+//   )
+// );
+// library.push(
+//   new Series(
+//     "Mr Truetest",
+//     true,
+//     "https://en.wikipedia.org/wiki/The_Expanse_(TV_series)",
+//     "https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg"
+//   )
+// );
+// library.push(
+//   new Series(
+//     "Mr Curious Man Doing Curious Things",
+//     false,
+//     "https://en.wikipedia.org/wiki/The_Expanse_(TV_series)",
+//     "https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg"
+//   )
+// );
+////////////////////
+////////////////////
 //Series constructor function//
 export function Series(title, complete, link, image) {
   this.title = title;
@@ -99,41 +134,6 @@ function reSeries(unconstructedArray) {
   } else return;
 }
 ///////////////////
-
-////////////////////
-library.push(
-  new Series(
-    "Mr Inbetween",
-    true,
-    "https://en.wikipedia.org/wiki/The_Expanse_(TV_series)",
-    "https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg"
-  )
-);
-library.push(
-  new Series(
-    "Mr Test",
-    false,
-    "https://en.wikipedia.org/wiki/The_Expanse_(TV_series)",
-    "https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg"
-  )
-);
-library.push(
-  new Series(
-    "Mr Truetest",
-    true,
-    "https://en.wikipedia.org/wiki/The_Expanse_(TV_series)",
-    "https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg"
-  )
-);
-library.push(
-  new Series(
-    "Mr Curious Man Doing Curious Things",
-    false,
-    "https://en.wikipedia.org/wiki/The_Expanse_(TV_series)",
-    "https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg"
-  )
-);
-////////////////////
 //clean this up?
 export function submissionTasks() {
   const obj = Series.formSubmission();
