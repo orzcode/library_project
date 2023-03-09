@@ -1,56 +1,76 @@
 let library = [];
 let libraryDiv = document.querySelector("#library");
-////////////////////////////////////////////////////////////
-///////////////////
-//Reconstructs a Series from raw string data - to use, call this onto a new var
-function reSeries(unconstructedArray) {
-  return unconstructedArray.map(
-    ({ title, complete, link, image }) =>
-      new Series(title, complete, link, image)
-  );
-}
-///////////////////
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
-import {
-  getDatabase,
-  ref,
-  onValue,
-  child,
-  get,
-  push,
-  update,
-  set,
-  increment,
-  runTransaction,
-} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
-const firebaseConfig = {
-  apiKey: "AIzaSyCgWOsD40-y422erIMNultdmSBmcP5c_VY",
-  authDomain: "tv-series-library.firebaseapp.com",
-  databaseURL: "https://tv-series-library-default-rtdb.firebaseio.com",
-  projectId: "tv-series-library",
-  storageBucket: "tv-series-library.appspot.com",
-  messagingSenderId: "371898195484",
-  appId: "1:371898195484:web:6d181e6ccf75b8410ec9d9",
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const database = getDatabase(app);
+////////////////////////////////////////////////////
 
 ///////////////////
-const gistId = "5030015d1b6612eed934612108b3e63f";
-const filename = "library.txt";
-const ACCESSTOKEN = atob(
-  "Z2l0aHViX3BhdF8xMUFRNVdCNVkwN2Q0enFpbjE2Ull2X2NSYXRvOU1pNWFCTHVnYkJOUTFkRDBPZW04TEQ4ZTFCcUdadzVrQnFlOTBVSE5UQlpZRDRKYjdGRmlO"
-);
+//FIREBASE
+
+// import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+// import { getAuth } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+// import {
+//   getDatabase,
+//   ref,
+//   onValue,
+//   child,
+//   get,
+//   push,
+//   update,
+//   set,
+//   increment,
+//   runTransaction,
+// } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+// const firebaseConfig = {
+//   apiKey: "AIzaSyCgWOsD40-y422erIMNultdmSBmcP5c_VY",
+//   authDomain: "tv-series-library.firebaseapp.com",
+//   databaseURL: "https://tv-series-library-default-rtdb.firebaseio.com",
+//   projectId: "tv-series-library",
+//   storageBucket: "tv-series-library.appspot.com",
+//   messagingSenderId: "371898195484",
+//   appId: "1:371898195484:web:6d181e6ccf75b8410ec9d9",
+// };
+
+// const app = initializeApp(firebaseConfig);
+// const auth = getAuth(app);
+// const database = getDatabase(app);
+
+//FIREBASE
+///////////////////
+//GIST
+// const gistId = "5030015d1b6612eed934612108b3e63f";
+// const filename = "library.txt";
+// const ACCESSTOKEN = atob(
+//   "Z2l0aHViX3BhdF8xMUFRNVdCNVkwN2Q0enFpbjE2Ull2X2NSYXRvOU1pNWFCTHVnYkJOUTFkRDBPZW04TEQ4ZTFCcUdadzVrQnFlOTBVSE5UQlpZRDRKYjdGRmlO"
+// );
 //Note to anyone reading:
 //actually using a Github Secret is far, FAR more difficult than it needs to be
 //I spent literally several hours trying half a dozen fixes and methods and none of them worked
 //Since this is not a sensitive or critical app and nothing can be lost, I decided to say
 //a great big "Fuck this" and simply use an encoded API key in the above way.
 ////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+// async function getContentFromGist() {
+//   const response = await fetch(`https://api.github.com/gists/${gistId}`, {
+//     headers: {
+//       Authorization: `token ${ACCESSTOKEN}`,
+//     },
+//   });
+//   const data = await response.json();
+//   const file = data.files[filename];
+//   if (file) {
+//     const content = JSON.parse(file.content);
+//     return content;
+//   } else {
+//     console.error(`File ${filename} not found in Gist ${gistId}`);
+//     return null;
+//   }
+// }
+
+// async function gulpAndRender() {
+//   const content = await getContentFromGist();
+//   renderCards(content);
+//   //console.log(content);
+// }
+///////////////////
 
 //Series constructor function//
 export function Series(title, complete, link, image) {
@@ -69,45 +89,17 @@ Series.formSubmission = function () {
 };
 window.Series = Series;
 ////////////////////////////////////////////////////////////
-//clean this up? 
-function submissionTasks() {
-  const obj = Series.formSubmission();
-  const card = createCard(obj);
-  card.setAttribute("data-complete", obj.complete);
-  //IF 'complete' is true, it highlights the card
-  libraryDiv.appendChild(card);
-
-  document.querySelector("dialog").close();
-  
-  library.push(obj);
-  //stringify and send - use sep funciton?
+//Reconstructs a Series array from raw string data - to use, call this onto a new var
+function reSeries(unconstructedArray) {
+  if (unconstructedArray) {
+    return unconstructedArray.map(
+      ({ title, complete, link, image }) =>
+        new Series(title, complete, link, image)
+    );
+  } else return;
 }
-////////////////////////////////////////////////////////////
-async function getContentFromGist() {
-  const response = await fetch(`https://api.github.com/gists/${gistId}`, {
-    headers: {
-      Authorization: `token ${ACCESSTOKEN}`,
-    },
-  });
-  const data = await response.json();
-  const file = data.files[filename];
-  if (file) {
-    const content = JSON.parse(file.content);
-    return content;
-  } else {
-    console.error(`File ${filename} not found in Gist ${gistId}`);
-    return null;
-  }
-}
-
-async function gulpAndRender() {
-  const content = await getContentFromGist();
-  renderCards(content);
-  //console.log(content);
-}
-
-//gulpAndRender();
 ///////////////////
+
 ////////////////////
 library.push(
   new Series(
@@ -142,13 +134,41 @@ library.push(
   )
 );
 ////////////////////
-console.log(library);
+//clean this up?
+function submissionTasks() {
+  const obj = Series.formSubmission();
+  const card = createCard(obj);
+  card.setAttribute("data-complete", obj.complete);
+  //IF 'complete' is true, it highlights the card
+  libraryDiv.appendChild(card);
 
-localStorage.setItem("localContent", JSON.stringify(library));
-let localContent = JSON.parse(localStorage.getItem("localContent"));
+  document.querySelector("dialog").close();
 
-renderCards(reSeries(localContent));
+  library.push(obj);
+  sendLibrary();
+}
+////////////////////
+function sendLibrary() {
+  localStorage.setItem("localContent", JSON.stringify(library));
+  //set a localStorage item called "localContent", set it as a stringified library[]
+}
+function getLibrary() {
+  let data = localStorage.getItem("localContent");
+  //get localStorage item "localContent" (which is a string)
+  data = JSON.parse(data);
+  //parses (de-strings) library
+  //IMPORTANTLY, still needs to be MAPPED to a proper array of objects using 'reSeries':
+  data = reSeries(data);
+  //NOTE: called "data", but it's effectively the library[]
+  data.forEach((ObjFromArray) => {
+    library.push(ObjFromArray);
+  });
+  //runs through each obj in the pulled data and pushes to library[] (cant just push whole thing)
+}
 
+//The Magic//
+getLibrary();
+renderCards(library);
 ////////////////////
 //This function runs when you click 'Query'
 /////////////////////
@@ -202,18 +222,17 @@ window.queryData = queryData;
 ////////////////////
 ////////////Actually runs the card-creation function, and then appends that card to the page
 function renderCards(givenLibrary) {
-  givenLibrary.forEach((ObjFromArray) => {
-    //Note that 'card' here is different in scope!! And is therefore separate. Confusing huh
-    const card = createCard(ObjFromArray);
-    //passing it the object to 'construct' a card from
-    card.setAttribute("data-complete", ObjFromArray.complete);
-    //IF 'complete' is true, it highlights the card
-    libraryDiv.appendChild(card);
-  });
+  if (givenLibrary) {
+    givenLibrary.forEach((ObjFromArray) => {
+      //Note that 'card' here is different in scope!! And is therefore separate. Confusing huh
+      const card = createCard(ObjFromArray);
+      //passing it the object to 'construct' a card from
+      card.setAttribute("data-complete", ObjFromArray.complete);
+      //IF 'complete' is true, it highlights the card
+      libraryDiv.appendChild(card);
+    });
+  } else return;
 }
-
-// renderCards(content);
-
 ///////
 ////////Creates a card based on array object, but doesn't append tp page yet////////////
 //In other words, even though this is a long function, it's all just creating the card structure
