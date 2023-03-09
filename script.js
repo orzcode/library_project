@@ -135,7 +135,7 @@ library.push(
 );
 ////////////////////
 //clean this up?
-function submissionTasks() {
+export function submissionTasks() {
   const obj = Series.formSubmission();
   const card = createCard(obj);
   card.setAttribute("data-complete", obj.complete);
@@ -147,6 +147,7 @@ function submissionTasks() {
   library.push(obj);
   sendLibrary();
 }
+window.submissionTasks = submissionTasks;
 ////////////////////
 function sendLibrary() {
   localStorage.setItem("localContent", JSON.stringify(library));
