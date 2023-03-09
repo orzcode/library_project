@@ -280,10 +280,42 @@ function createCard(obj) {
   const removeStrong = document.createElement("strong");
   const removeEm = document.createElement("em");
   removeEm.textContent = "Remove?";
+
+//REMOVAL BUTTON
+  removeEm.addEventListener("click", confirmRM, true)
+  function confirmRM() {
+    const card = this.closest('.card');
+       
+    //actual stuff that happens on 2nd click is in this bit
+    if (removeEm.dataset.clicked === 'true') {
+      card.remove();
+      removeFromLibrary(obj.title)
+      return;
+    }
+    //actual stuff that happens on 2nd click is in this bit
+
+    removeEm.dataset.clicked = 'true';
+    removeEm.textContent = 'Confirm remove?';
+    
+    setTimeout(() => {
+      removeEm.dataset.clicked = 'false';
+      removeEm.textContent = 'Remove?';
+    }, 3000);
+  }
+
+  function removeFromLibrary(objTitle) {
+    const index = library.findIndex(obj => obj.title === objTitle);
+    if (index !== -1) {
+      library.splice(index, 1);
+      sendLibrary();
+    }
+  //finds the right object in the array (based on title) and removes from Library natively
+  //then runs the sendLibrary function to remove from remote
+  }
+////////////////
   linkP.appendChild(removeStrong);
   removeStrong.appendChild(removeEm);
-  //NEED TO TURN THIS INTO A BUTTON
-  //DECIDE HOW THIS SHOULD FLOW
+
 
   linkP.appendChild(removeStrong);
 
@@ -460,9 +492,3 @@ async function getPosterImageFromTVMaze(searchTerm) {
 
 //////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
-
-// getMainImageFromTVMaze("twin peaks").then(mainImage =>{
-// 	document.body.style.backgroundImage = `url(${mainImage})`;
-// })//WORKS...BUT NEED TO TEST ON LIVE PAGE BUTTON OR SOMETHING
-
-// //WORKS BEAUTIFULLY_ SHOULD TEST LIVE TOO

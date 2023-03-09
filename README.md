@@ -1,14 +1,9 @@
 # library_project
 Library project involving prototypes
 ~~~
-lib is created at pageload - first, 'get' library array at page load
-create functions for this and stringify functions
-
 add function to handle other 'Submit' functions along with prototype (check notes)
 Make Query button the default - two submit buttons with no onsubmit? other way?
 ~~~
-TODO: 'Remove' btn functionality
-    --Remove should have a confirmation
 TODO: Improve modal; always center on screen?
 TODO: Click (with confirmation) to change from Complete? Yes to No
 
