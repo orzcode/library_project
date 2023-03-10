@@ -132,7 +132,7 @@ a {
   line-height: 1.3;
   overflow: ellipsis;
 }
-.card[data-complete="true"] {
+.card[data-complete="Yes"] {
   background-color: var(--highlighted);
 }
 .card img{
@@ -204,6 +204,7 @@ dialog img:nth-child(2) {
 dialog h2 {
   font-size: 6rem;
   line-height: 110%;
+  align-self: center;
 }
 dialog form {
   margin: 0 1rem;
