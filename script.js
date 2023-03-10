@@ -117,7 +117,7 @@ export function Series(title, complete, link, image) {
 Series.formSubmission = function () {
   return new Series(
     document.querySelector("dialog h2").innerHTML,
-    document.querySelector('input[name="filmingComplete"]:checked').value,
+    Boolean(document.querySelector('input[name="filmingComplete"]:checked').value),
     document.querySelector("dialog a").href,
     document.querySelector("#formImg").src
   );
