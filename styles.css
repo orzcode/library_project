@@ -13,30 +13,35 @@
 }
 html {
   background-color: var(--main);
-  font-family: 'A-OTF Shin Go Pro R';
+  font-family: "A-OTF Shin Go Pro R";
   font-size: 62.5%;
   /* FONTSIZE TRICK-- 1 rem = 10 px here, usually 1 rem = 16px */
   caret-color: transparent;
   max-width: 100vw;
+  min-width: 100vw;
 }
 body {
   font-size: 2rem;
+  max-width: 100vw;
+  min-width: 100vw;
   /* font-size: calc(1.5rem + 0.4vw); */
   /* FONTSIZE TRICK-- 1 rem = 10 px here, usually 1 rem = 16px */
   /* FONTSIZE - Adding the 0.4 is for responsivity */
 }
 
 @font-face {
-    font-family: 'A-OTF Shin Go Pro R';
-    font-style: normal;
-    font-weight: normal;
-    src: local('A-OTF Shin Go Pro R'), url('AOTFShinGoProRegular.woff') format('woff');
+  font-family: "A-OTF Shin Go Pro R";
+  font-style: normal;
+  font-weight: normal;
+  src: local("A-OTF Shin Go Pro R"),
+    url("AOTFShinGoProRegular.woff") format("woff");
 }
 @font-face {
-    font-family: 'A-OTF Shin Go Pro L';
-    font-style: normal;
-    font-weight: normal;
-    src: local('A-OTF Shin Go Pro L'), url('AOTFShinGoProLight.woff') format('woff');
+  font-family: "A-OTF Shin Go Pro L";
+  font-style: normal;
+  font-weight: normal;
+  src: local("A-OTF Shin Go Pro L"),
+    url("AOTFShinGoProLight.woff") format("woff");
 }
 
 li {
@@ -70,7 +75,8 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
+  max-width: 100vw;
+  min-width: 100vw;
   /*This is important for flex-based bottom footer*/
 }
 
@@ -81,7 +87,7 @@ a {
   flex-grow: 0;
   flex-shrink: 0;
   padding: 2rem;
-  margin:auto;
+  margin: auto;
 }
 
 #header2 {
@@ -95,35 +101,36 @@ a {
   background-color: var(--main);
   display: grid;
   flex-grow: 1;
-  width: 100vw;
-  gap: 2rem;
-  padding: 2rem;
+  max-width: 100vw;
+  min-width: 100vw;
+  gap: 4rem 2rem;
+  padding: 1rem;
   align-items: center;
   justify-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(444px, 1fr));
 }
 
 #footer {
   margin-top: auto;
-  padding-bottom: 5rem;
+  padding: 2rem 0;
   flex-grow: 0;
   flex-shrink: 0;
 }
 
 .card {
-  border-radius: 15px;
+  border-radius: 8px;
   border: 2px solid black;
   background-color: #9b9797;
   /* height: 180px; */
-  padding: 1rem;
-  gap: 2rem;
-  height: 760px;
-  width: clamp(420px, 100%, 520px);
+  height: 750px;
+  /* width: clamp(440px, 100%, 520px); */
+  width: 445px;
   display: flex;
   text-align: center;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  padding-bottom: 1rem;
   font-size: larger;
   letter-spacing: 1px;
 }
@@ -135,10 +142,13 @@ a {
 .card[data-complete="Yes"] {
   background-color: var(--highlighted);
 }
-.card img{
-  width: 100%;
-  height: 65%;
-  border-radius: 15px;
+.card img {
+  max-height: 550px;
+  width: 440px;
+  aspect-ratio: 0.675;
+  border-radius: 8px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
   outline: 2px solid black;
   object-fit: cover;
 }
