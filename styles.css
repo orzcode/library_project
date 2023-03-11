@@ -112,7 +112,7 @@ a {
 
 #footer {
   margin-top: auto;
-  padding: 2rem 0;
+padding-top: 4rem;
   flex-grow: 0;
   flex-shrink: 0;
 }
