@@ -230,6 +230,7 @@ function createCard(obj) {
   completeStrong.textContent = "Filming: ";
   completeP.appendChild(completeStrong);
   completeP.appendChild(document.createTextNode(obj.complete));
+  console.log(!obj.complete);
 
   card.appendChild(completeP);
 
