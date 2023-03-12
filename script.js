@@ -34,6 +34,7 @@ let libraryDiv = document.querySelector("#library");
 
 //FIREBASE
 ///////////////////
+
 ///////////////////
 //GIST
 // const gistId = "5030015d1b6612eed934612108b3e63f";
@@ -71,41 +72,7 @@ let libraryDiv = document.querySelector("#library");
 //   //console.log(content);
 // }
 ///////////////////
-////////////////////
-//TEST LIBRARY
-// library.push(
-//   new Series(
-//     "Mr Inbetween",
-//     true,
-//     "https://en.wikipedia.org/wiki/The_Expanse_(TV_series)",
-//     "https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg"
-//   )
-// );
-// library.push(
-//   new Series(
-//     "Mr Test",
-//     false,
-//     "https://en.wikipedia.org/wiki/The_Expanse_(TV_series)",
-//     "https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg"
-//   )
-// );
-// library.push(
-//   new Series(
-//     "Mr Truetest",
-//     true,
-//     "https://en.wikipedia.org/wiki/The_Expanse_(TV_series)",
-//     "https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg"
-//   )
-// );
-// library.push(
-//   new Series(
-//     "Mr Curious Man Doing Curious Things",
-//     false,
-//     "https://en.wikipedia.org/wiki/The_Expanse_(TV_series)",
-//     "https://static.tvmaze.com/uploads/images/medium_portrait/0/2142.jpg"
-//   )
-// );
-////////////////////
+
 ////////////////////
 //Series constructor function//
 export function Series(title, complete, link, image) {
@@ -260,7 +227,7 @@ function createCard(obj) {
 
   const completeP = document.createElement("p");
   const completeStrong = document.createElement("strong");
-  completeStrong.textContent = "Complete: ";
+  completeStrong.textContent = "Filming: ";
   completeP.appendChild(completeStrong);
   completeP.appendChild(document.createTextNode(obj.complete));
 
@@ -431,7 +398,6 @@ async function getWikiLink(term) {
 //   return smallestGeneralImage;
 // }
 ////////////////////////////////////////////////////////////////////////////////////////////
-//used only for modal dialog//
 ///////////////
 async function getPosterImageFromTVMaze(searchTerm) {
   const searchUrl = `https://api.tvmaze.com/search/shows?q=${searchTerm}`;
@@ -489,6 +455,5 @@ async function getPosterImageFromTVMaze(searchTerm) {
 
   return smallestImage;
 }
-
 //////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
