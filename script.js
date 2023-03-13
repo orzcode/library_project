@@ -135,6 +135,7 @@ function sendLibrary() {
   //set a localStorage item called "localContent", set it as a stringified library[]
 }
 function getLibrary() {
+  if (typeof localStorage !== 'undefined') {
   let data = localStorage.getItem("localContent");
   //get localStorage item "localContent" (which is a string)
   data = JSON.parse(data);
@@ -146,10 +147,10 @@ function getLibrary() {
     library.push(ObjFromArray);
   });
   //runs through each obj in the pulled data and pushes to library[] (cant just push whole thing)
+  } else return
 }
 
 //The Magic//
-localStorage.clear();
 getLibrary();
 renderCards(library);
 ////////////////////
