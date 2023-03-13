@@ -135,7 +135,7 @@ function sendLibrary() {
   //set a localStorage item called "localContent", set it as a stringified library[]
 }
 function getLibrary() {
-  if (typeof localStorage !== 'undefined') {
+  if (localStorage.getItem("localContent") !== null) {
   let data = localStorage.getItem("localContent");
   //get localStorage item "localContent" (which is a string)
   data = JSON.parse(data);
