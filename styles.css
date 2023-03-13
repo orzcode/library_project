@@ -141,6 +141,10 @@ padding-top: 4rem;
 }
 .card[data-complete="Complete"] {
   background-color: var(--highlighted);
+  order: 1;
+}
+.card[data-complete="Ongoing"] {
+  order: 2;
 }
 .card img {
   max-height: 550px;
