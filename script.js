@@ -149,6 +149,7 @@ function getLibrary() {
 }
 
 //The Magic//
+localStorage.clear();
 getLibrary();
 renderCards(library);
 ////////////////////
