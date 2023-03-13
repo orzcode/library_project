@@ -89,6 +89,14 @@ Series.formSubmission = function () {
     document.querySelector("#formImg").src
   );
 };
+Series.toggle = function (theObj){
+  if(theObj.complete === "Ongoing"){
+    theObj.complete = "Complete"
+  }else theObj.complete = "Ongoing";
+  console.log(library)
+  //renderCards(library) DO NOT EXECUTE THIS UNTIL INFINITE LOOP FIXED
+}//but you're not actually changing the library yet?
+
 window.Series = Series;
 ////////////////////////////////////////////////////////////
 //Reconstructs a Series array from raw string data - to use, call this onto a new var
@@ -230,7 +238,8 @@ function createCard(obj) {
   completeStrong.textContent = "Filming: ";
   completeP.appendChild(completeStrong);
   completeP.appendChild(document.createTextNode(obj.complete));
-  console.log(!obj.complete);
+  completeP.addEventListener("click", Series.toggle(obj));
+  //TESTING THIS - WHY DOES IT RUN?!?!
 
   card.appendChild(completeP);
 
