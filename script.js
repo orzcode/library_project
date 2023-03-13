@@ -93,9 +93,15 @@ Series.toggle = function (theObj){
   if(theObj.complete === "Ongoing"){
     theObj.complete = "Complete"
   }else theObj.complete = "Ongoing";
-  console.log(library)
-  //renderCards(library) DO NOT EXECUTE THIS UNTIL INFINITE LOOP FIXED
-}//but you're not actually changing the library yet?
+
+  event.target.closest('.card').setAttribute("data-complete", theObj.complete)
+  //'event' works without being passed as a parameter in the calling function
+  //so ignore the strikethrough - still works.
+  event.target.closest('p').textContent = theObj.complete
+
+  //And somehow, it does actually update the library array
+  sendLibrary()
+}
 
 window.Series = Series;
 ////////////////////////////////////////////////////////////
@@ -237,9 +243,16 @@ function createCard(obj) {
   const completeStrong = document.createElement("strong");
   completeStrong.textContent = "Filming: ";
   completeP.appendChild(completeStrong);
-  completeP.appendChild(document.createTextNode(obj.complete));
-  completeP.addEventListener("click", Series.toggle(obj));
-  //TESTING THIS - WHY DOES IT RUN?!?!
+
+  const completeToggle = document.createElement("p");
+  completeToggle.textContent = obj.complete;
+  completeToggle.style.display = "inline";
+  completeP.appendChild(completeToggle);
+  
+  //Phew. Toggles the 'Ongoing/Complete' status (see main function)
+  completeP.addEventListener('click', function() {
+    Series.toggle(obj);
+  });
 
   card.appendChild(completeP);
 

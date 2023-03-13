@@ -5,7 +5,6 @@ add function to handle other 'Submit' functions along with prototype (check note
 Make Query button the default - two submit buttons with no onsubmit? other way?
 ~~~
 TODO: Improve modal; always center on screen?
-TODO: Click (with confirmation) to change from Complete? Yes to No
 TODO: enter button defaults to Query
 
 
