@@ -17,13 +17,10 @@ html {
   font-size: 62.5%;
   /* FONTSIZE TRICK-- 1 rem = 10 px here, usually 1 rem = 16px */
   caret-color: transparent;
-  max-width: 100vw;
-  min-width: 100vw;
+  overflow-x: hidden;
 }
 body {
   font-size: 2rem;
-  max-width: 100vw;
-  min-width: 100vw;
   /* font-size: calc(1.5rem + 0.4vw); */
   /* FONTSIZE TRICK-- 1 rem = 10 px here, usually 1 rem = 16px */
   /* FONTSIZE - Adding the 0.4 is for responsivity */
@@ -101,8 +98,7 @@ a {
   background-color: var(--main);
   display: grid;
   flex-grow: 1;
-  max-width: 100vw;
-  min-width: 100vw;
+  width: 100vw;
   gap: 4rem 2rem;
   padding: 1rem;
   align-items: center;
