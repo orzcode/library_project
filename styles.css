@@ -169,7 +169,7 @@ dialog {
   /*Other properties below*/
   width: 80%;
   min-width: 394px;
-  height: 90%;
+  height: 100%;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -181,12 +181,12 @@ dialog {
   transition: all 0.4s ease;
 }
 
-/* dialog * {outline: 1px solid pink;} */
+dialog * {outline: 1px solid pink;}
 
 dialog::backdrop {
   background: rgba(0, 0, 0, 0.5);
 }
-
+/* Note: this will exhibit strange position behavior unless you force reload */
 dialog[open] {
   transform: translate(-50%, -50%) scale(1);
   opacity: 1;
@@ -215,19 +215,20 @@ dialog img:nth-child(2) {
   object-fit: contain;
 }
 dialog h2 {
-  font-size: 6rem;
+  /* font-size: calc(3rem + 1vw); */
   line-height: 110%;
   align-self: center;
+  text-align: center;
 }
 dialog form {
   margin: 0 1rem;
 }
 dialog form * {
-  font-size: 4rem;
+  /* font-size: calc(1.5rem + 0.8vw); */
   font-family: Oswald;
 }
 dialog a {
-  font-size: 4rem;
+  /* font-size: calc(1.5rem + 1vw); */
   font-family: Oswald;
   font-style: italic;
   visibility: hidden;
@@ -240,22 +241,26 @@ dialog input[type="text"] {
   text-align: center;
 }
 dialog input[type="radio"] {
-  height: 4rem;
-  width: 4rem;
+  height: calc(1.5rem + 0.8vw);
+  width: calc(1.5rem + 0.8vw);
+  margin: 5px;
+}
+label{
+height: 100%;
 }
 dialog button {
   border-radius: 10px;
   padding: 0 1rem;
-  font-size: 3rem;
+  /* font-size: calc(1rem + 0.8vw); */
 }
 dialog button:hover {
   background-color: var(--highlighted);
 }
 #saveSeries {
-  font-size: 4rem;
+
   visibility: hidden;
 }
-#filmingComplete {
+#filmingComplete{
   visibility: hidden;
 }
 form > div {
@@ -265,3 +270,17 @@ form > div {
   align-items: center;
   gap: 1rem;
 }
+/* font sizes for dialog (easier to group like this) */
+dialog h2 {
+  font-size: calc(3rem + 1vw);
+}
+dialog form {
+  font-size: calc(1.5rem + 0.8vw);
+}
+dialog a {
+  font-size: calc(1.5rem + 1vw);
+}
+dialog button {
+  font-size: calc(1rem + 0.8vw);
+}
+/* plus the radio buttons */
