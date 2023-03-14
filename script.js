@@ -164,12 +164,13 @@ export function queryData() {
   document.querySelector("#formImg").src = "spinner.svg";
 
   const searchTerm = document.querySelector("#seriesName").value;
+  document.querySelector("#seriesName").value = '';
   const url = `https://api.tvmaze.com/singlesearch/shows?q=${encodeURIComponent(
     searchTerm
   )}`;
 
   Promise.all([
-    getPosterImageFromTVMaze(document.querySelector("#seriesName").value).then(
+    getPosterImageFromTVMaze(searchTerm).then(
       (mainImage) => {
         document.querySelector("#formImg").src = mainImage;
       }

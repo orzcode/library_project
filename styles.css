@@ -98,8 +98,8 @@ a {
   background-color: var(--main);
   display: grid;
   flex-grow: 1;
-  width: 100vw;
-  gap: 4rem 2rem;
+  width: 94vw;
+  gap: 8rem 6rem;
   padding: 1rem;
   align-items: center;
   justify-items: center;
@@ -237,6 +237,7 @@ dialog input[type="text"] {
   border-radius: 5px;
   height: 4rem;
   width: 30rem;
+  text-align: center;
 }
 dialog input[type="radio"] {
   height: 4rem;

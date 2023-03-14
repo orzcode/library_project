@@ -16,13 +16,13 @@
 		<img src="close.svg" onclick="document.querySelector('dialog').close()"></img>
 		<img id="formImg" src="addMedia.svg"></img>
 		<h2>Add a series</h2>
-		<a href="www.google.com" target="_blank">Wikipedia Link to Show</a>
-		<form>
+		<a href="www.google.com" target="_blank">Wikipedia Link</a>
+		<form onsubmit="window.queryData();return false">
 			<!-- or event.preventDefault() -->
 			
 			<div>
-				<label for="seriesName">Series name:</label>
-				<input type="text" id="seriesName">
+				<!-- <label for="seriesName">Series name:</label> -->
+				<input type="text" id="seriesName" minlength="1" placeholder="Enter Series Name" title="Enter a series name" required />
 			</div>
 			
 			<div id="filmingComplete">
@@ -30,14 +30,15 @@
 				
 				<div style="width: fit-content">
 					<label for="yes">Yes</label>
-					<input type="radio" id="yes" name="filmingComplete" value="Complete" required>
+					<input type="radio" id="yes" name="filmingComplete" value="Complete">
 					<label for="no">No</label>
-					<input type="radio" id="no" name="filmingComplete" value="Ongoing" required>
+					<input type="radio" id="no" name="filmingComplete" value="Ongoing">
+					<!-- Need a way to make these 'required' without interferring with first submit btn -->
 				</div>
 			</div>
 
 			<div>
-				<button id="confirmBtn" type="submit" onclick="window.queryData();return false" value="Query">Query</button>
+				<button id="confirmBtn" type="submit" value="Query">Query</button>
 				<button id="cancelFormButton" type="button" onclick="document.querySelector('dialog').close()">Cancel</button>
 			</div><!-- 'Query' is the 'Submit' button so that enter key defaults to it. -->
 			<div>
