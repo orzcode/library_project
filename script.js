@@ -89,19 +89,19 @@ Series.formSubmission = function () {
     document.querySelector("#formImg").src
   );
 };
-Series.toggle = function (theObj){
-  if(theObj.complete === "Ongoing"){
-    theObj.complete = "Complete"
-  }else theObj.complete = "Ongoing";
+Series.toggle = function (theObj) {
+  if (theObj.complete === "Ongoing") {
+    theObj.complete = "Complete";
+  } else theObj.complete = "Ongoing";
 
-  event.target.closest('.card').setAttribute("data-complete", theObj.complete)
+  event.target.closest(".card").setAttribute("data-complete", theObj.complete);
   //'event' works without being passed as a parameter in the calling function
   //so ignore the strikethrough - still works.
-  event.target.closest('p').textContent = theObj.complete
+  event.target.closest("p").textContent = theObj.complete;
 
   //And somehow, it does actually update the library array
-  sendLibrary()
-}
+  sendLibrary();
+};
 
 window.Series = Series;
 ////////////////////////////////////////////////////////////
@@ -136,18 +136,18 @@ function sendLibrary() {
 }
 function getLibrary() {
   if (localStorage.getItem("localContent") !== null) {
-  let data = localStorage.getItem("localContent");
-  //get localStorage item "localContent" (which is a string)
-  data = JSON.parse(data);
-  //parses (de-strings) library
-  //IMPORTANTLY, still needs to be MAPPED to a proper array of objects using 'reSeries':
-  data = reSeries(data);
-  //NOTE: called "data", but it's effectively the library[]
-  data.forEach((ObjFromArray) => {
-    library.push(ObjFromArray);
-  });
-  //runs through each obj in the pulled data and pushes to library[] (cant just push whole thing)
-  } else return
+    let data = localStorage.getItem("localContent");
+    //get localStorage item "localContent" (which is a string)
+    data = JSON.parse(data);
+    //parses (de-strings) library
+    //IMPORTANTLY, still needs to be MAPPED to a proper array of objects using 'reSeries':
+    data = reSeries(data);
+    //NOTE: called "data", but it's effectively the library[]
+    data.forEach((ObjFromArray) => {
+      library.push(ObjFromArray);
+    });
+    //runs through each obj in the pulled data and pushes to library[] (cant just push whole thing)
+  } else return;
 }
 
 //The Magic//
@@ -250,9 +250,9 @@ function createCard(obj) {
   completeToggle.textContent = obj.complete;
   completeToggle.style.display = "inline";
   completeP.appendChild(completeToggle);
-  
+
   //Phew. Toggles the 'Ongoing/Complete' status (see main function)
-  completeP.addEventListener('click', function() {
+  completeToggle.addEventListener("click", function () {
     Series.toggle(obj);
   });
 
@@ -273,41 +273,40 @@ function createCard(obj) {
   const removeEm = document.createElement("em");
   removeEm.textContent = "Remove?";
 
-//REMOVAL BUTTON
-  removeEm.addEventListener("click", confirmRM, true)
+  //REMOVAL BUTTON
+  removeEm.addEventListener("click", confirmRM, true);
   function confirmRM() {
-    const card = this.closest('.card');
-       
+    const card = this.closest(".card");
+
     //actual stuff that happens on 2nd click is in this bit
-    if (removeEm.dataset.clicked === 'true') {
+    if (removeEm.dataset.clicked === "true") {
       card.remove();
-      removeFromLibrary(obj.title)
+      removeFromLibrary(obj.title);
       return;
     }
     //actual stuff that happens on 2nd click is in this bit
 
-    removeEm.dataset.clicked = 'true';
-    removeEm.textContent = 'Confirm remove?';
-    
+    removeEm.dataset.clicked = "true";
+    removeEm.textContent = "Confirm remove?";
+
     setTimeout(() => {
-      removeEm.dataset.clicked = 'false';
-      removeEm.textContent = 'Remove?';
+      removeEm.dataset.clicked = "false";
+      removeEm.textContent = "Remove?";
     }, 3000);
   }
 
   function removeFromLibrary(objTitle) {
-    const index = library.findIndex(obj => obj.title === objTitle);
+    const index = library.findIndex((obj) => obj.title === objTitle);
     if (index !== -1) {
       library.splice(index, 1);
       sendLibrary();
     }
-  //finds the right object in the array (based on title) and removes from Library natively
-  //then runs the sendLibrary function to remove from remote
+    //finds the right object in the array (based on title) and removes from Library natively
+    //then runs the sendLibrary function to remove from remote
   }
-////////////////
+  ////////////////
   linkP.appendChild(removeStrong);
   removeStrong.appendChild(removeEm);
-
 
   linkP.appendChild(removeStrong);
 

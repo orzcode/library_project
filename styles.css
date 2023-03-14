@@ -108,7 +108,7 @@ a {
 
 #footer {
   margin-top: auto;
-padding-top: 4rem;
+  padding-top: 4rem;
   flex-grow: 0;
   flex-shrink: 0;
 }
@@ -141,6 +141,9 @@ padding-top: 4rem;
 }
 .card[data-complete="Ongoing"] {
   order: 2;
+}
+.card p p{
+  cursor: pointer;
 }
 .card img {
   max-height: 550px;
