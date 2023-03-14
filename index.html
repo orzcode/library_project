@@ -17,7 +17,7 @@
 		<img id="formImg" src="addMedia.svg"></img>
 		<h2>Add a series</h2>
 		<a href="www.google.com" target="_blank">Wikipedia Link to Show</a>
-		<form onsubmit="submissionTasks();return false">
+		<form>
 			<!-- or event.preventDefault() -->
 			
 			<div>
@@ -37,11 +37,11 @@
 			</div>
 
 			<div>
-				<button id="confirmBtn" type="button" onclick="window.queryData()" value="Query">Query</button>
+				<button id="confirmBtn" type="submit" onclick="window.queryData();return false" value="Query">Query</button>
 				<button id="cancelFormButton" type="button" onclick="document.querySelector('dialog').close()">Cancel</button>
-			</div>
+			</div><!-- 'Query' is the 'Submit' button so that enter key defaults to it. -->
 			<div>
-				<button id="saveSeries" type="submit" value="Submit">Add Series to Library</button>
+				<button id="saveSeries" type="button" onclick="submissionTasks()" value="Submit">Add Series to Library</button>
 			</div>
 		  
 		</form>
