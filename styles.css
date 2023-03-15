@@ -17,10 +17,12 @@ html {
   font-size: 62.5%;
   /* FONTSIZE TRICK-- 1 rem = 10 px here, usually 1 rem = 16px */
   caret-color: transparent;
+  width: 100vw;
   overflow-x: hidden;
 }
 body {
   font-size: 2rem;
+  width: 100vw;
   /* font-size: calc(1.5rem + 0.4vw); */
   /* FONTSIZE TRICK-- 1 rem = 10 px here, usually 1 rem = 16px */
   /* FONTSIZE - Adding the 0.4 is for responsivity */
@@ -72,18 +74,16 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* max-width: 100vw; */
-  min-width: 100vw;
+  width: 100vw;
   /*This is important for flex-based bottom footer*/
 }
 
 #header {
   background-color: var(--header);
-  min-width: 100vw;
+  width: 100vw;
   text-align: center;
   flex-grow: 0;
   flex-shrink: 0;
-  padding: 2rem;
   margin: auto;
 }
 
@@ -98,17 +98,15 @@ a {
   background-color: var(--main);
   display: grid;
   flex-grow: 1;
-  width: 98vw;
-  gap: 8rem 6rem;
-  padding: 1rem;
+  width: 100vw;
+  gap: 8rem 2rem;
   align-items: center;
   justify-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(444px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(44rem, 1fr));
 }
 
 #footer {
-  margin-top: auto;
-  padding-top: 4rem;
+  padding: 2rem 0;
   flex-grow: 0;
   flex-shrink: 0;
 }
@@ -117,10 +115,10 @@ a {
   border-radius: 8px;
   border: 2px solid black;
   background-color: #9b9797;
-  /* height: 180px; */
-  height: 750px;
+  
   /* width: clamp(440px, 100%, 520px); */
-  width: 445px;
+  /* width: 40rem; */
+  width: calc(34rem + 1.6vw);
   display: flex;
   text-align: center;
   flex-direction: column;
@@ -130,6 +128,19 @@ a {
   font-size: larger;
   letter-spacing: 1px;
 }
+.card img {
+  max-width: 100%;
+  width: 100%;
+  aspect-ratio: .8;
+  /*Lower the ratio, taller image gets*/
+  /*Was 0.675*/
+  border-radius: 8px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  outline: 2px solid black;
+  object-fit: cover;
+}
+
 .title {
   font-size: xx-large;
   line-height: 1.3;
@@ -144,16 +155,6 @@ a {
 }
 .card p p{
   cursor: pointer;
-}
-.card img {
-  max-height: 550px;
-  width: 440px;
-  aspect-ratio: 0.675;
-  border-radius: 8px;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  outline: 2px solid black;
-  object-fit: cover;
 }
 em {
   cursor: pointer;

@@ -234,13 +234,13 @@ function createCard(obj) {
 
   card.appendChild(banner);
 
-  const titleP = document.createElement("p");
-  const titleStrong = document.createElement("strong");
-  titleStrong.textContent = obj.title;
-  titleStrong.className = "title";
-  titleP.appendChild(titleStrong);
+  // const titleP = document.createElement("p");
+  // const titleStrong = document.createElement("strong");
+  // titleStrong.textContent = obj.title;
+  // titleStrong.className = "title";
+  // titleP.appendChild(titleStrong);
 
-  card.appendChild(titleP);
+  // card.appendChild(titleP);
 
   const completeP = document.createElement("p");
   const completeStrong = document.createElement("strong");
