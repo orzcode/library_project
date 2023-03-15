@@ -123,13 +123,20 @@ export function submissionTasks() {
   //IF 'complete' is true, it highlights the card
   libraryDiv.appendChild(card);
 
-  document.querySelector("dialog").close();
+  closeModal();
 
   library.push(obj);
   sendLibrary();
 }
 window.submissionTasks = submissionTasks;
 ////////////////////
+export function closeModal(){
+  document.body.style.removeProperty('position');
+  document.body.style.removeProperty('overflowY');
+  document.querySelector("dialog").close();
+}
+window.closeModal = closeModal;
+///////////////////
 function sendLibrary() {
   localStorage.setItem("localContent", JSON.stringify(library));
   //set a localStorage item called "localContent", set it as a stringified library[]
@@ -164,17 +171,15 @@ export function queryData() {
   document.querySelector("#formImg").src = "spinner.svg";
 
   const searchTerm = document.querySelector("#seriesName").value;
-  document.querySelector("#seriesName").value = '';
+  document.querySelector("#seriesName").value = "";
   const url = `https://api.tvmaze.com/singlesearch/shows?q=${encodeURIComponent(
     searchTerm
   )}`;
 
   Promise.all([
-    getPosterImageFromTVMaze(searchTerm).then(
-      (mainImage) => {
-        document.querySelector("#formImg").src = mainImage;
-      }
-    ),
+    getPosterImageFromTVMaze(searchTerm).then((mainImage) => {
+      document.querySelector("#formImg").src = mainImage;
+    }),
 
     fetch(url)
       .then((response) => response.json())
@@ -324,6 +329,8 @@ function modalOpenTasks() {
   document.querySelector("dialog a").style.visibility = "hidden";
   document.querySelector("#filmingComplete").style.visibility = "hidden";
   document.querySelector("#saveSeries").style.visibility = "hidden";
+  document.body.style.position = "fixed";
+  document.body.style.overflowY = "hidden";
 }
 window.modalOpenTasks = modalOpenTasks;
 ////////////////////////////////////////////////////////////////////////////////////////////
