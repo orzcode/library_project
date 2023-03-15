@@ -17,12 +17,10 @@ html {
   font-size: 62.5%;
   /* FONTSIZE TRICK-- 1 rem = 10 px here, usually 1 rem = 16px */
   caret-color: transparent;
-  width: 100vw;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 body {
   font-size: 2rem;
-  width: 100vw;
   /* font-size: calc(1.5rem + 0.4vw); */
   /* FONTSIZE TRICK-- 1 rem = 10 px here, usually 1 rem = 16px */
   /* FONTSIZE - Adding the 0.4 is for responsivity */
@@ -74,13 +72,13 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
+  
   /*This is important for flex-based bottom footer*/
 }
 
 #header {
   background-color: var(--header);
-  width: 100vw;
+  width: 100%;
   text-align: center;
   flex-grow: 0;
   flex-shrink: 0;
@@ -98,7 +96,7 @@ a {
   background-color: var(--main);
   display: grid;
   flex-grow: 1;
-  width: 100vw;
+  width: 100%;
   gap: 8rem 2rem;
   align-items: center;
   justify-items: center;
@@ -118,7 +116,7 @@ a {
   
   /* width: clamp(440px, 100%, 520px); */
   /* width: 40rem; */
-  width: calc(34rem + 1.6vw);
+  width: calc(34rem + 2vw);
   display: flex;
   text-align: center;
   flex-direction: column;
