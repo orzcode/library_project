@@ -100,7 +100,7 @@ a {
   gap: 8rem 2rem;
   align-items: center;
   justify-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(44rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(calc(34rem + 2vw), 1fr));
 }
 
 #footer {
