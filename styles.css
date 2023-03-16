@@ -101,6 +101,7 @@ a {
   align-items: center;
   justify-items: center;
   grid-template-columns: repeat(auto-fit, minmax(calc(34rem + 2vw), 1fr));
+  /*Make sure this value is equal to the .card size width to avoid not-quite-center at smaller sizes*/
 }
 
 #footer {

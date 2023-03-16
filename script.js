@@ -129,14 +129,30 @@ export function submissionTasks() {
   sendLibrary();
 }
 window.submissionTasks = submissionTasks;
-////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+export function modalOpenTasks() {
+  document.querySelector("form").reset();
+  document.querySelector("dialog").showModal();
+  document.querySelector("#formImg").src = "addMedia.svg";
+  document.querySelector("dialog h2").innerHTML = "Add a series";
+  document.querySelector("dialog a").href =
+    "https://en.wikipedia.org/wiki/Main_Page";
+  document.querySelector("dialog a").style.visibility = "hidden";
+  document.querySelector("#filmingComplete").style.visibility = "hidden";
+  document.querySelector("#saveSeries").style.visibility = "hidden";
+  // document.body.style.position = "fixed";
+  document.body.style.overflowY = "hidden";
+}
+window.modalOpenTasks = modalOpenTasks;
+//
 export function closeModal(){
-  document.body.style.removeProperty('position');
-  document.body.style.removeProperty('overflowY');
+  // document.body.style.removeProperty('position');
+  document.body.style.overflowY = "visible";
   document.querySelector("dialog").close();
 }
 window.closeModal = closeModal;
-///////////////////
+/////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------//
 function sendLibrary() {
   localStorage.setItem("localContent", JSON.stringify(library));
   //set a localStorage item called "localContent", set it as a stringified library[]
@@ -156,11 +172,13 @@ function getLibrary() {
     //runs through each obj in the pulled data and pushes to library[] (cant just push whole thing)
   } else return;
 }
-
+//-----------------------------------------------------------------------------//
+//////////////////////////////////////////////////////////////////////////////////
 //The Magic//
 getLibrary();
 renderCards(library);
 ////////////////////
+
 //This function runs when you click 'Query'
 /////////////////////
 export function queryData() {
@@ -319,21 +337,7 @@ function createCard(obj) {
   return card;
 }
 //------------------------------------------------------------------------------//
-function modalOpenTasks() {
-  document.querySelector("form").reset();
-  document.querySelector("dialog").showModal();
-  document.querySelector("#formImg").src = "addMedia.svg";
-  document.querySelector("dialog h2").innerHTML = "Add a series";
-  document.querySelector("dialog a").href =
-    "https://en.wikipedia.org/wiki/Main_Page";
-  document.querySelector("dialog a").style.visibility = "hidden";
-  document.querySelector("#filmingComplete").style.visibility = "hidden";
-  document.querySelector("#saveSeries").style.visibility = "hidden";
-  document.body.style.position = "fixed";
-  document.body.style.overflowY = "hidden";
-}
-window.modalOpenTasks = modalOpenTasks;
-////////////////////////////////////////////////////////////////////////////////////////////
+
 ////////////////////////////////////////////////////////////////////////////////////////////
 /////////WIKI LINK FETCHER/////////////
 ////////////////////////////////////////
