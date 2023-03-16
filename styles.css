@@ -6,11 +6,24 @@
   box-sizing: border-box;
   /* outline: 1px solid black; */
 }
-:root {
+/* :root {
   --header: #402c2c;
   --main: #746565;
   --highlighted: #849070;
+} */
+:root {
+  --header: #75296c;
+  --main: #4f689d;
+  --highlighted: #79a7d3;
 }
+/*----------------------------------------------------------------------*/
+/*Half opacity and quarter opacity - for cards - leave this root section*/
+:root{
+  --cardComplete: rgba(150, 150, 150, 0.25);
+  --cardOngoing: rgba(0, 0, 0, 0.5);
+}
+/*Half opacity and quarter opacity - for cards - leave this root section*/
+/*----------------------------------------------------------------------*/
 html {
   background-color: var(--main);
   font-family: "A-OTF Shin Go Pro R";
@@ -46,7 +59,7 @@ li {
 }
 a {
   text-decoration: none;
-  color: initial;
+  color:inherit;
 }
 .btnShadow {
   cursor: pointer;
@@ -78,7 +91,11 @@ a {
 
 #header {
   background-color: var(--header);
+  border-bottom: 1px solid black;
+  filter: drop-shadow(1px 1px 100px black);
   width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
   text-align: center;
   flex-grow: 0;
   flex-shrink: 0;
@@ -110,12 +127,15 @@ a {
   flex-shrink: 0;
   filter: drop-shadow(0px 0px 4px var(--highlighted));
 }
-
 .card {
   border-radius: 8px;
-  border: 2px solid black;
-  background-color: #9b9797;
-  
+  border: 3px solid black;
+  /* background-color: #9b9797; */
+  background-color: var(--cardOngoing);
+  color: whitesmoke;
+  text-shadow: 1px 0px 0px black, -1px 0px 0px black, 0px 1px 0px black,
+    0px -1px 0px black;
+    filter: drop-shadow(1px 1px 5px black);
   /* width: clamp(440px, 100%, 520px); */
   /* width: 40rem; */
   width: calc(34rem + 2vw);
@@ -126,18 +146,18 @@ a {
   align-items: center;
   padding-bottom: 1rem;
   font-size: larger;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
 }
 .card img {
   max-width: 100%;
   width: 100%;
-  aspect-ratio: .8;
+  aspect-ratio: 0.8;
   /*Lower the ratio, taller image gets*/
   /*Was 0.675*/
   border-radius: 8px;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  outline: 2px solid black;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  outline: 1px solid black;
   object-fit: cover;
 }
 
@@ -147,13 +167,14 @@ a {
   overflow: ellipsis;
 }
 .card[data-complete="Complete"] {
-  background-color: var(--highlighted);
+  background-color: var(--cardComplete);
   order: 1;
 }
 .card[data-complete="Ongoing"] {
   order: 2;
+  filter:brightness(0.75);
 }
-.card p p{
+.card p p {
   cursor: pointer;
 }
 em {
@@ -182,7 +203,9 @@ dialog {
   transition: all 0.4s ease;
 }
 
-dialog * {outline: 1px solid pink;}
+dialog * {
+  outline: 1px solid pink;
+}
 
 dialog::backdrop {
   background: rgba(0, 0, 0, 0.5);
@@ -246,8 +269,8 @@ dialog input[type="radio"] {
   width: calc(1.5rem + 0.8vw);
   margin: 5px;
 }
-label{
-height: 100%;
+label {
+  height: 100%;
 }
 dialog button {
   border-radius: 10px;
@@ -260,7 +283,7 @@ dialog button:hover {
 #saveSeries {
   visibility: hidden;
 }
-#filmingComplete{
+#filmingComplete {
   visibility: hidden;
 }
 form > div {
