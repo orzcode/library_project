@@ -142,12 +142,19 @@ export function modalOpenTasks() {
   document.querySelector("#saveSeries").style.visibility = "hidden";
   // document.body.style.position = "fixed";
   document.body.style.overflowY = "hidden";
+  document.body.style.height = "100vh";
+  document.body.style.paddingRight = "15px";
+  document.querySelector("#header").style.width = "calc(100% + 15px)";
 }
 window.modalOpenTasks = modalOpenTasks;
 //
 export function closeModal(){
   // document.body.style.removeProperty('position');
   document.body.style.overflowY = "visible";
+  document.body.style.height = "";
+  document.body.style.paddingRight = "";
+  document.querySelector("#header").style.width = "100%";
+
   document.querySelector("dialog").close();
 }
 window.closeModal = closeModal;
