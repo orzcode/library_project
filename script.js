@@ -141,27 +141,30 @@ export function modalOpenTasks() {
   document.querySelector("dialog a").style.visibility = "hidden";
   document.querySelector("#filmingComplete").style.visibility = "hidden";
   document.querySelector("#saveSeries").style.visibility = "hidden";
-  // document.body.style.position = "fixed";
+  //document.body.style.position = "sticky";
   document.body.style.overflowY = "hidden";
 
-  document.body.style.paddingRight = "15px";
-  document.querySelector("#header").style.width = "calc(100% + 15px)";
-  document.querySelector("#header").style.paddingRight = "15px";
-  
+
+   if(screen.orientation.type === "landscape-primary"){
+     document.body.style.paddingRight = "15px";
+   document.querySelector("#header").style.width = "calc(100% + 15px)";
+   document.querySelector("#header").style.paddingRight = "15px";
+   }
 }
 window.modalOpenTasks = modalOpenTasks;
 //--this is some wacky shit, and on mobile, it seems to move to the LEFT
-//can't be fucked dicking around to fix it, it seems like a rabbit hole.
-//but leaving notes here so the issue is known.
+//"fixed" this with viewport size checking.
 export function closeModal(){
   // document.body.style.removeProperty('position');
   document.body.style.overflowY = "visible";
+ // document.body.style.position = "";
 
-  document.body.style.paddingRight = "";
-  document.querySelector("#header").style.width = "100%";
-  document.querySelector("#header").style.paddingRight = "";
-  document.querySelector("#library").style.paddingLeft = "";
-
+   if(screen.orientation.type === "landscape-primary"){
+   document.body.style.paddingRight = "";
+   document.querySelector("#header").style.width = "100%";
+   document.querySelector("#header").style.paddingRight = "";
+   document.querySelector("#library").style.paddingLeft = "";
+   }
   document.querySelector("dialog").close();
 }
 window.closeModal = closeModal;
