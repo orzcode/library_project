@@ -14,7 +14,7 @@
 :root {
   --header: #75296c;
   --main: #4f689d;
-  --highlighted: #79a7d3;
+  --highlighted: #2d4e2d;
 }
 /*----------------------------------------------------------------------*/
 /*Half opacity and quarter opacity - for cards - leave this root section*/
@@ -61,26 +61,57 @@ a {
   text-decoration: none;
   color:inherit;
 }
-.btnShadow {
+/* ---------------------------------------------------- */
+button {
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
   cursor: pointer;
-  box-shadow: 0.5px 0.5px 0.5px 0.5px rgb(50, 50, 50, 1);
-  transition: box-shadow 0.1s;
+  outline: inherit;
 }
-.btnShadow:hover {
-  box-shadow: 1.5px 1.5px 1.5px 1.5px rgb(50, 50, 50, 0.5);
+/* Button base styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  font-size: 3rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  transition: all 0.15s ease-in-out;
+  z-index: 1;
 }
-.btnShadow:active {
-  transform: translate3d(0.5px, 1px, 0);
+/* Primary button style */
+.btn-primary {
+  background-color: var(--highlighted);
+  color: #fff;
+}
+.btn-primary:hover, .btn-primary:focus {
+  background-color: var(--highlighted);
+  color: #fff;
+  filter: brightness(110%);
+}
+/* Secondary button style */
+.btn-secondary {
+  background-color: var(--highlighted);
+  color: #fff;
+  filter: brightness(75%);
+}
+.btn-secondary:hover, .btn-secondary:focus {
+  background-color: var(--highlighted);
+  color: #fff;
+  filter: brightness(85%);
+}
+/* Disabled button style */
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 /* ---------------------------------------------------- */
-#newShowBtn {
-  height: 10rem;
-  width: 30rem;
-  border-radius: 28px;
-  font-size: 4rem;
-  font-family: "A-OTF Shin Go Pro R";
-  margin: 4rem 0;
-}
 #container {
   display: flex;
   flex-direction: column;
@@ -108,6 +139,7 @@ a {
   flex-grow: 0;
   flex-shrink: 0;
   z-index: 1;
+  margin: 2rem;
 }
 
 #library {

@@ -13,10 +13,10 @@
 </head>
 <body>
 	<dialog>
-		<img src="close.svg" onclick="closeModal()"></img>
-		<img id="formImg" src="addMedia.svg"></img>
+		<img src="close.svg" onclick="closeModal()">
+		<img id="formImg" src="addMedia.svg">
 		<h2>Add a series</h2>
-		<a href="www.google.com" target="_blank">Wikipedia Link</a>
+		<a href="www.google.com" rel="noopener" target="_blank">Wikipedia Link</a>
 		<form onsubmit="window.queryData();return false">
 			<!-- or event.preventDefault() -->
 			
@@ -52,7 +52,7 @@
 			<h1>TV shows 'n shit</h1>
 		</div>
 		<div id="header2">
-			<button id="newShowBtn" class="btnShadow" onclick="window.modalOpenTasks()">Add a show</button>
+			<button id="newShowBtn" class="btn btn-secondary" onclick="window.modalOpenTasks()">Add a show</button>
 			<!--Shows the Dialog element modal, AND 'resets' the image source (because it gets changed during form use)-->
 			
 		</div>
