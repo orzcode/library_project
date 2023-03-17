@@ -148,6 +148,7 @@ a {
   padding-bottom: 1rem;
   font-size: larger;
   letter-spacing: 2px;
+  transition: opacity 0.3s ease;
 }
 .card img {
   max-width: 100%;

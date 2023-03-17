@@ -322,7 +322,10 @@ function createCard(obj) {
 
     //actual stuff that happens on 2nd click is in this bit
     if (removeEm.dataset.clicked === "true") {
-      card.remove();
+      this.closest(".card").style.opacity = 0;
+      setTimeout(() => {
+        card.remove();
+      }, 500);
       removeFromLibrary(obj.title);
       return;
     }
