@@ -6,10 +6,15 @@
   box-sizing: border-box;
   /* outline: 1px solid black; */
 }
+/* :root {
+  --header: #26343b;
+  --main: #353132;
+  --highlighted: 70, 89, 71;
+} */
 :root {
   --header: #402c2c;
   --main: #746565;
-  --highlighted: 45, 78, 45; /*Make this RGB value*/
+  --highlighted: 45, 78, 45;
 }
 /* :root {
   --header: #75296c;
@@ -32,6 +37,7 @@
 html {
   background-color: var(--main);
   font-family: "A-OTF Shin Go Pro R";
+  color: whitesmoke;
   font-size: 62.5%;
   /* FONTSIZE TRICK-- 1 rem = 10 px here, usually 1 rem = 16px */
   caret-color: transparent;
@@ -93,21 +99,17 @@ button {
 /* Primary button style */
 .btn-primary {
   background-color: var(--btnPrimary);
-  color: #fff;
 }
 .btn-primary:hover, .btn-primary:focus {
   background-color: var(--btnPrimary);
-  color: #fff;
   filter: brightness(140%);
 }
 /* Secondary button style */
 .btn-secondary {
   background-color: var(--btnSecondary);
-  color: #fff;
 }
 .btn-secondary:hover, .btn-secondary:focus {
   background-color: var(--btnSecondary);
-  color: #fff;
   filter: brightness(140%);
 }
 /* Disabled button style */
@@ -132,6 +134,7 @@ button {
   padding-top: 1rem;
   padding-bottom: 2rem;
   text-align: center;
+  letter-spacing: 3px;
   flex-grow: 0;
   flex-shrink: 0;
   margin: auto;
@@ -169,7 +172,6 @@ button {
   border: 3px solid black;
   /* background-color: #9b9797; */
   background-color: var(--cardOngoing);
-  color: whitesmoke;
   text-shadow: 1px 0px 0px black, -1px 0px 0px black, 0px 1px 0px black,
     0px -1px 0px black;
     filter: drop-shadow(1px 1px 5px black);
