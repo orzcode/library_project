@@ -236,10 +236,10 @@ dialog {
   visibility: hidden;
   transition: all 0.4s ease;
 }
-
+/* 
 dialog * {
   outline: 1px solid pink;
-}
+} */
 
 dialog::backdrop {
   background: rgba(0, 0, 0, 0.5);
@@ -257,16 +257,32 @@ dialog:not([open]) {
   pointer-events: none;
   visibility: hidden;
 }
-/*------------*/
-dialog img:nth-child(1) {
+/*----------------------------*/
+/*-- Close icon --*/
+dialog svg:nth-child(1) {
   position: absolute;
   top: 8px;
   right: 8px;
+  padding: 3px;
+  height:fit-content;
   width: clamp(50px, 9%, 80px);
+  filter: drop-shadow(1px 1px 1px black);
 }
-dialog img:nth-child(1):active {
+dialog svg:nth-child(1):hover {
+  background-color: rgba(255, 0, 0, 0.8);
+  border-radius: 12px;
+  padding: 3px;
+  fill: whitesmoke;
+  filter: drop-shadow(1px 1px 1px black);
+}
+dialog svg:nth-child(1):active {
   transform: translate3d(1px, 1px, 0);
+  background-color: rgba(255, 0, 0, 0.8);
+  border-radius: 12px;
+  padding: 3px;
+  filter: drop-shadow(1px 1px 1px black);
 }
+/*-- Close icon --*/
 dialog img:nth-child(2) {
   width: clamp(256px, 40%, 320px);
   height: 450px;
