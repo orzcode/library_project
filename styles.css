@@ -6,21 +6,26 @@
   box-sizing: border-box;
   /* outline: 1px solid black; */
 }
-/* :root {
+:root {
   --header: #402c2c;
   --main: #746565;
-  --highlighted: #849070;
-} */
-:root {
+  --highlighted: 45, 78, 45; /*Make this RGB value*/
+}
+/* :root {
   --header: #75296c;
   --main: #4f689d;
   --highlighted: #2d4e2d;
-}
+} */
 /*----------------------------------------------------------------------*/
 /*Half opacity and quarter opacity - for cards - leave this root section*/
 :root{
   --cardComplete: rgba(150, 150, 150, 0.25);
   --cardOngoing: rgba(0, 0, 0, 0.5);
+}
+:root{
+  --btnPrimary: rgba(var(--highlighted), 0.4);
+  --btnSecondary: rgba(var(--highlighted), 0.2);
+  /*OR SHOULD I JUST USE CARDCOMPLETE?*/
 }
 /*Half opacity and quarter opacity - for cards - leave this root section*/
 /*----------------------------------------------------------------------*/
@@ -87,24 +92,23 @@ button {
 }
 /* Primary button style */
 .btn-primary {
-  background-color: var(--highlighted);
+  background-color: var(--btnPrimary);
   color: #fff;
 }
 .btn-primary:hover, .btn-primary:focus {
-  background-color: var(--highlighted);
+  background-color: var(--btnPrimary);
   color: #fff;
-  filter: brightness(110%);
+  filter: brightness(140%);
 }
 /* Secondary button style */
 .btn-secondary {
-  background-color: var(--highlighted);
+  background-color: var(--btnSecondary);
   color: #fff;
-  filter: brightness(75%);
 }
 .btn-secondary:hover, .btn-secondary:focus {
-  background-color: var(--highlighted);
+  background-color: var(--btnSecondary);
   color: #fff;
-  filter: brightness(85%);
+  filter: brightness(140%);
 }
 /* Disabled button style */
 .btn:disabled {
