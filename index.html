@@ -27,19 +27,21 @@
 			<!-- or event.preventDefault() -->
 			
 			<div>
-				<!-- <label for="seriesName">Series name:</label> -->
 				<input type="text" id="seriesName" minlength="1" placeholder="Enter Series Name" title="Enter a series name" required />
 			</div>
 			
 			<div id="filmingComplete">
-				<label for="filmingComplete">Filming complete?</label>
+				<div><label for="filmingComplete">Filming complete?</label></div>
 				
 				<div>
-					<label for="yes">Yes</label>
-					<input type="radio" id="yes" name="filmingComplete" value="Complete">
-					<label for="no">No</label>
-					<input type="radio" id="no" name="filmingComplete" value="Ongoing">
-					<!-- Need a way to make these 'required' without interferring with first submit btn -->
+					<div>
+						<label for="yes">Yes</label>
+						<input type="radio" id="yes" name="filmingComplete" value="Complete">
+					</div>
+					<div>
+						<label for="no">No</label>
+						<input type="radio" id="no" name="filmingComplete" value="Ongoing">
+					</div>
 				</div>
 			</div>
 
