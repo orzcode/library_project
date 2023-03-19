@@ -165,7 +165,7 @@ button {
   padding: 2rem 0;
   flex-grow: 0;
   flex-shrink: 0;
-  filter: drop-shadow(0px 0px 4px var(--highlighted));
+  filter: drop-shadow(0px 0px 4px rgb(var(--highlighted)));
 }
 .card {
   border-radius: 8px;
@@ -241,6 +241,8 @@ dialog {
   pointer-events: none;
   visibility: hidden;
   transition: all 0.4s ease;
+  filter: drop-shadow(1px 1px 10px black);
+  background-color: var(--main);
 }
 /* 
 dialog * {
@@ -248,7 +250,7 @@ dialog * {
 } */
 
 dialog::backdrop {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.75);  
 }
 /* Note: this will exhibit strange position behavior unless you force reload */
 dialog[open] {
@@ -334,7 +336,7 @@ dialog button {
   /* font-size: calc(1rem + 0.8vw); */
 }
 dialog button:hover {
-  background-color: var(--highlighted);
+  background-color: rgb(var(--highlighted));
 }
 #saveSeries {
   visibility: hidden;
