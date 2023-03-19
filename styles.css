@@ -308,11 +308,10 @@ dialog a {
 dialog input[type="text"] {
   border: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: 5px;
-  height: 5rem;
   width: 80%;
-  max-width: 70rem;
+  max-width: 60rem;
   text-align: center;
-  font-size: min(calc(2rem + 1vw), 4rem);
+  font-size: min(calc(2rem + 0.8vw), 4rem);
 }
 dialog input[type="radio"] {
   height: calc(1.5rem + 0.8vw);
@@ -359,18 +358,18 @@ form > div {
 /* font sizes for dialog (easier to group like this) */
 dialog h2 {
   /* font-size: calc(4rem + 1vw); */
-  font-size: min(calc(4rem + 1vw), 6rem);
+  font-size: min(calc(4rem + 0.2vw), 6rem);
 }
 dialog form {
   /* font-size: calc(2.5rem + 0.8vw); */
-  font-size: min(calc(2rem + 1vw), 4rem);
+  font-size: min(calc(2rem + 0.5vw), 4rem);
 }
 dialog a {
   /* font-size: calc(2.5rem + 1vw); */
-  font-size: min(calc(2rem + 1vw), 4rem);
+  font-size: min(calc(2rem + 0.5vw), 4rem);
 }
 dialog button {
   /* font-size: calc(2rem + 0.8vw); */
-  font-size: min(calc(2rem + 1vw), 4rem);
+  font-size: min(calc(2rem + 0.5vw), 4rem);
 }
 /* plus the radio buttons */
