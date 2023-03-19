@@ -11,16 +11,16 @@
   --main: #353132;
   --highlighted: 70, 89, 71;
 } */
-:root {
+/* :root {
   --header: #402c2c;
   --main: #746565;
   --highlighted: 45, 78, 45;
-}
-/* :root {
+} */
+:root {
   --header: #75296c;
   --main: #4f689d;
   --highlighted: #2d4e2d;
-} */
+}
 /*----------------------------------------------------------------------*/
 /*Half opacity and quarter opacity - for cards - leave this root section*/
 :root{
@@ -244,10 +244,10 @@ dialog {
   filter: drop-shadow(1px 1px 10px black);
   background-color: var(--main);
 }
-/* 
+
 dialog * {
   outline: 1px solid pink;
-} */
+}
 
 dialog::backdrop {
   background: rgba(0, 0, 0, 0.75);  
@@ -297,30 +297,22 @@ dialog img:nth-child(2) {
   object-fit: contain;
 }
 dialog h2 {
-  /* font-size: calc(3rem + 1vw); */
   line-height: 110%;
   align-self: center;
   text-align: center;
 }
-dialog form {
-  margin: 0 1rem;
-}
-dialog form * {
-  /* font-size: calc(1.5rem + 0.8vw); */
-  font-family: Oswald;
-}
 dialog a {
-  /* font-size: calc(1.5rem + 1vw); */
-  font-family: Oswald;
   font-style: italic;
   visibility: hidden;
 }
 dialog input[type="text"] {
   border: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: 5px;
-  height: 4rem;
-  width: 30rem;
+  height: 5rem;
+  width: 80%;
+  max-width: 70rem;
   text-align: center;
+  font-size: min(calc(2rem + 1vw), 4rem);
 }
 dialog input[type="radio"] {
   height: calc(1.5rem + 0.8vw);
@@ -330,10 +322,13 @@ dialog input[type="radio"] {
 label {
   height: 100%;
 }
+dialog form {
+  min-width: 80%;
+  width: fit-content;
+}
 dialog button {
   border-radius: 10px;
   padding: 0 1rem;
-  /* font-size: calc(1rem + 0.8vw); */
 }
 dialog button:hover {
   background-color: rgb(var(--highlighted));
@@ -343,6 +338,17 @@ dialog button:hover {
 }
 #filmingComplete {
   visibility: hidden;
+  display: flex;
+  flex-wrap: wrap;
+}
+#filmingComplete > label{
+}
+#filmingComplete div{
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 29rem;
+  justify-content: space-evenly;
+  align-items: center;
 }
 form > div {
   display: flex;
@@ -353,15 +359,19 @@ form > div {
 }
 /* font sizes for dialog (easier to group like this) */
 dialog h2 {
-  font-size: calc(3rem + 1vw);
+  /* font-size: calc(4rem + 1vw); */
+  font-size: min(calc(4rem + 1vw), 6rem);
 }
 dialog form {
-  font-size: calc(1.5rem + 0.8vw);
+  /* font-size: calc(2.5rem + 0.8vw); */
+  font-size: min(calc(2rem + 1vw), 4rem);
 }
 dialog a {
-  font-size: calc(1.5rem + 1vw);
+  /* font-size: calc(2.5rem + 1vw); */
+  font-size: min(calc(2rem + 1vw), 4rem);
 }
 dialog button {
-  font-size: calc(1rem + 0.8vw);
+  /* font-size: calc(2rem + 0.8vw); */
+  font-size: min(calc(2rem + 1vw), 4rem);
 }
 /* plus the radio buttons */
