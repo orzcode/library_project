@@ -2,8 +2,9 @@
 Library project involving prototypes
 
 ~~~
-https://www.aleksandrhovhannisyan.com/blog/flexbox-holy-albatross-with-variable-width-columns/
-https://heydonworks.com/article/the-flexbox-holy-albatross/
+wiki links - make sure to use H2 title
+both on card and in modal
+
 ~~~
 TODO: Improve modal spacing and font sizes
 move Add Show button to header? 

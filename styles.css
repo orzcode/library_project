@@ -245,9 +245,9 @@ dialog {
   background-color: var(--main);
 }
 
-dialog * {
+/* dialog * {
   outline: 1px solid pink;
-}
+} */
 
 dialog::backdrop {
   background: rgba(0, 0, 0, 0.75);  
@@ -292,9 +292,13 @@ dialog svg:nth-child(1):active {
 }
 /*-- Close icon --*/
 dialog img:nth-child(2) {
-  width: clamp(256px, 40%, 320px);
-  height: 450px;
+  width: 100%;
+  max-width: 42rem;
+  min-height: 20rem;
+  max-height: 58rem;
+  aspect-ratio: 0.8;
   object-fit: contain;
+  filter: drop-shadow(1px 1px 10px black);
 }
 dialog h2 {
   line-height: 110%;
