@@ -209,21 +209,23 @@ export function queryData() {
   const searchTerm = document.querySelector("#seriesName").value;
   document.querySelector("#seriesName").value = "";
 
-  Promise.all([
-    getDataFromTVMaze(searchTerm).then((data) => {
+  getDataFromTVMaze(searchTerm)
+    .then((data) => {
+      if (!data)
       document.querySelector("#formImg").src = data.image;
       document.querySelector("dialog h2").innerHTML = data.name;
       document.querySelector("dialog a").href = data.url;
-    }),
-  ])
-    .then(() => {
-      console.log("All parts of the queryData function have completed");
+      document.querySelector("dialog a").style.visibility = "visible";
       document.querySelector("#filmingComplete").style.visibility = "visible";
       document.querySelector("#saveSeries").style.visibility = "visible";
-      document.querySelector("dialog a").style.visibility = "visible";
     })
     .catch((error) => {
       console.error(error);
+      document.querySelector("#formImg").src = "errorImage.png";
+      document.querySelector("dialog h2").innerHTML = `${error.message}`;
+      document.querySelector("dialog a").style.visibility = "hidden";
+      document.querySelector("#filmingComplete").style.visibility = "hidden";
+      document.querySelector("#saveSeries").style.visibility = "hidden";
     });
 }
 window.queryData = queryData;
@@ -309,7 +311,7 @@ function createCard(obj) {
       this.closest(".card").style.opacity = 0;
       setTimeout(() => {
         card.remove();
-      }, 500);
+      }, 300);
       removeFromLibrary(obj.title);
       return;
     }
@@ -345,10 +347,21 @@ function createCard(obj) {
 /////////DATA FETCHER/////////////
 async function getDataFromTVMaze(searchTerm) {
   const searchUrl = `https://api.tvmaze.com/singlesearch/shows?q=${searchTerm}`;
-  const response = await fetch(searchUrl);
-  const data = await response.json()
-  const name = data.name;
-  const url = data.url;
-  const image = data.image.medium;
-  return { name, url, image };
+  try {
+    const response = await fetch(searchUrl);
+    if (!response.ok) {
+      // throw new Error(`API error: ${response.status}`);
+      throw new Error(`No result for "${searchTerm}"`);
+    }
+    const data = await response.json();
+    const name = data.name;
+    const url = data.url;
+    const image = data.image.medium;
+    if (!name || !url || !image) {
+      throw new Error(`No result for "${searchTerm}"`);
+    }
+    return { name, url, image };
+  } catch (error) {
+    throw new Error(`${error.message}`);
+  }
 };
