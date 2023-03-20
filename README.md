@@ -2,9 +2,6 @@
 Library project involving prototypes
 
 ~~~
-wiki links - make sure to use H2 title
-both on card and in modal
-
 ~~~
 TODO: Improve modal spacing and font sizes
 move Add Show button to header? 

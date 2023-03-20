@@ -209,29 +209,12 @@ export function queryData() {
   const searchTerm = document.querySelector("#seriesName").value;
   document.querySelector("#seriesName").value = "";
 
-  const url = `https://api.tvmaze.com/singlesearch/shows?q=${encodeURIComponent(
-    searchTerm
-  )}`;
-
   Promise.all([
-    getPosterImageFromTVMaze(searchTerm).then((mainImage) => {
-      document.querySelector("#formImg").src = mainImage;
+    getDataFromTVMaze(searchTerm).then((data) => {
+      document.querySelector("#formImg").src = data.image;
+      document.querySelector("dialog h2").innerHTML = data.name;
+      document.querySelector("dialog a").href = data.url;
     }),
-
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        document.querySelector("dialog h2").innerHTML = data.name;
-      })
-      .catch((error) => {
-        console.error(error);
-        document.querySelector("dialog h2").innerHTML = "Error searching";
-      }),
-
-    getWikiLink(searchTerm).then((link) => {
-      document.querySelector("dialog a").href = link;
-    }),
-    //CHANGE THIS TO TVMAZE SEARCH
   ])
     .then(() => {
       console.log("All parts of the queryData function have completed");
@@ -359,81 +342,7 @@ function createCard(obj) {
   return card;
 }
 //------------------------------------------------------------------------------//
-
-////////////////////////////////////////////////////////////////////////////////////////////
-/////////WIKI LINK FETCHER/////////////
-////////////////////////////////////////
-async function getWikiLink(term) {
-  const apiUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${term}&format=json&origin=*`;
-  const response = await fetch(apiUrl);
-  const data = await response.json();
-  const firstResult = data.query.search[0];
-  const pageId = firstResult.pageid;
-  const link = `https://en.wikipedia.org/?curid=${pageId}`;
-  return link;
-}
-//--------------------------------------------------//
-////////////////////////////////////////////////////////////////////////////////////////////
-/////////IMAGE FETCHER/////////////
-////////////////////////////////////////////////////////////////////////////////////////////
-async function getPosterImageFromTVMaze(searchTerm) {
-  const searchUrl = `https://api.tvmaze.com/search/shows?q=${searchTerm}`;
-  let searchResults;
-  try {
-    const searchResponse = await fetch(searchUrl);
-    if (!searchResponse.ok) {
-      throw new Error(
-        `Error fetching search results: ${searchResponse.status}`
-      );
-    }
-    searchResults = await searchResponse.json();
-  } catch (error) {
-    console.error(error);
-    return "errorImage.png";
-  }
-
-  const bestMatch = searchResults[0]?.show;
-  if (!bestMatch) {
-    console.error("No search results found");
-    return "errorImage.png";
-  }
-
-  const id = bestMatch.id;
-  const imagesUrl = `https://api.tvmaze.com/shows/${id}/images`;
-  let smallestImage = "errorImage.png";
-  let smallestImageSize = Infinity;
-
-  try {
-    const imagesResponse = await fetch(imagesUrl);
-    if (!imagesResponse.ok) {
-      throw new Error(`Error fetching images: ${imagesResponse.status}`);
-    }
-    const imagesData = await imagesResponse.json();
-    imagesData.forEach((image) => {
-      const { width, height, url } = image.resolutions?.original || {};
-      if (width && height && url && image.type === "poster") {
-        const imageSize = width * height;
-        if (imageSize < smallestImageSize) {
-          if (imageSize < 10000) {
-            smallestImage = url;
-            smallestImageSize = imageSize;
-          } else {
-            smallestImage = image.resolutions.medium.url;
-            smallestImageSize =
-              image.resolutions.medium.width * image.resolutions.medium.height;
-          }
-        }
-      }
-    });
-  } catch (error) {
-    console.error(error);
-    smallestImage = "errorImage.png"; // replace with path to your default image
-  }
-
-  return smallestImage;
-}
-//////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////
+/////////DATA FETCHER/////////////
 async function getDataFromTVMaze(searchTerm) {
   const searchUrl = `https://api.tvmaze.com/singlesearch/shows?q=${searchTerm}`;
   const response = await fetch(searchUrl);
@@ -443,7 +352,3 @@ async function getDataFromTVMaze(searchTerm) {
   const image = data.image.medium;
   return { name, url, image };
 };
-const APIresult = await getDataFromTVMaze(searchTerm);
-console.log(APIresult.name); // output the name
-console.log(APIresult.url); // output the url
-console.log(APIresult.image); // output the image
