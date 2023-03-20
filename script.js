@@ -208,6 +208,7 @@ export function queryData() {
 
   const searchTerm = document.querySelector("#seriesName").value;
   document.querySelector("#seriesName").value = "";
+
   const url = `https://api.tvmaze.com/singlesearch/shows?q=${encodeURIComponent(
     searchTerm
   )}`;
@@ -230,9 +231,9 @@ export function queryData() {
     getWikiLink(searchTerm).then((link) => {
       document.querySelector("dialog a").href = link;
     }),
+    //CHANGE THIS TO TVMAZE SEARCH
   ])
     .then(() => {
-      // All three parts of the queryData function have completed
       console.log("All parts of the queryData function have completed");
       document.querySelector("#filmingComplete").style.visibility = "visible";
       document.querySelector("#saveSeries").style.visibility = "visible";
