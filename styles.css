@@ -275,7 +275,7 @@ dialog svg:nth-child(1) {
   height:fit-content;
   pointer-events: all;
   z-index: 10;
-  width: clamp(50px, 9%, 80px);
+  width: clamp(20px, 9%, 80px);
   filter: drop-shadow(1px 1px 1px black);
 }
 dialog svg:nth-child(1):hover {
