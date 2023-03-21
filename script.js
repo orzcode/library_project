@@ -157,6 +157,7 @@ window.modalOpenTasks = modalOpenTasks;
 export function closeModal(){
   // document.body.style.removeProperty('position');
   document.body.style.overflowY = "visible";
+  window.navigator.vibrate(100);
  // document.body.style.position = "";
 
    if(screen.orientation.type === "landscape-primary"){
