@@ -273,6 +273,7 @@ dialog svg:nth-child(1) {
   right: 8px;
   padding: 3px;
   height:fit-content;
+  pointer-events: all;
   width: clamp(50px, 9%, 80px);
   filter: drop-shadow(1px 1px 1px black);
 }
