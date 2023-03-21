@@ -204,7 +204,7 @@ export function queryData() {
   document.querySelector("#filmingComplete").style.visibility = "hidden";
   document.querySelector("#saveSeries").style.visibility = "hidden";
 
-  document.querySelector("#formImg").src = "spinner.svg";
+  document.querySelector("#formImg").src = "ripple.svg";
 
   const searchTerm = document.querySelector("#seriesName").value;
   document.querySelector("#seriesName").value = "";
