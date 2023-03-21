@@ -134,7 +134,7 @@ window.submissionTasks = submissionTasks;
 export function modalOpenTasks() {
   document.querySelector("form").reset();
   document.querySelector("dialog").showModal();
-  document.querySelector("#formImg").src = "addMedia.svg";
+  document.querySelector("#formImg").src = "cloudNew.svg";
   document.querySelector("dialog h2").innerHTML = "Add a series";
   document.querySelector("dialog a").href =
     "https://en.wikipedia.org/wiki/Main_Page";
@@ -221,7 +221,7 @@ export function queryData() {
     })
     .catch((error) => {
       console.error(error);
-      document.querySelector("#formImg").src = "errorImage.png";
+      document.querySelector("#formImg").src = "cloudError.svg";
       document.querySelector("dialog h2").innerHTML = `${error.message}`;
       document.querySelector("dialog a").style.visibility = "hidden";
       document.querySelector("#filmingComplete").style.visibility = "hidden";
