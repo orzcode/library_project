@@ -96,6 +96,13 @@ button {
   transition: all 0.15s ease-in-out;
   z-index: 1;
 }
+.btnForm{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  text-transform: uppercase;
+}
 /* Primary button style */
 .btn-primary {
   background-color: var(--btnPrimary);
@@ -345,15 +352,13 @@ dialog form {
   padding-top: 2rem;
 }
 dialog button {
-  border-radius: 6px;
-  line-height: 150%;
   padding: 0 1rem;
 }
 
 #formButtons {
   display: flex;
-  gap: clamp(1rem, 5%, 5rem);
-  
+  gap: clamp(0.5rem, 2%, 5rem);
+  flex-wrap: nowrap;
 }
 #saveSeries {
   visibility: hidden;
@@ -375,13 +380,7 @@ dialog button {
   display: flex;
   flex-direction: column;
 }
-/* #filmingComplete div{
-  display: flex;
-  flex-wrap: wrap;
-  min-width: 29rem;
-  justify-content: space-evenly;
-  align-items: center;
-} */
+
 form > div {
   display: flex;
   flex-wrap: wrap;
