@@ -301,14 +301,21 @@ dialog img:nth-child(2) {
   object-fit: contain;
   filter: drop-shadow(1px 1px 10px black);
 }
+
+#titleAndLink {
+  background-color: green;
+  display: flex;
+  flex-direction: column;
+}
 dialog h2 {
-  line-height: 110%;
+  line-height: 120%;
   align-self: center;
   text-align: center;
 }
 dialog a {
   font-style: italic;
   visibility: hidden;
+  align-self: center;
 }
 dialog input[type="text"] {
   border: 1px solid rgba(0, 0, 0, 0.4);
@@ -319,8 +326,9 @@ dialog input[type="text"] {
   font-size: min(calc(2rem + 0.8vw), 4rem);
 }
 dialog input[type="radio"] {
-  height: min(calc(2rem + 0.5vw), 4rem);
-  width: min(calc(2rem + 0.5vw), 4rem);
+  height: min(calc(2rem + 0.8vw), 4rem);
+  width: min(calc(2rem + 0.8vw), 4rem);
+  align-self: center;
 }
 label {
   height: 100%;
@@ -342,18 +350,26 @@ dialog button:hover {
 #filmingComplete {
   visibility: hidden;
   display: flex;
-  flex-wrap: wrap;
 }
-#filmingComplete div div{
+#radioButtons{
   background-color: blue;
+  display: flex;
+  flex-direction: row;
+  width: clamp(210px, 30%, 300px);
+  justify-content: space-between;
+  align-items: center;
 }
-#filmingComplete div{
+#filmingComplete{
+  display: flex;
+  flex-direction: column;
+}
+/* #filmingComplete div{
   display: flex;
   flex-wrap: wrap;
   min-width: 29rem;
   justify-content: space-evenly;
   align-items: center;
-}
+} */
 form > div {
   display: flex;
   flex-wrap: wrap;
@@ -363,7 +379,7 @@ form > div {
 /* font sizes for dialog (easier to group like this) */
 dialog h2 {
   /* font-size: calc(4rem + 1vw); */
-  font-size: min(calc(4rem + 0.2vw), 6rem);
+  font-size: min(calc(3rem + 0.2vw), 6rem);
 }
 dialog form {
   /* font-size: calc(2.5rem + 0.8vw); */
@@ -371,7 +387,7 @@ dialog form {
 }
 dialog a {
   /* font-size: calc(2.5rem + 1vw); */
-  font-size: min(calc(2rem + 0.5vw), 4rem);
+  font-size: min(calc(2rem), 4rem);
 }
 dialog button {
   /* font-size: calc(2rem + 0.8vw); */

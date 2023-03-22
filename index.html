@@ -21,8 +21,10 @@
 			</g>
 		</svg>
 		<img id="formImg" src="cloudNew.svg">
-		<h2>Add a series</h2>
-		<a href="www.google.com" rel="noopener" target="_blank">TVMaze Link</a>
+		<div id="titleAndLink">
+			<h2>Add a series</h2>
+			<a href="www.google.com" rel="noopener" target="_blank">TVMaze Link</a>
+		</div>
 		<form onsubmit="window.queryData();return false">
 			<!-- or event.preventDefault() -->
 			
@@ -33,7 +35,7 @@
 			<div id="filmingComplete">
 				<div><label for="filmingComplete">Filming complete?</label></div>
 				
-				<div>
+				<div id="radioButtons">
 					<div>
 						<label for="yes">Yes</label>
 						<input type="radio" id="yes" name="filmingComplete" value="Complete">
@@ -47,10 +49,10 @@
 
 			<div>
 				<button id="confirmBtn" type="submit" value="Query">Query</button>
-				<button id="cancelFormButton" type="button" onclick="closeModal()">Cancel</button>
+				<button id="cancelFormButton" type="button" onclick="closeModal()">Close</button>
 			</div><!-- 'Query' is the 'Submit' button so that enter key defaults to it. -->
 			<div>
-				<button id="saveSeries" type="button" onclick="submissionTasks()" value="Submit">Add Series to Library</button>
+				<button id="saveSeries" type="button" onclick="submissionTasks()" value="Submit">Save</button>
 			</div>
 		  
 		</form>
