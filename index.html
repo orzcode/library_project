@@ -47,13 +47,11 @@
 				</div>
 			</div>
 
-			<div>
-				<button id="confirmBtn" type="submit" value="Query">Query</button>
-				<button id="cancelFormButton" type="button" onclick="closeModal()">Close</button>
+			<div id="formButtons">
+				<button id="confirmBtn" class="btn-secondary" type="submit" value="Query">Query</button>
+				<button id="saveSeries" class="btn-primary" type="button" onclick="submissionTasks()" value="Submit">Save</button>
+				<button id="cancelFormButton" class="btn-secondary" type="button" onclick="closeModal()">Close</button>
 			</div><!-- 'Query' is the 'Submit' button so that enter key defaults to it. -->
-			<div>
-				<button id="saveSeries" type="button" onclick="submissionTasks()" value="Submit">Save</button>
-			</div>
 		  
 		</form>
 	</dialog>
@@ -64,7 +62,6 @@
 		<div id="header2">
 			<button id="newShowBtn" class="btn btn-primary" onclick="window.modalOpenTasks()">Add a show</button>
 			<button id="newShowBtn" class="btn btn-secondary">___  Add a show</button>
-			<!--Shows the Dialog element modal, AND 'resets' the image source (because it gets changed during form use)-->
 			
 		</div>
 		

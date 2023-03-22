@@ -234,7 +234,9 @@ dialog {
   border-radius: 15px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  padding: 1rem 0;
+  gap: 1rem;
   align-items: center;
   opacity: 0;
   pointer-events: none;
@@ -244,9 +246,9 @@ dialog {
   background-color: var(--main);
 }
 
-dialog * {
+/* dialog * {
   outline: 1px solid pink;
-}
+} */
 
 dialog::backdrop {
   background: rgba(0, 0, 0, 0.75);  
@@ -293,7 +295,7 @@ dialog svg:nth-child(1):active {
 }
 /*-- Close icon --*/
 dialog img:nth-child(2) {
-  width: 100%;
+  width: 80%;
   max-width: 42rem;
   min-height: 20rem;
   max-height: 58rem;
@@ -303,7 +305,6 @@ dialog img:nth-child(2) {
 }
 
 #titleAndLink {
-  background-color: green;
   display: flex;
   flex-direction: column;
 }
@@ -329,30 +330,41 @@ dialog input[type="radio"] {
   height: min(calc(2rem + 0.8vw), 4rem);
   width: min(calc(2rem + 0.8vw), 4rem);
   align-self: center;
+  accent-color: var(--header);
+  cursor: pointer;
 }
 label {
   height: 100%;
 }
 dialog form {
   min-width: 80%;
-  width: fit-content;
+  max-width: 50rem;
+  display: flex;
+  flex-direction: column;
+  gap: min(4rem, 4vw);
+  padding-top: 2rem;
 }
 dialog button {
-  border-radius: 10px;
+  border-radius: 6px;
+  line-height: 150%;
   padding: 0 1rem;
 }
-dialog button:hover {
-  background-color: rgb(var(--highlighted));
+
+#formButtons {
+  display: flex;
+  gap: clamp(1rem, 5%, 5rem);
+  
 }
 #saveSeries {
   visibility: hidden;
+  font-size: min(calc(2rem + 2vw), 5rem) !important;
 }
 #filmingComplete {
   visibility: hidden;
   display: flex;
+  gap: 1rem;
 }
 #radioButtons{
-  background-color: blue;
   display: flex;
   flex-direction: row;
   width: clamp(210px, 30%, 300px);
@@ -379,7 +391,7 @@ form > div {
 /* font sizes for dialog (easier to group like this) */
 dialog h2 {
   /* font-size: calc(4rem + 1vw); */
-  font-size: min(calc(3rem + 0.2vw), 6rem);
+  font-size: min(calc(3rem + 0.5vw), 6rem);
 }
 dialog form {
   /* font-size: calc(2.5rem + 0.8vw); */
@@ -387,7 +399,7 @@ dialog form {
 }
 dialog a {
   /* font-size: calc(2.5rem + 1vw); */
-  font-size: min(calc(2rem), 4rem);
+  font-size: min(calc(1.5rem), 4rem);
 }
 dialog button {
   /* font-size: calc(2rem + 0.8vw); */
