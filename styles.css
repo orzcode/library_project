@@ -9,17 +9,17 @@
 :root {
   --header: #26343b;
   --main: #353132;
-  --highlighted: 70, 89, 71;
+  --highlighted: 38, 52, 59;
 }
 /* :root {
   --header: #402c2c;
   --main: #746565;
-  --highlighted: 45, 78, 45;
+  --highlighted: 64, 44, 44;
 } */
 /* :root {
   --header: #75296c;
   --main: #4f689d;
-  --highlighted: 45, 78, 45;
+  --highlighted: 117, 41, 108;
 } */
 /*----------------------------------------------------------------------*/
 /*Half opacity and quarter opacity - for cards - leave this root section*/
@@ -245,9 +245,9 @@ dialog {
   background-color: var(--main);
 }
 
-/* dialog * {
+dialog * {
   outline: 1px solid pink;
-} */
+}
 
 dialog::backdrop {
   background: rgba(0, 0, 0, 0.75);  

@@ -200,7 +200,7 @@ renderCards(library);
 //This function runs when you click 'Query'
 /////////////////////
 export function queryData() {
-  document.querySelector("dialog h2").innerHTML = "";
+  document.querySelector("dialog h2").innerHTML = "hidden";
   document.querySelector("dialog a").style.visibility = "hidden";
   document.querySelector("#filmingComplete").style.visibility = "hidden";
   document.querySelector("#saveSeries").style.visibility = "hidden";
