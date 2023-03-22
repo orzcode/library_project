@@ -140,7 +140,7 @@ export function modalOpenTasks() {
     "https://en.wikipedia.org/wiki/Main_Page";
   document.querySelector("dialog a").style.visibility = "hidden";
   document.querySelector("#filmingComplete").style.visibility = "hidden";
-  document.querySelector("#saveSeries").style.visibility = "hidden";
+  document.querySelector("#saveSeries").disabled = true;
   //document.body.style.position = "sticky";
   document.body.style.overflowY = "hidden";
 
@@ -203,7 +203,7 @@ export function queryData() {
   document.querySelector("dialog h2").style.visibility = "hidden";
   document.querySelector("dialog a").style.visibility = "hidden";
   document.querySelector("#filmingComplete").style.visibility = "hidden";
-  document.querySelector("#saveSeries").style.visibility = "hidden";
+  document.querySelector("#saveSeries").disabled = true;
 
   document.querySelector("#formImg").src = "ripple.svg";
 
@@ -220,7 +220,7 @@ export function queryData() {
       document.querySelector("dialog a").href = data.url;
       document.querySelector("dialog a").style.visibility = "visible";
       document.querySelector("#filmingComplete").style.visibility = "visible";
-      document.querySelector("#saveSeries").style.visibility = "visible";
+      document.querySelector("#saveSeries").disabled = false;
     })
     .catch((error) => {
       console.error(error);
@@ -229,7 +229,7 @@ export function queryData() {
       document.querySelector("dialog h2").style.visibility = "visible";
       document.querySelector("dialog a").style.visibility = "hidden";
       document.querySelector("#filmingComplete").style.visibility = "hidden";
-      document.querySelector("#saveSeries").style.visibility = "hidden";
+      document.querySelector("#saveSeries").disabled = true;
     });
 }
 window.queryData = queryData;

@@ -81,6 +81,8 @@ button {
   font: inherit;
   cursor: pointer;
   outline: inherit;
+  border: 1px solid black;
+  border-radius: 1.5rem;
 }
 /* Button base styles */
 .btn {
@@ -88,13 +90,13 @@ button {
   align-items: center;
   justify-content: center;
   padding: 0.5rem 1rem;
-  border-radius: 1rem;
+  border-radius: 1.5rem;
   font-size: 3rem;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.1rem;
   transition: all 0.15s ease-in-out;
-  z-index: 1;
+  z-index: 1;  
 }
 .btnForm{
   display: inline-flex;
@@ -102,6 +104,11 @@ button {
   justify-content: center;
   border-radius: 1rem;
   text-transform: uppercase;
+}
+.btnForm:disabled {
+  opacity: 0.5;
+  filter: grayscale(1);
+  cursor: not-allowed;
 }
 /* Primary button style */
 .btn-primary {
@@ -122,6 +129,7 @@ button {
 /* Disabled button style */
 .btn:disabled {
   opacity: 0.5;
+  filter: grayscale(1);
   cursor: not-allowed;
 }
 /* ---------------------------------------------------- */
@@ -251,8 +259,13 @@ dialog {
   transition: all 0.4s ease;
   filter: drop-shadow(1px 1px 10px black);
   background-color: var(--main);
+  color: whitesmoke;
+  border-color: black;
 }
-
+dialog *:not(input[type="text"]){
+  text-shadow: 1px 0px 0px black, -1px 0px 0px black, 0px 1px 0px black,
+  0px -1px 0px black;
+}
 /* dialog * {
   outline: 1px solid pink;
 } */
@@ -361,7 +374,7 @@ dialog button {
   flex-wrap: nowrap;
 }
 #saveSeries {
-  visibility: hidden;
+  /* visibility: hidden; */
   font-size: min(calc(2rem + 2vw), 5rem) !important;
 }
 #filmingComplete {
