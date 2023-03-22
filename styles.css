@@ -229,10 +229,9 @@ dialog {
   transform: translate(-50%, -50%) scale(0);
   /*Transform function above*/
   /*Other properties below*/
-  width: 80%;
-  min-width: 394px;
+  width: clamp(394px, 80%, 120rem);
   height: 100%;
-  border-radius: 20px;
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -320,8 +319,8 @@ dialog input[type="text"] {
   font-size: min(calc(2rem + 0.8vw), 4rem);
 }
 dialog input[type="radio"] {
-  height: calc(1.5rem + 0.8vw);
-  width: calc(1.5rem + 0.8vw);
+  height: min(calc(2rem + 0.5vw), 4rem);
+  width: min(calc(2rem + 0.5vw), 4rem);
 }
 label {
   height: 100%;
