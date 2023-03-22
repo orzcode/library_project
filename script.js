@@ -200,7 +200,7 @@ renderCards(library);
 //This function runs when you click 'Query'
 /////////////////////
 export function queryData() {
-  document.querySelector("dialog h2").innerHTML = "hidden";
+  document.querySelector("dialog h2").style.visibility = "hidden";
   document.querySelector("dialog a").style.visibility = "hidden";
   document.querySelector("#filmingComplete").style.visibility = "hidden";
   document.querySelector("#saveSeries").style.visibility = "hidden";
@@ -216,6 +216,7 @@ export function queryData() {
       console.log("API Fetch complete: " + [data.name, data.url, data.image]);
       document.querySelector("#formImg").src = data.image;
       document.querySelector("dialog h2").innerHTML = data.name;
+      document.querySelector("dialog h2").style.visibility = "visible";
       document.querySelector("dialog a").href = data.url;
       document.querySelector("dialog a").style.visibility = "visible";
       document.querySelector("#filmingComplete").style.visibility = "visible";
@@ -225,6 +226,7 @@ export function queryData() {
       console.error(error);
       document.querySelector("#formImg").src = "cloudError.svg";
       document.querySelector("dialog h2").innerHTML = `${error.message}`;
+      document.querySelector("dialog h2").style.visibility = "visible";
       document.querySelector("dialog a").style.visibility = "hidden";
       document.querySelector("#filmingComplete").style.visibility = "hidden";
       document.querySelector("#saveSeries").style.visibility = "hidden";
