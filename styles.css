@@ -237,7 +237,7 @@ h1 {
 }
 .card p:last-of-type{
   display: flex;
-  gap: 2rem;
+  gap: 1.7rem;
 }
 
 .title {

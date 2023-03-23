@@ -35,44 +35,6 @@ let libraryDiv = document.querySelector("#library");
 //FIREBASE
 ///////////////////
 
-///////////////////
-//GIST
-// const gistId = "5030015d1b6612eed934612108b3e63f";
-// const filename = "library.txt";
-// const ACCESSTOKEN = atob(
-//   "Z2l0aHViX3BhdF8xMUFRNVdCNVkwN2Q0enFpbjE2Ull2X2NSYXRvOU1pNWFCTHVnYkJOUTFkRDBPZW04TEQ4ZTFCcUdadzVrQnFlOTBVSE5UQlpZRDRKYjdGRmlO"
-// );
-//Note to anyone reading:
-//actually using a Github Secret is far, FAR more difficult than it needs to be
-//I spent literally several hours trying half a dozen fixes and methods and none of them worked
-//Since this is not a sensitive or critical app and nothing can be lost, I decided to say
-//a great big "Fuck this" and simply use an encoded API key in the above way.
-////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////
-// async function getContentFromGist() {
-//   const response = await fetch(`https://api.github.com/gists/${gistId}`, {
-//     headers: {
-//       Authorization: `token ${ACCESSTOKEN}`,
-//     },
-//   });
-//   const data = await response.json();
-//   const file = data.files[filename];
-//   if (file) {
-//     const content = JSON.parse(file.content);
-//     return content;
-//   } else {
-//     console.error(`File ${filename} not found in Gist ${gistId}`);
-//     return null;
-//   }
-// }
-
-// async function gulpAndRender() {
-//   const content = await getContentFromGist();
-//   renderCards(content);
-//   //console.log(content);
-// }
-///////////////////
-
 ////////////////////
 //Series constructor function//
 export function Series(title, complete, link, image) {
