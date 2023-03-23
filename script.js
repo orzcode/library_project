@@ -297,7 +297,9 @@ function createCard(obj) {
   linkA.href = obj.link;
   linkP.appendChild(linkStrong);
   linkStrong.appendChild(linkA);
-  linkA.after(" • ");
+  let linkSvg = document.createElement("img");
+  linkSvg.src = "link.svg";
+  linkA.appendChild(linkSvg);
 
   card.appendChild(linkP);
 

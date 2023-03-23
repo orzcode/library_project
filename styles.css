@@ -218,16 +218,26 @@ h1 {
   outline: 1px solid black;
   object-fit: cover;
 }
+.card a img{
+  all: initial;
+  /*this is amazing*/
+  width: min(calc(2rem + 1vw), 4rem);
+  height: 50%;
+  margin-bottom: -0.1rem;
+  padding-left: 0.1rem;
+  cursor: pointer;
+}
+
 .card p:first-of-type{
   display: flex;
-  gap: 5rem;
+  gap: 3rem;
 }
 .card strong ~ p{
   margin-bottom: 1rem;
 }
 .card p:last-of-type{
   display: flex;
-  gap: 3.5rem;
+  gap: 2rem;
 }
 
 .title {
