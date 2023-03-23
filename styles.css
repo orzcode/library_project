@@ -298,7 +298,6 @@ dialog svg:nth-child(1) {
   z-index: 10;
   width: clamp(20px, 9%, 80px);
   filter: drop-shadow(1px 1px 1px black);
-
   fill: whitesmoke;
 }
 dialog svg:nth-child(1):hover {
@@ -328,21 +327,24 @@ dialog img:nth-child(2) {
 
 #titleAndLink {
   display: flex;
-  flex-direction: column;
-}
-dialog h2 {
-  line-height: 120%;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  line-height: 150%;
   align-self: center;
   text-align: center;
+  gap: 1rem;
+  filter: drop-shadow(1px 1px 1px black);
 }
-dialog a {
-  font-style: italic;
-  visibility: hidden;
-  align-self: center;
+#titleAndLink img{
+  width: min(calc(2rem + 1vw), 4rem);
+  margin-top: 1rem;
+  height: 100%;
 }
 dialog input[type="text"] {
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  border-radius: 5px;
+  border: 2px solid black;
+  border-radius: .5rem;
   width: 80%;
   max-width: 60rem;
   text-align: center;
