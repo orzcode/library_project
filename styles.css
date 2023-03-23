@@ -218,6 +218,17 @@ h1 {
   outline: 1px solid black;
   object-fit: cover;
 }
+.card p:first-of-type{
+  display: flex;
+  gap: 5rem;
+}
+.card strong ~ p{
+  margin-bottom: 1rem;
+}
+.card p:last-of-type{
+  display: flex;
+  gap: 3.5rem;
+}
 
 .title {
   font-size: xx-large;
