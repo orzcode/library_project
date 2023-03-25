@@ -98,8 +98,9 @@ export function modalOpenTasks() {
   document.querySelector("dialog").showModal();
   document.querySelector("#formImg").src = "cloudNew.svg";
   document.querySelector("dialog h2").innerHTML = "Add a series";
+  document.querySelector("dialog a").style.pointerEvents = "none";
 
-  document.querySelector("dialog a").style.display = "none";
+  document.querySelector("#titleAndLink a > img:only-child").style.display = "none";
 
   document.querySelector('#filmingComplete').style.opacity = "0.3";
   document.querySelector('#no').disabled = true;
@@ -190,7 +191,13 @@ export function queryData() {
       document.querySelector("#formImg").src = data.image;
       document.querySelector("dialog h2").innerHTML = data.name;
       document.querySelector("dialog h2").style.visibility = "visible";
-      document.querySelector("dialog a").href = data.url;
+
+      document.querySelector("dialog a").style.pointerEvents = "auto";
+
+      document.querySelector("#titleAndLink a > img:only-child").style.display = "block";
+
+      document.querySelector("#title").href = data.url;
+      document.querySelector("#link").href = data.url;
       document.querySelector("dialog a").style.display = "inline-block";
       
       document.querySelector('#filmingComplete').style.opacity = "1";
@@ -204,9 +211,19 @@ export function queryData() {
     .catch((error) => {
       console.error(error);
       document.querySelector("#formImg").src = "cloudError.svg";
-      document.querySelector("dialog h2").innerHTML = `${error.message}`;
+
       document.querySelector("dialog h2").style.visibility = "visible";
-      document.querySelector("dialog a").style.display = "none";
+      document.querySelector("dialog a").style.visibility = "visible";
+
+      /*--WHY ISNT THIS WORKING--*/
+      /*--WHY ISNT THIS WORKING--*/
+      /*--WHY ISNT THIS WORKING--*/
+      
+      document.querySelector("dialog h2").innerHTML = `${error.message}`;
+
+      document.querySelector("dialog a").style.pointerEvents = "none";
+
+      document.querySelector("#titleAndLink a > img:only-child").style.display = "none";
 
       document.querySelector("#saveSeries").disabled = true;
     });

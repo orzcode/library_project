@@ -373,10 +373,14 @@ dialog img:nth-child(2) {
   filter: drop-shadow(1px 1px 1px black);
 }
 #titleAndLink img{
-  width: min(calc(2rem + 1vw), 4rem);
-  margin-top: 1rem;
+  width: min(calc(2rem + 0.8vw), 4rem);
   height: 100%;
 }
+#titleAndLink a > img:only-child {
+  display: block;
+}
+/*--Fixes weird whitespace with links around images--*/
+
 
 dialog input[type="text"] {
   border: 2px solid black;
