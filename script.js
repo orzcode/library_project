@@ -56,10 +56,14 @@ Series.toggle = function (theObj) {
     theObj.complete = "Complete";
   } else theObj.complete = "Ongoing";
 
+  /*--do animation here?*--/
+
+  /*this is the visual text on the card*/
   event.target.closest(".card").setAttribute("data-complete", theObj.complete);
   //'event' works without being passed as a parameter in the calling function
   //so ignore the strikethrough - still works.
   event.target.closest("p").textContent = theObj.complete;
+  /*this is the visual text on the card*/
 
   //And somehow, it does actually update the library array
   sendLibrary();
