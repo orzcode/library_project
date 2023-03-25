@@ -94,13 +94,15 @@ window.submissionTasks = submissionTasks;
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 export function modalOpenTasks() {
+  scrollTo(0, 0);
   document.querySelector("form").reset();
   document.querySelector("dialog").showModal();
   document.querySelector("#formImg").src = "cloudNew.svg";
+
   document.querySelector("dialog h2").innerHTML = "Add a series";
   document.querySelector("dialog a").style.pointerEvents = "none";
 
-  document.querySelector("#titleAndLink a > img:only-child").style.display = "none";
+  document.querySelector("#linkImg").style.display = "none";
 
   document.querySelector('#filmingComplete').style.opacity = "0.3";
   document.querySelector('#no').disabled = true;
@@ -109,7 +111,7 @@ export function modalOpenTasks() {
   document.querySelector('#no').style.cursor = "not-allowed";
 
   document.querySelector("#saveSeries").disabled = true;
-  //document.body.style.position = "sticky";
+  // document.body.style.position = "sticky";
   document.body.style.overflowY = "hidden";
 
 
@@ -122,6 +124,7 @@ export function modalOpenTasks() {
 window.modalOpenTasks = modalOpenTasks;
 //--this is some wacky shit, and on mobile, it seems to move to the LEFT
 //"fixed" this with viewport size checking.
+
 export function closeModal(){
   // document.body.style.removeProperty('position');
   document.body.style.overflowY = "visible";
@@ -169,7 +172,7 @@ renderCards(library);
 /////////////////////
 export function queryData() {
   document.querySelector("dialog h2").style.visibility = "hidden";
-  document.querySelector("dialog a").style.display = "none";
+  document.querySelector("#linkImg").style.display = "none";
 
   document.querySelector('#filmingComplete').style.opacity = "0.3";
   document.querySelector('#no').disabled = true;
@@ -188,18 +191,16 @@ export function queryData() {
     .then((data) => {
       if (data)
       console.log("API Fetch complete: " + [data.name, data.url, data.image]);
-      document.querySelector("#formImg").src = data.image;
+
       document.querySelector("dialog h2").innerHTML = data.name;
       document.querySelector("dialog h2").style.visibility = "visible";
+      document.querySelector("#title").href = data.url;
 
+      document.querySelector("#link").href = data.url;
+      document.querySelector("#linkImg").style.display = "block";
       document.querySelector("dialog a").style.pointerEvents = "auto";
 
-      document.querySelector("#titleAndLink a > img:only-child").style.display = "block";
 
-      document.querySelector("#title").href = data.url;
-      document.querySelector("#link").href = data.url;
-      document.querySelector("dialog a").style.display = "inline-block";
-      
       document.querySelector('#filmingComplete').style.opacity = "1";
       document.querySelector('#no').disabled = false;
       document.querySelector('#yes').disabled = false;
@@ -207,25 +208,18 @@ export function queryData() {
       document.querySelector('#no').style.cursor = "pointer";
 
       document.querySelector("#saveSeries").disabled = false;
+      document.querySelector("#formImg").src = data.image;
     })
     .catch((error) => {
       console.error(error);
-      document.querySelector("#formImg").src = "cloudError.svg";
 
       document.querySelector("dialog h2").style.visibility = "visible";
-      document.querySelector("dialog a").style.visibility = "visible";
-
-      /*--WHY ISNT THIS WORKING--*/
-      /*--WHY ISNT THIS WORKING--*/
-      /*--WHY ISNT THIS WORKING--*/
-      
       document.querySelector("dialog h2").innerHTML = `${error.message}`;
 
-      document.querySelector("dialog a").style.pointerEvents = "none";
-
-      document.querySelector("#titleAndLink a > img:only-child").style.display = "none";
+      document.querySelector("#linkImg").style.display = "none";
 
       document.querySelector("#saveSeries").disabled = true;
+      document.querySelector("#formImg").src = "cloudError.svg";
     });
 }
 window.queryData = queryData;

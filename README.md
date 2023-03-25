@@ -1,10 +1,6 @@
 # library_project
 Library project involving prototypes
 ~~~
-replace link dot with link svg
-~~~
-when clicking modal, return view to top of screen
-~~~
 
 change 'complete' transition to smoothness (same fadein as remove)
 
