@@ -98,10 +98,15 @@ export function modalOpenTasks() {
   document.querySelector("dialog").showModal();
   document.querySelector("#formImg").src = "cloudNew.svg";
   document.querySelector("dialog h2").innerHTML = "Add a series";
-  document.querySelector("dialog a").href =
-    "https://en.wikipedia.org/wiki/Main_Page";
-  document.querySelector("dialog a").style.visibility = "hidden";
-  document.querySelector("#filmingComplete").style.visibility = "hidden";
+
+  document.querySelector("dialog a").style.display = "none";
+
+  document.querySelector('#filmingComplete').style.opacity = "0.3";
+  document.querySelector('#no').disabled = true;
+  document.querySelector('#yes').disabled = true;
+  document.querySelector('#yes').style.cursor = "not-allowed";
+  document.querySelector('#no').style.cursor = "not-allowed";
+
   document.querySelector("#saveSeries").disabled = true;
   //document.body.style.position = "sticky";
   document.body.style.overflowY = "hidden";
@@ -163,8 +168,14 @@ renderCards(library);
 /////////////////////
 export function queryData() {
   document.querySelector("dialog h2").style.visibility = "hidden";
-  document.querySelector("dialog a").style.visibility = "hidden";
-  document.querySelector("#filmingComplete").style.visibility = "hidden";
+  document.querySelector("dialog a").style.display = "none";
+
+  document.querySelector('#filmingComplete').style.opacity = "0.3";
+  document.querySelector('#no').disabled = true;
+  document.querySelector('#yes').disabled = true;
+  document.querySelector('#yes').style.cursor = "not-allowed";
+  document.querySelector('#no').style.cursor = "not-allowed";
+
   document.querySelector("#saveSeries").disabled = true;
 
   document.querySelector("#formImg").src = "ripple.svg";
@@ -180,8 +191,14 @@ export function queryData() {
       document.querySelector("dialog h2").innerHTML = data.name;
       document.querySelector("dialog h2").style.visibility = "visible";
       document.querySelector("dialog a").href = data.url;
-      document.querySelector("dialog a").style.visibility = "visible";
-      document.querySelector("#filmingComplete").style.visibility = "visible";
+      document.querySelector("dialog a").style.display = "inline-block";
+      
+      document.querySelector('#filmingComplete').style.opacity = "1";
+      document.querySelector('#no').disabled = false;
+      document.querySelector('#yes').disabled = false;
+      document.querySelector('#yes').style.cursor = "pointer";
+      document.querySelector('#no').style.cursor = "pointer";
+
       document.querySelector("#saveSeries").disabled = false;
     })
     .catch((error) => {
@@ -189,8 +206,8 @@ export function queryData() {
       document.querySelector("#formImg").src = "cloudError.svg";
       document.querySelector("dialog h2").innerHTML = `${error.message}`;
       document.querySelector("dialog h2").style.visibility = "visible";
-      document.querySelector("dialog a").style.visibility = "hidden";
-      document.querySelector("#filmingComplete").style.visibility = "hidden";
+      document.querySelector("dialog a").style.display = "none";
+
       document.querySelector("#saveSeries").disabled = true;
     });
 }
