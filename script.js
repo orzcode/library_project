@@ -54,7 +54,9 @@ Series.formSubmission = function () {
 Series.toggle = function (theObj) {
   if (theObj.complete === "Ongoing") {
     theObj.complete = "Complete";
+    event.target.closest(".card").setAttribute("cardFlip", theObj.complete);
   } else theObj.complete = "Ongoing";
+    event.target.closest(".card").setAttribute("cardFlip", theObj.complete);
 
   /*--do animation here?*--/
 
@@ -65,7 +67,8 @@ Series.toggle = function (theObj) {
   event.target.closest("p").textContent = theObj.complete;
   /*this is the visual text on the card*/
 
-  //And somehow, it does actually update the library array
+  //Somehow, it does actually update the library array
+
   sendLibrary();
 };
 
@@ -108,38 +111,37 @@ export function modalOpenTasks() {
 
   document.querySelector("#linkImg").style.display = "none";
 
-  document.querySelector('#filmingComplete').style.opacity = "0.3";
-  document.querySelector('#no').disabled = true;
-  document.querySelector('#yes').disabled = true;
-  document.querySelector('#yes').style.cursor = "not-allowed";
-  document.querySelector('#no').style.cursor = "not-allowed";
+  document.querySelector("#filmingComplete").style.opacity = "0.3";
+  document.querySelector("#no").disabled = true;
+  document.querySelector("#yes").disabled = true;
+  document.querySelector("#yes").style.cursor = "not-allowed";
+  document.querySelector("#no").style.cursor = "not-allowed";
 
   document.querySelector("#saveSeries").disabled = true;
   // document.body.style.position = "sticky";
   document.body.style.overflowY = "hidden";
 
-
-   if(screen.orientation.type === "landscape-primary"){
-     document.body.style.paddingRight = "15px";
-   document.querySelector("#header").style.width = "calc(100% + 15px)";
-   document.querySelector("#header").style.paddingRight = "15px";
-   }
+  if (screen.orientation.type === "landscape-primary") {
+    document.body.style.paddingRight = "15px";
+    document.querySelector("#header").style.width = "calc(100% + 15px)";
+    document.querySelector("#header").style.paddingRight = "15px";
+  }
 }
 window.modalOpenTasks = modalOpenTasks;
 //--this is some wacky shit, and on mobile, it seems to move to the LEFT
 //"fixed" this with viewport size checking.
 
-export function closeModal(){
+export function closeModal() {
   // document.body.style.removeProperty('position');
   document.body.style.overflowY = "visible";
- // document.body.style.position = "";
+  // document.body.style.position = "";
 
-   if(screen.orientation.type === "landscape-primary"){
-   document.body.style.paddingRight = "";
-   document.querySelector("#header").style.width = "100%";
-   document.querySelector("#header").style.paddingRight = "";
-   document.querySelector("#library").style.paddingLeft = "";
-   }
+  if (screen.orientation.type === "landscape-primary") {
+    document.body.style.paddingRight = "";
+    document.querySelector("#header").style.width = "100%";
+    document.querySelector("#header").style.paddingRight = "";
+    document.querySelector("#library").style.paddingLeft = "";
+  }
   document.querySelector("dialog").close();
 }
 window.closeModal = closeModal;
@@ -178,11 +180,11 @@ export function queryData() {
   document.querySelector("dialog h2").style.visibility = "hidden";
   document.querySelector("#linkImg").style.display = "none";
 
-  document.querySelector('#filmingComplete').style.opacity = "0.3";
-  document.querySelector('#no').disabled = true;
-  document.querySelector('#yes').disabled = true;
-  document.querySelector('#yes').style.cursor = "not-allowed";
-  document.querySelector('#no').style.cursor = "not-allowed";
+  document.querySelector("#filmingComplete").style.opacity = "0.3";
+  document.querySelector("#no").disabled = true;
+  document.querySelector("#yes").disabled = true;
+  document.querySelector("#yes").style.cursor = "not-allowed";
+  document.querySelector("#no").style.cursor = "not-allowed";
 
   document.querySelector("#saveSeries").disabled = true;
 
@@ -194,7 +196,7 @@ export function queryData() {
   getDataFromTVMaze(searchTerm)
     .then((data) => {
       if (data)
-      console.log("API Fetch complete: " + [data.name, data.url, data.image]);
+        console.log("API Fetch complete: " + [data.name, data.url, data.image]);
 
       document.querySelector("dialog h2").innerHTML = data.name;
       document.querySelector("dialog h2").style.visibility = "visible";
@@ -204,12 +206,11 @@ export function queryData() {
       document.querySelector("#linkImg").style.display = "block";
       document.querySelector("dialog a").style.pointerEvents = "auto";
 
-
-      document.querySelector('#filmingComplete').style.opacity = "1";
-      document.querySelector('#no').disabled = false;
-      document.querySelector('#yes').disabled = false;
-      document.querySelector('#yes').style.cursor = "pointer";
-      document.querySelector('#no').style.cursor = "pointer";
+      document.querySelector("#filmingComplete").style.opacity = "1";
+      document.querySelector("#no").disabled = false;
+      document.querySelector("#yes").disabled = false;
+      document.querySelector("#yes").style.cursor = "pointer";
+      document.querySelector("#no").style.cursor = "pointer";
 
       document.querySelector("#saveSeries").disabled = false;
       document.querySelector("#formImg").src = data.image;
@@ -277,7 +278,8 @@ function createCard(obj) {
   completeToggle.style.display = "inline";
   completeP.appendChild(completeToggle);
 
-  //Phew. Toggles the 'Ongoing/Complete' status (see main function)
+  //Toggles the 'Ongoing/Complete' status (see main function)
+  //as you can see, this sends the SPECIFIC card to the function - brilliant.
   completeToggle.addEventListener("click", function () {
     Series.toggle(obj);
   });
@@ -364,4 +366,4 @@ async function getDataFromTVMaze(searchTerm) {
   } catch (error) {
     throw new Error(`${error.message}`);
   }
-};
+}
