@@ -65,8 +65,6 @@ Series.toggle = function (theObj) {
       theObj.complete = "Ongoing";
     }
 
-    //card.setAttribute("animation", "completeToggle");
-
     // update the visual text on the card
     card.setAttribute("data-complete", theObj.complete);
     card.querySelector("p p").textContent = theObj.complete;
@@ -82,7 +80,7 @@ Series.toggle = function (theObj) {
     // scale up and fade in the card
     card.style.opacity = 1;
     card.style.transform = "scale(1)";
-  }, 400); // wait 500ms (the duration of the transition) before changing the card's state and position
+  }, 300); // wait 300ms (the duration of the transition) before changing the card's state and position
   sendLibrary();
 };
 window.Series = Series;
