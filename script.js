@@ -52,26 +52,39 @@ Series.formSubmission = function () {
   );
 };
 Series.toggle = function (theObj) {
-  if (theObj.complete === "Ongoing") {
-    theObj.complete = "Complete";
-    event.target.closest(".card").setAttribute("cardFlip", theObj.complete);
-  } else theObj.complete = "Ongoing";
-    event.target.closest(".card").setAttribute("cardFlip", theObj.complete);
+  var card = event.target.closest(".card");
 
-  /*--do animation here?*--/
+  // scale down and fade out the card
+  card.style.opacity = 0;
+  card.style.transform = "scale(0.1)";
 
-  /*this is the visual text on the card*/
-  event.target.closest(".card").setAttribute("data-complete", theObj.complete);
-  //'event' works without being passed as a parameter in the calling function
-  //so ignore the strikethrough - still works.
-  event.target.closest("p").textContent = theObj.complete;
-  /*this is the visual text on the card*/
+  setTimeout(function() {
+    if (theObj.complete === "Ongoing") {
+      theObj.complete = "Complete";
+    } else {
+      theObj.complete = "Ongoing";
+    }
 
-  //Somehow, it does actually update the library array
+    //card.setAttribute("animation", "completeToggle");
 
+    // update the visual text on the card
+    card.setAttribute("data-complete", theObj.complete);
+    card.querySelector("p p").textContent = theObj.complete;
+
+    // shift the card's position by changing its order
+    if (theObj.complete === "Complete") {
+      card.style.order = 1;
+    } else {
+      card.style.order = 2;
+    }
+    //Seems unneccessary, but the re-ordering appears to be better ordered with this.
+
+    // scale up and fade in the card
+    card.style.opacity = 1;
+    card.style.transform = "scale(1)";
+  }, 400); // wait 500ms (the duration of the transition) before changing the card's state and position
   sendLibrary();
 };
-
 window.Series = Series;
 ////////////////////////////////////////////////////////////
 //Reconstructs a Series array from raw string data - to use, call this onto a new var
