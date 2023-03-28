@@ -6,21 +6,21 @@
   box-sizing: border-box;
   /* outline: 1px solid black; */
 }
-:root {
+/* :root {
   --header: #26343b;
   --main: #353132;
   --highlighted: 38, 52, 59;
-}
+} */
 /* :root {
   --header: #402c2c;
   --main: #746565;
   --highlighted: 64, 44, 44;
 } */
-/* :root {
+:root {
   --header: #75296c;
   --main: #4f689d;
   --highlighted: 117, 41, 108;
-} */
+}
 /*----------------------------------------------------------------------*/
 /*Half opacity and quarter opacity - for cards - leave this root section*/
 :root{
@@ -31,10 +31,7 @@
 }
 :root{
   --btnPrimary: rgba(var(--highlighted), 0.9);
-  --btnSecondary: rgba(var(--highlighted), 0.7);
-  /*OR SHOULD I JUST USE CARDCOMPLETE?*/
-  /*Note: hover for both of these have:
-    filter: brightness(140%); */
+  --btnSecondary: rgba(var(--highlighted), 0.8);
 }
 /*Half opacity and quarter opacity - for cards - leave this root section*/
 /*----------------------------------------------------------------------*/
