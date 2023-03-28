@@ -148,7 +148,7 @@ button {
   width: 100%;
   padding: min(1rem, 0.4vw);
   text-align: center;
-  letter-spacing: min(3px, 0.2vw);
+  letter-spacing: min(3px, 0.3vw);
   flex-grow: 0;
   flex-shrink: 0;
   margin: auto;
@@ -165,6 +165,10 @@ h1 {
   flex-shrink: 0;
   z-index: 1;
   margin: 2rem;
+}
+
+#header2 button {
+  font-size: clamp(2rem, 4.8vw, 3rem);
 }
 
 #library {
