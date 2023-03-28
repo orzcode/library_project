@@ -70,12 +70,12 @@ Series.toggle = function (theObj) {
     card.querySelector("p p").textContent = theObj.complete;
 
     // shift the card's position by changing its order
-    if (theObj.complete === "Complete") {
-      card.style.order = 1;
-    } else {
-      card.style.order = 2;
-    }
-    //Seems unneccessary, but the re-ordering appears to be better ordered with this.
+    // if (theObj.complete === "Complete") {
+    //   card.style.order = 1;
+    // } else {
+    //   card.style.order = 2;
+    // }
+    //Seems unneccessary
 
     // scale up and fade in the card
     card.style.opacity = 1;
@@ -324,7 +324,7 @@ function createCard(obj) {
       this.closest(".card").style.opacity = 0;
       setTimeout(() => {
         card.remove();
-      }, 300);
+      }, 400);
       removeFromLibrary(obj.title);
       return;
     }

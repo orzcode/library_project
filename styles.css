@@ -146,16 +146,16 @@ button {
   border-bottom: 1px solid black;
   filter: drop-shadow(1px 1px 100px black);
   width: 100%;
-  padding-top: 1rem;
-  padding-bottom: 2rem;
+  padding: min(1rem, 0.4vw);
   text-align: center;
-  letter-spacing: 3px;
+  letter-spacing: min(3px, 0.2vw);
   flex-grow: 0;
   flex-shrink: 0;
   margin: auto;
 }
 h1 {
   filter: drop-shadow(1px 1px 1px black);
+  
 }
 
 #header2 {
@@ -202,7 +202,7 @@ h1 {
   font-size: larger;
   letter-spacing: 2px;
   transform-style: preserve-3d;
-  transition: opacity 0.3s ease, transform 0.3s ease-out;
+  transition: opacity 0.4s ease, transform 0.3s ease-out;
 }
 .card img {
   max-width: 100%;
