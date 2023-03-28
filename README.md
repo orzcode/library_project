@@ -6,6 +6,6 @@ move Add Show button to header?
 
 BUTTONS NEED COLOR WORK
 brightness
-invert
 opacity
-drop-shadow
+filter: hue-rotate(30deg);
+saturate

@@ -30,8 +30,8 @@
   it reflects the underlying background color*/
 }
 :root{
-  --btnPrimary: rgba(var(--highlighted), 0.4);
-  --btnSecondary: rgba(var(--highlighted), 0.2);
+  --btnPrimary: rgba(var(--highlighted), 0.9);
+  --btnSecondary: rgba(var(--highlighted), 0.7);
   /*OR SHOULD I JUST USE CARDCOMPLETE?*/
   /*Note: hover for both of these have:
     filter: brightness(140%); */
@@ -99,7 +99,7 @@ button {
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.1rem;
-  transition: all 0.15s ease-in-out;
+  transition: all 0.1s ease-in-out;
   z-index: 1;  
 }
 .btnForm{
@@ -117,14 +117,16 @@ button {
 /* Primary button style */
 .btn-primary {
   background-color: var(--btnPrimary);
+  filter: brightness(110%) saturate(1.5);
 }
 .btn-primary:hover, .btn-primary:focus {
   background-color: var(--btnPrimary);
-  filter: brightness(140%);
+  filter: brightness(160%);
 }
 /* Secondary button style */
 .btn-secondary {
   background-color: var(--btnSecondary);
+
 }
 .btn-secondary:hover, .btn-secondary:focus {
   background-color: var(--btnSecondary);
