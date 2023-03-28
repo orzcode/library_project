@@ -26,11 +26,15 @@
 :root{
   --cardComplete: rgba(150, 150, 150, 0.25);
   --cardOngoing: rgba(0, 0, 0, 0.5);
+  /*the idea being that by using black/white and OPACITY,
+  it reflects the underlying background color*/
 }
 :root{
   --btnPrimary: rgba(var(--highlighted), 0.4);
   --btnSecondary: rgba(var(--highlighted), 0.2);
   /*OR SHOULD I JUST USE CARDCOMPLETE?*/
+  /*Note: hover for both of these have:
+    filter: brightness(140%); */
 }
 /*Half opacity and quarter opacity - for cards - leave this root section*/
 /*----------------------------------------------------------------------*/
