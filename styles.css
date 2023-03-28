@@ -155,7 +155,7 @@ button {
 }
 h1 {
   filter: drop-shadow(1px 1px 1px black);
-  
+  font-size: clamp(3.4rem, 5vw, 4.5rem);
 }
 
 #header2 {
