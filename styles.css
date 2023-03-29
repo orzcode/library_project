@@ -6,20 +6,50 @@
   box-sizing: border-box;
   /* outline: 1px solid black; */
 }
-/* :root {
-  --header: #26343b;
-  --main: #353132;
-  --highlighted: 38, 52, 59;
-} */
-/* :root {
-  --header: #402c2c;
-  --main: #746565;
-  --highlighted: 64, 44, 44;
-} */
 :root {
-  --header: #75296c;
-  --main: #4f689d;
-  --highlighted: 117, 41, 108;
+  --headerA: #26343b;
+  --mainA: #353132;
+  --highlightedA: 38, 52, 59;
+
+  --headerB: #402c2c;
+  --mainB: #746565;
+  --highlightedB: 64, 44, 44;
+
+  --headerC: #75296c;
+  --mainC: #4f689d;
+  --highlightedC: 117, 41, 108;
+
+  --header1: #81A186;
+  --main1: #57737E;
+  --highlighted1: 129, 161, 134;
+
+  --header2: #9E847E;
+  --main2: #6F5761;
+  --highlighted2: 158, 132, 126;
+
+  --header3: #DDD5C5;
+  --main3: #7E899D;
+  --highlighted3: 221, 213, 197;
+
+  --header4: #AD8D87;
+  --main4: #5E526B;
+  --highlighted4: 173, 141, 135;
+
+  --header5: #B44B36;
+  --main5: #442E2C;
+  --highlighted5: 180, 75, 54;
+
+  --header6: #A69C91;
+  --main6: #6D7D68;
+  --highlighted6: 166, 156, 145;
+
+  --header: #608696;
+  --main: #626580;
+  --highlighted: 96, 134, 150;
+
+  --header8: #F6A07B;
+  --main8: #D17780;
+  --highlighted8: 246, 160, 123;
 }
 /*----------------------------------------------------------------------*/
 /*Half opacity and quarter opacity - for cards - leave this root section*/
@@ -114,7 +144,7 @@ button {
 /* Primary button style */
 .btn-primary {
   background-color: var(--btnPrimary);
-  filter: brightness(110%) saturate(1.5);
+  filter: brightness(110%) saturate(1.4);
 }
 /* Secondary button style */
 .btn-secondary {
