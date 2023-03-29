@@ -6,6 +6,5 @@ move Add Show button to header?
 get color schemes
 
 add empty library image
-mousehover focus fix
 
 write readme

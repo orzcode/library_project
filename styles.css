@@ -116,7 +116,7 @@ button {
   background-color: var(--btnPrimary);
   filter: brightness(110%) saturate(1.5);
 }
-/* .btn-primary:hover/*, .btn-primary:focus*/ {
+/* .btn-primary:hover{
   background-color: var(--btnPrimary);
   filter: brightness(160%);
 } */
@@ -124,7 +124,7 @@ button {
 .btn-secondary {
   background-color: var(--btnSecondary);
 }
-/* .btn-secondary:hover/*, .btn-secondary:focus*/ {
+/* .btn-secondary:hover{
   background-color: var(--btnSecondary);
   filter: brightness(140%);
 } */
