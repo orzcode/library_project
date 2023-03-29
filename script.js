@@ -1,7 +1,11 @@
 let library = [];
 let libraryDiv = document.querySelector("#library");
 ////////////////////////////////////////////////////
-
+document.querySelector('#colors').addEventListener("click", function () {
+  document.documentElement.style.setProperty('--header', 'var(--header2)');
+  document.documentElement.style.setProperty('--main', 'var(--main2)');
+  document.documentElement.style.setProperty('--highlighted', 'var(--highlighted2)');
+})
 ///////////////////
 //FIREBASE
 // import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
