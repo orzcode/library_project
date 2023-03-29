@@ -43,19 +43,19 @@
   --main6: #6D7D68;
   --highlighted6: 166, 156, 145;
 
-  --header: #608696;
-  --main: #626580;
-  --highlighted: 96, 134, 150;
+  --header7: #608696;
+  --main7: #626580;
+  --highlighted7: 96, 134, 150;
 
-  --header8: #F6A07B;
-  --main8: #D17780;
-  --highlighted8: 246, 160, 123;
+  --header: #F6A07B;
+  --main: #693b40;
+  --highlighted: 246, 160, 123;
 }
 /*----------------------------------------------------------------------*/
 /*Half opacity and quarter opacity - for cards - leave this root section*/
 :root{
-  --cardComplete: rgba(150, 150, 150, 0.25);
-  --cardOngoing: rgba(0, 0, 0, 0.5);
+  --cardComplete: rgba(var(--highlighted), 0.9);
+  --cardOngoing: rgba(var(--highlighted), 0.6);
   /*the idea being that by using black/white and OPACITY,
   it reflects the underlying background color*/
 }
@@ -144,7 +144,7 @@ button {
 /* Primary button style */
 .btn-primary {
   background-color: var(--btnPrimary);
-  filter: brightness(110%) saturate(1.4);
+  filter: brightness(110%) saturate(1.2);
 }
 /* Secondary button style */
 .btn-secondary {
