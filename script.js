@@ -1,6 +1,13 @@
 let library = [];
 let libraryDiv = document.querySelector("#library");
 ////////////////////////////////////////////////////
+function emptyChecker(){
+  if (library.length === 0) {
+  document.querySelector('#joePie').style.display = 'flex';
+} else document.querySelector('#joePie').style.display = 'none'
+}
+emptyChecker()
+//Checks if library is empty, displays default image if so//
 
 ///////////////////
 //FIREBASE
@@ -162,6 +169,7 @@ window.closeModal = closeModal;
 function sendLibrary() {
   localStorage.setItem("localContent", JSON.stringify(library));
   //set a localStorage item called "localContent", set it as a stringified library[]
+  emptyChecker()
 }
 function getLibrary() {
   if (localStorage.getItem("localContent") !== null) {
