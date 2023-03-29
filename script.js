@@ -1,13 +1,6 @@
 let library = [];
 let libraryDiv = document.querySelector("#library");
 ////////////////////////////////////////////////////
-function emptyChecker(){
-  if (library.length === 0) {
-  document.querySelector('#joePie').style.display = 'flex';
-} else document.querySelector('#joePie').style.display = 'none'
-}
-emptyChecker()
-//Checks if library is empty, displays default image if so//
 
 ///////////////////
 //FIREBASE
@@ -386,3 +379,10 @@ async function getDataFromTVMaze(searchTerm) {
     throw new Error(`${error.message}`);
   }
 }
+//Checks if library is empty, displays default image if so//
+function emptyChecker(){
+  if (library.length === 0) {
+  document.querySelector('#joePie').style.display = 'flex';
+} else document.querySelector('#joePie').style.display = 'none'
+}
+emptyChecker()
