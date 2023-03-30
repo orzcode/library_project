@@ -72,7 +72,7 @@ html {
   font-size: 62.5%;
   /* FONTSIZE TRICK-- 1 rem = 10 px here, usually 1 rem = 16px */
   caret-color: transparent;
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
 }
 body {
   font-size: 2rem;
