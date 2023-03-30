@@ -174,8 +174,8 @@ button {
   border-radius: 1.2rem;
   width: clamp(3rem, 5vw, 5rem);
   height: clamp(3rem, 5vw, 5rem);
-  margin-left: 2rem;
-  margin-right: -2rem;
+  /* margin-left: 2rem;*/
+  margin-right: -1rem;
   display: block;
 }
 .btn-grad:hover {
@@ -195,7 +195,7 @@ button {
   border-bottom: 1px solid black;
   filter: drop-shadow(1px 1px 100px black);
   width: 100%;
-  padding: min(1rem, 0.4vw);
+  padding: min(1rem, 0.4vw) 0;
   text-align: center;
   letter-spacing: min(3px, 0.3vw);
   flex-grow: 0;
@@ -205,10 +205,11 @@ button {
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
 }
 h1 {
   filter: drop-shadow(1px 1px 1px black);
-  font-size: clamp(3.4rem, 5vw, 4.5rem);
+  font-size: clamp(3.3rem, 5vw, 4.5rem);
 }
 
 #header2 {
