@@ -47,9 +47,9 @@
   --main10: #626580;
   --highlighted10: 96, 134, 150;
 
-  --header: #F6A07B;
-  --main: #693b40;
-  --highlighted: 246, 160, 123;
+  --header: #222c34;
+  --main: #2e2b2d;
+  --highlighted: 34, 51, 75;
 }
 /*----------------------------------------------------------------------*/
 /*Half opacity and quarter opacity - for cards - leave this root section*/
@@ -166,6 +166,21 @@ button {
   filter: grayscale(1);
   cursor: not-allowed;
 }
+/* ---------------------------------------------------- */     
+.btn-grad {
+  background-image: linear-gradient(to right, var(--header) 10%, #322e2e 45%, var(--main)  100%);
+  transition: 0.5s;
+  background-size: 200% auto;
+  border-radius: 1.2rem;
+  width: clamp(3rem, 5vw, 5rem);
+  height: clamp(3rem, 5vw, 5rem);
+  margin-left: 2rem;
+  margin-right: -2rem;
+  display: block;
+}
+.btn-grad:hover {
+  background-position: right center; /* change the direction of the change here */
+}
 /* ---------------------------------------------------- */
 #container {
   display: flex;
@@ -186,6 +201,10 @@ button {
   flex-grow: 0;
   flex-shrink: 0;
   margin: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
 }
 h1 {
   filter: drop-shadow(1px 1px 1px black);

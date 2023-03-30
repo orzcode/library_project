@@ -1,11 +1,7 @@
 let library = [];
 let libraryDiv = document.querySelector("#library");
 ////////////////////////////////////////////////////
-document.querySelector('#colors').addEventListener("click", function () {
-  document.documentElement.style.setProperty('--header', 'var(--header5)');
-  document.documentElement.style.setProperty('--main', 'var(--main5)');
-  document.documentElement.style.setProperty('--highlighted', 'var(--highlighted5)');
-})
+
 ///////////////////
 //FIREBASE
 // import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
@@ -62,7 +58,7 @@ Series.toggle = function (theObj) {
   card.style.opacity = 0;
   card.style.transform = "scale(0.1)";
 
-  setTimeout(function() {
+  setTimeout(function () {
     if (theObj.complete === "Ongoing") {
       theObj.complete = "Complete";
     } else {
@@ -166,7 +162,7 @@ window.closeModal = closeModal;
 function sendLibrary() {
   localStorage.setItem("localContent", JSON.stringify(library));
   //set a localStorage item called "localContent", set it as a stringified library[]
-  emptyChecker()
+  emptyChecker();
 }
 function getLibrary() {
   if (localStorage.getItem("localContent") !== null) {
@@ -383,10 +379,59 @@ async function getDataFromTVMaze(searchTerm) {
     throw new Error(`${error.message}`);
   }
 }
+//--------------------------------------------------------//
 //Checks if library is empty, displays default image if so//
-function emptyChecker(){
+function emptyChecker() {
   if (library.length === 0) {
-  document.querySelector('#joePie').style.display = 'flex';
-} else document.querySelector('#joePie').style.display = 'none'
+    document.querySelector("#joePie").style.display = "flex";
+  } else document.querySelector("#joePie").style.display = "none";
 }
-emptyChecker()
+emptyChecker();
+//--------------------------------------------------------//
+// Define an array of color schemes
+const colorSchemes = [
+  {
+    header: "#222c34",
+    main: "#2e2b2d",
+    highlighted: "34, 51, 75",
+  },
+  {
+    header: "#311d1d",
+    main: "#5a4b4a",
+    highlighted: "49, 32, 32",
+  },
+  {
+    header: "#771c11",
+    main: "#342321",
+    highlighted: "119, 28, 17",
+  },
+  {
+    header: "#1c2e34",
+    main: "#3b3936",
+    highlighted: "28, 46, 52",
+  },
+  {
+    header: "#36221f",
+    main: "#6e5c5c",
+    highlighted: "54, 34, 31",
+  },
+  {
+    header: "#752523",
+    main: "#3f3551",
+    highlighted: "117, 37, 35",
+  },
+];
+
+let currentSchemeIndex = 0;
+
+document.querySelector("#colors").addEventListener("click", function () {
+  currentSchemeIndex = (currentSchemeIndex + 1) % colorSchemes.length;
+  const currentScheme = colorSchemes[currentSchemeIndex];
+  document.documentElement.style.setProperty("--header", currentScheme.header);
+  document.documentElement.style.setProperty("--main", currentScheme.main);
+  document.documentElement.style.setProperty(
+    "--highlighted",
+    currentScheme.highlighted
+  );
+});
+//--------------------------------------------------------//
