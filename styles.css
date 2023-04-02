@@ -47,7 +47,7 @@
   --main10: #626580;
   --highlighted10: 96, 134, 150;
 
-  --header: #22334B;
+  --header: #22334b;
   --main: #2e2b2d;
   --highlighted: 34, 51, 75;
 }
@@ -74,7 +74,8 @@ html {
   caret-color: transparent;
   overflow-x: hidden;
 }
-html, dialog{
+html,
+dialog {
   user-select: none;
 }
 body {

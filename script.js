@@ -75,7 +75,7 @@ Series.toggle = function (theObj) {
     sendLibrary();
     //sendLib must be IN the timeout func for it to run on time
   }, 300); // wait 300ms (the duration of the transition) before changing the card's state and position
-}
+};
 window.Series = Series;
 ////////////////////////////////////////////////////////////
 //Reconstructs a Series array from raw string data - to use, call this onto a new var
@@ -131,7 +131,9 @@ export function modalOpenTasks() {
     document.querySelector("#header").style.paddingRight = "15px";
   }
 
-  setTimeout(function(){document.getElementById("seriesName").focus();}, 100);
+  setTimeout(function () {
+    document.getElementById("seriesName").focus();
+  }, 100);
   //Sets focus to input field on modal load - needs a timeout for some reason
 }
 window.modalOpenTasks = modalOpenTasks;
@@ -403,16 +405,29 @@ const colorSchemes = [
   },
 ];
 
-let currentSchemeIndex = 0;
+let currentSchemeIndex = parseInt(localStorage.getItem("currentSchemeIndex"));
 
-document.querySelector("#colors").addEventListener("click", function () {
-  currentSchemeIndex = (currentSchemeIndex + 1) % colorSchemes.length;
-  const currentScheme = colorSchemes[currentSchemeIndex];
+if (isNaN(currentSchemeIndex)) {
+  currentSchemeIndex = 0;
+}
+
+// Set the initial color scheme on page load
+function setColors(){
+if (currentSchemeIndex !== undefined) {
+  let currentScheme = colorSchemes[currentSchemeIndex];
   document.documentElement.style.setProperty("--header", currentScheme.header);
   document.documentElement.style.setProperty("--main", currentScheme.main);
   document.documentElement.style.setProperty(
     "--highlighted",
     currentScheme.highlighted
   );
+}};
+setColors();
+
+// Update the color scheme on button click
+document.querySelector("#colors").addEventListener("click", function () {
+  currentSchemeIndex = (currentSchemeIndex + 1) % colorSchemes.length;
+  setColors();
+  localStorage.setItem("currentSchemeIndex", currentSchemeIndex);
 });
 //--------------------------------------------------------//
