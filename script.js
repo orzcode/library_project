@@ -1,7 +1,7 @@
 let library = [];
 let libraryDiv = document.querySelector("#library");
 ////////////////////////////////////////////////////
-console.log(library);
+
 ///////////////////
 //FIREBASE
 // import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
@@ -61,10 +61,8 @@ Series.toggle = function (theObj) {
   setTimeout(function () {
     if (theObj.complete === "Ongoing") {
       theObj.complete = "Complete";
-      console.log(theObj.complete);
     } else {
       theObj.complete = "Ongoing";
-      console.log(theObj.complete);
     }
 
     // update the visual text on the card
@@ -76,12 +74,9 @@ Series.toggle = function (theObj) {
     card.style.transform = "scale(1)";
   }, 300); // wait 300ms (the duration of the transition) before changing the card's state and position
   sendLibrary();
-  console.log("After series toggle, native library[] is: " + library);
+  //THIS SETTIMEOUT IS CAUSING THE BUG!!
 }
 window.Series = Series;
-
-
-
 ////////////////////////////////////////////////////////////
 //Reconstructs a Series array from raw string data - to use, call this onto a new var
 function reSeries(unconstructedArray) {
@@ -164,8 +159,6 @@ function sendLibrary() {
   localStorage.setItem("localContent", JSON.stringify(library));
   //set a localStorage item called "localContent", set it as a stringified library[]
   emptyChecker();
-  console.log("SendLibrary function has run");
-  console.log(library);
 }
 function getLibrary() {
   if (localStorage.getItem("localContent") !== null) {
@@ -180,13 +173,7 @@ function getLibrary() {
       library.push(ObjFromArray);
     });
     //runs through each obj in the pulled data and pushes to library[] (cant just push whole thing)
-    console.log("GetLibrary function has run");
-    console.log(library);
-    console.log(data);
-  } else 
-  console.log("GetLibrary function has run");
-  console.log(library);
-  return;
+  } else return;
 }
 //-----------------------------------------------------------------------------//
 //////////////////////////////////////////////////////////////////////////////////
