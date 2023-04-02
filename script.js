@@ -1,7 +1,7 @@
 let library = [];
 let libraryDiv = document.querySelector("#library");
 ////////////////////////////////////////////////////
-
+console.log(library);
 ///////////////////
 //FIREBASE
 // import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
@@ -52,7 +52,7 @@ Series.formSubmission = function () {
   );
 };
 Series.toggle = function (theObj) {
-  var card = event.target.closest(".card");
+  let card = event.target.closest(".card");
 
   // scale down and fade out the card
   card.style.opacity = 0;
@@ -61,29 +61,27 @@ Series.toggle = function (theObj) {
   setTimeout(function () {
     if (theObj.complete === "Ongoing") {
       theObj.complete = "Complete";
+      console.log(theObj.complete);
     } else {
       theObj.complete = "Ongoing";
+      console.log(theObj.complete);
     }
 
     // update the visual text on the card
     card.setAttribute("data-complete", theObj.complete);
     card.querySelector("p p").textContent = theObj.complete;
 
-    // shift the card's position by changing its order
-    // if (theObj.complete === "Complete") {
-    //   card.style.order = 1;
-    // } else {
-    //   card.style.order = 2;
-    // }
-    //Seems unneccessary
-
     // scale up and fade in the card
     card.style.opacity = 1;
     card.style.transform = "scale(1)";
   }, 300); // wait 300ms (the duration of the transition) before changing the card's state and position
   sendLibrary();
-};
+  console.log("After series toggle, native library[] is: " + library);
+}
 window.Series = Series;
+
+
+
 ////////////////////////////////////////////////////////////
 //Reconstructs a Series array from raw string data - to use, call this onto a new var
 function reSeries(unconstructedArray) {
@@ -137,6 +135,9 @@ export function modalOpenTasks() {
     document.querySelector("#header").style.width = "calc(100% + 15px)";
     document.querySelector("#header").style.paddingRight = "15px";
   }
+
+  setTimeout(function(){document.getElementById("seriesName").focus();}, 100);
+  //Sets focus to input field on modal load - needs a timeout for some reason
 }
 window.modalOpenTasks = modalOpenTasks;
 //--this is some wacky shit, and on mobile, it seems to move to the LEFT
@@ -163,6 +164,8 @@ function sendLibrary() {
   localStorage.setItem("localContent", JSON.stringify(library));
   //set a localStorage item called "localContent", set it as a stringified library[]
   emptyChecker();
+  console.log("SendLibrary function has run");
+  console.log(library);
 }
 function getLibrary() {
   if (localStorage.getItem("localContent") !== null) {
@@ -177,7 +180,13 @@ function getLibrary() {
       library.push(ObjFromArray);
     });
     //runs through each obj in the pulled data and pushes to library[] (cant just push whole thing)
-  } else return;
+    console.log("GetLibrary function has run");
+    console.log(library);
+    console.log(data);
+  } else 
+  console.log("GetLibrary function has run");
+  console.log(library);
+  return;
 }
 //-----------------------------------------------------------------------------//
 //////////////////////////////////////////////////////////////////////////////////
@@ -391,24 +400,9 @@ emptyChecker();
 // Define an array of color schemes
 const colorSchemes = [
   {
-    header: "#222c34",
+    header: "#22334B",
     main: "#2e2b2d",
     highlighted: "34, 51, 75",
-  },
-  {
-    header: "#311d1d",
-    main: "#5a4b4a",
-    highlighted: "49, 32, 32",
-  },
-  {
-    header: "#771c11",
-    main: "#342321",
-    highlighted: "119, 28, 17",
-  },
-  {
-    header: "#1c2e34",
-    main: "#3b3936",
-    highlighted: "28, 46, 52",
   },
   {
     header: "#36221f",
@@ -416,9 +410,9 @@ const colorSchemes = [
     highlighted: "54, 34, 31",
   },
   {
-    header: "#752523",
-    main: "#3f3551",
-    highlighted: "117, 37, 35",
+    header: "#771c11",
+    main: "#342321",
+    highlighted: "119, 28, 17",
   },
 ];
 

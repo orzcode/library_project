@@ -6,7 +6,7 @@
   box-sizing: border-box;
   /* outline: 1px solid black; */
 }
-:root{
+:root {
   --header1: #26343b;
   --main1: #353132;
   --highlighted1: 38, 52, 59;
@@ -19,28 +19,28 @@
   --main3: #4f689d;
   --highlighted3: 117, 41, 108;
 
-  --header4: #81A186;
-  --main4: #57737E;
+  --header4: #81a186;
+  --main4: #57737e;
   --highlighted4: 129, 161, 134;
 
-  --header5: #9E847E;
-  --main5: #6F5761;
+  --header5: #9e847e;
+  --main5: #6f5761;
   --highlighted5: 158, 132, 126;
 
-  --header6: #DDD5C5;
-  --main6: #7E899D;
+  --header6: #ddd5c5;
+  --main6: #7e899d;
   --highlighted6: 221, 213, 197;
 
-  --header7: #AD8D87;
-  --main7: #5E526B;
+  --header7: #ad8d87;
+  --main7: #5e526b;
   --highlighted7: 173, 141, 135;
 
-  --header8: #B44B36;
-  --main8: #442E2C;
+  --header8: #b44b36;
+  --main8: #442e2c;
   --highlighted8: 180, 75, 54;
 
-  --header9: #A69C91;
-  --main9: #6D7D68;
+  --header9: #a69c91;
+  --main9: #6d7d68;
   --highlighted9: 166, 156, 145;
 
   --header10: #608696;
@@ -53,13 +53,13 @@
 }
 /*----------------------------------------------------------------------*/
 /*Half opacity and quarter opacity - for cards - leave this root section*/
-:root{
+:root {
   --cardComplete: rgba(var(--highlighted), 0.9);
   --cardOngoing: rgba(var(--highlighted), 0.6);
   /*the idea being that by using black/white and OPACITY,
   it reflects the underlying background color*/
 }
-:root{
+:root {
   --btnPrimary: rgba(var(--highlighted), 0.9);
   --btnSecondary: rgba(var(--highlighted), 0.8);
 }
@@ -73,6 +73,9 @@ html {
   /* FONTSIZE TRICK-- 1 rem = 10 px here, usually 1 rem = 16px */
   caret-color: transparent;
   overflow-x: hidden;
+}
+html, dialog{
+  user-select: none;
 }
 body {
   font-size: 2rem;
@@ -101,7 +104,7 @@ li {
 }
 a {
   text-decoration: none;
-  color:inherit;
+  color: inherit;
 }
 /* ---------------------------------------------------- */
 button {
@@ -127,9 +130,9 @@ button {
   text-transform: uppercase;
   letter-spacing: 0.1rem;
   transition: all 0.1s ease-in-out;
-  z-index: 1;  
+  z-index: 1;
 }
-.btnForm{
+.btnForm {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -166,12 +169,17 @@ button {
   filter: grayscale(1);
   cursor: not-allowed;
 }
-/* ---------------------------------------------------- */     
+/* ---------------------------------------------------- */
 .btn-grad {
-  background-image: linear-gradient(to right, var(--header) 10%, #322e2e 45%, var(--main)  100%);
+  background-image: linear-gradient(
+    to right,
+    var(--header) 10%,
+    #322e2e 45%,
+    var(--main) 100%
+  );
   transition: 0.5s;
   background-size: 200% auto;
-  border-radius: 1.2rem;
+  border-radius: 1rem;
   width: clamp(3rem, 5vw, 5rem);
   height: clamp(3rem, 5vw, 5rem);
   /* margin-left: 2rem;*/
@@ -205,7 +213,7 @@ button {
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
 }
 h1 {
   filter: drop-shadow(1px 1px 1px black);
@@ -253,14 +261,14 @@ h1 {
   z-index: 2;
   margin: 0 auto;
 }
-#joePieSVG{
+#joePieSVG {
   display: flex;
   justify-content: space-around;
   width: 100%;
   gap: 2rem;
   max-width: 70rem;
 }
-#joePie img{
+#joePie img {
   width: 45%;
   max-width: 20rem;
   height: auto;
@@ -279,7 +287,7 @@ h1 {
   background-color: var(--cardOngoing);
   text-shadow: 1px 0px 0px black, -1px 0px 0px black, 0px 1px 0px black,
     0px -1px 0px black;
-    filter: drop-shadow(1px 1px 5px black);
+  filter: drop-shadow(1px 1px 5px black);
   width: calc(34rem + 2vw);
   display: flex;
   text-align: center;
@@ -304,7 +312,7 @@ h1 {
   outline: 1px solid black;
   object-fit: cover;
 }
-.card a img{
+.card a img {
   all: initial;
   /*this is amazing*/
   width: min(calc(2rem + 1vw), 4rem);
@@ -314,14 +322,14 @@ h1 {
   cursor: pointer;
 }
 
-.card p:first-of-type{
+.card p:first-of-type {
   display: flex;
   gap: 3rem;
 }
-.card strong ~ p{
+.card strong ~ p {
   margin-bottom: 1rem;
 }
-.card p:last-of-type{
+.card p:last-of-type {
   display: flex;
   gap: 1.7rem;
 }
@@ -380,16 +388,16 @@ dialog {
   color: whitesmoke;
   border-color: black;
 }
-dialog *:not(input[type="text"]){
+dialog *:not(input[type="text"]) {
   text-shadow: 1px 0px 0px black, -1px 0px 0px black, 0px 1px 0px black,
-  0px -1px 0px black;
+    0px -1px 0px black;
 }
 /* dialog * {
   outline: 1px solid pink;
 } */
 
 dialog::backdrop {
-  background: rgba(0, 0, 0, 0.75);  
+  background: rgba(0, 0, 0, 0.75);
 }
 /* Note: this will exhibit strange position behavior unless you force reload */
 dialog[open] {
@@ -411,7 +419,7 @@ dialog svg:nth-child(1) {
   top: 8px;
   right: 8px;
   padding: 3px;
-  height:fit-content;
+  height: fit-content;
   pointer-events: all;
   z-index: 10;
   width: clamp(20px, 9%, 80px);
@@ -456,7 +464,7 @@ dialog img:nth-child(2) {
   gap: 1rem;
   filter: drop-shadow(1px 1px 1px black);
 }
-#titleAndLink img{
+#titleAndLink img {
   width: min(calc(2rem + 0.8vw), 4rem);
   height: 100%;
 }
@@ -465,10 +473,9 @@ dialog img:nth-child(2) {
 }
 /*--Fixes weird whitespace with links around images--*/
 
-
 dialog input[type="text"] {
   border: 2px solid black;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   width: 80%;
   max-width: 50rem;
   text-align: center;
@@ -505,14 +512,14 @@ dialog button {
   /* visibility: hidden; */
   font-size: min(calc(2rem + 2vw), 5rem) !important;
 }
-#radioButtons{
+#radioButtons {
   display: flex;
   flex-direction: row;
   width: clamp(210px, 30%, 300px);
   justify-content: space-between;
   align-items: center;
 }
-#filmingComplete{
+#filmingComplete {
   display: flex;
   flex-direction: column;
   gap: 1rem;
