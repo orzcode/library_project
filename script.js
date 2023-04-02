@@ -72,9 +72,9 @@ Series.toggle = function (theObj) {
     // scale up and fade in the card
     card.style.opacity = 1;
     card.style.transform = "scale(1)";
+    sendLibrary();
+    //sendLib must be IN the timeout func for it to run on time
   }, 300); // wait 300ms (the duration of the transition) before changing the card's state and position
-  sendLibrary();
-  //THIS SETTIMEOUT IS CAUSING THE BUG!!
 }
 window.Series = Series;
 ////////////////////////////////////////////////////////////
