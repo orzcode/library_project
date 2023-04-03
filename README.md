@@ -16,7 +16,8 @@ All in all I am quite happy with the result even if it is basic, and learned a l
 
 This is a 'final' version bar support for Firebase which is to be implemented later - currently, the user's library is saved to localStorage.
 
-~~~
-TODO: 
+
+**TODO**: 
+
 Add instructional modal
 Add firebase/cloud support
