@@ -55,7 +55,7 @@
 /*Half opacity and quarter opacity - for cards - leave this root section*/
 :root {
   --cardComplete: rgba(var(--highlighted), 0.9);
-  --cardOngoing: rgba(var(--highlighted), 0.6);
+  --cardOngoing: rgba(var(--highlighted), 0.5);
   /*the idea being that by using black/white and OPACITY,
   it reflects the underlying background color*/
 }
@@ -179,12 +179,14 @@ button {
     var(--main) 100%
   );
   transition: 0.5s;
-  background-size: 200% auto;
+  background-size: 250% auto;
   border-radius: 1rem;
   width: clamp(3rem, 5vw, 5rem);
   height: clamp(3rem, 5vw, 5rem);
-  margin-right: -1rem;
   display: block;
+
+  position: absolute;
+  right: 2.5%;
 }
 .btn-grad:hover {
   background-position: right center; /* change the direction of the change here */
@@ -213,11 +215,11 @@ button {
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
 }
 h1 {
   filter: drop-shadow(1px 1px 1px black);
   font-size: clamp(3.3rem, 5vw, 4.5rem);
+  /* flex-basis: 100vw; */
 }
 
 #header2 {
