@@ -1,5 +1,7 @@
 # library_project
-~~~
+
+
+
 This started out as a book-library project to solidify and exercise usage of Javascript prototypes. However - as someone who watches more TV than reads books - I soon pivoted to a TV series watchlist which proved more motivating. The project then ballooned in sincerity and took much longer than expected as things were added and the frontend was endlessly tweaked, including using an API to retrieve TV show details.
 
 As it stands, the process involves searching a large TV database for any given show, and noting whether the series is "Complete" or not (e.g filming has finished or not). This must be ascertained manually, by user research, due to the nature of it. Hence, when 'Query'ing the show, you are given a link to the show on the TV database to investigate this (in case you don't already know). 
@@ -17,7 +19,10 @@ All in all I am quite happy with the result even if it is basic, and learned a l
 This is a 'final' version bar support for Firebase which is to be implemented later - currently, the user's library is saved to localStorage.
 
 
+~~
+
 **TODO**: 
 
-Add instructional modal
-Add firebase/cloud support
+*Add instructional modal
+
+*Add firebase/cloud support
