@@ -4,7 +4,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* outline: 1px solid black; */
+  -webkit-tap-highlight-color: transparent;
+  /*apparently, shouldn't use this*/
 }
 :root {
   --header1: #26343b;
