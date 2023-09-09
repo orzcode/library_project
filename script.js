@@ -37,13 +37,16 @@ let libraryDiv = document.querySelector("#library");
 
 ////////////////////
 //Series constructor function//
-export function Series(title, complete, link, image) {
+export class Series {
+  constructor(title, complete, link, image){
   this.title = title;
   this.complete = complete;
   this.link = link;
   this.image = image;
+  }
 }
-Series.formSubmission = function () {
+
+ function formSubmission() {
   return new Series(
     document.querySelector("dialog h2").innerHTML,
     document.querySelector('input[name="filmingComplete"]:checked').value,
@@ -51,7 +54,8 @@ Series.formSubmission = function () {
     document.querySelector("#formImg").src
   );
 };
-Series.toggle = function (theObj) {
+
+function toggle(theObj) {
   let card = event.target.closest(".card");
 
   // scale down and fade out the card
@@ -90,7 +94,7 @@ function reSeries(unconstructedArray) {
 ///////////////////
 //clean this up?
 export function submissionTasks() {
-  const obj = Series.formSubmission();
+  const obj = formSubmission();
   const card = createCard(obj);
   card.setAttribute("data-complete", obj.complete);
   //IF 'complete' is true, it highlights the card
@@ -291,7 +295,7 @@ function createCard(obj) {
   //Toggles the 'Ongoing/Complete' status (see main function)
   //as you can see, this sends the SPECIFIC card to the function - brilliant.
   completeToggle.addEventListener("click", function () {
-    Series.toggle(obj);
+    toggle(obj);
   });
 
   card.appendChild(completeP);
