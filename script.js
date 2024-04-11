@@ -4,37 +4,88 @@ let libraryDiv = document.querySelector("#library");
 
 ///////////////////
 //FIREBASE
-// import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
-// import { getAuth } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
-// import {
-//   getDatabase,
-//   ref,
-//   onValue,
-//   child,
-//   get,
-//   push,
-//   update,
-//   set,
-//   increment,
-//   runTransaction,
-// } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCgWOsD40-y422erIMNultdmSBmcP5c_VY",
-//   authDomain: "tv-series-library.firebaseapp.com",
-//   databaseURL: "https://tv-series-library-default-rtdb.firebaseio.com",
-//   projectId: "tv-series-library",
-//   storageBucket: "tv-series-library.appspot.com",
-//   messagingSenderId: "371898195484",
-//   appId: "1:371898195484:web:6d181e6ccf75b8410ec9d9",
-// };
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, getDocs, addDoc } from "firebase/firestore";
+import { getAuth } from 'firebase/auth';
+import {
+  getDatabase,
+  ref,
+  onValue,
+  child,
+  get,
+  push,
+  update,
+  set,
+  increment,
+  runTransaction,
+} from 'firebase/database';
+const firebaseConfig = {
+  apiKey: "AIzaSyCgWOsD40-y422erIMNultdmSBmcP5c_VY",
+  authDomain: "tv-series-library.firebaseapp.com",
+  databaseURL: "https://tv-series-library-default-rtdb.firebaseio.com",
+  projectId: "tv-series-library",
+  storageBucket: "tv-series-library.appspot.com",
+  messagingSenderId: "371898195484",
+  appId: "1:371898195484:web:6d181e6ccf75b8410ec9d9",
+};
 
-// const app = initializeApp(firebaseConfig);
-// const auth = getAuth(app);
-// const database = getDatabase(app);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const database = getDatabase(app);
+const db = getFirestore(app);
 
+var firebase = require('firebase');
+var firebaseui = require('firebaseui');
+//
+//^^is this right??
+
+
+ var ui = new firebaseui.auth.AuthUI(firebase.auth());
+ui.start('#firebaseui-auth-container', {
+  signInOptions: [
+    {
+      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      signInMethod: firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD,
+      requireDisplayName: false,
+      forceSameDevice: false
+    }
+  ],
+  // Other config options...
+  
+});
+// Is there an email link sign-in?
+if (ui.isPendingRedirect()) {
+  ui.start('#firebaseui-auth-container', uiConfig);
+}
+
+var uiConfig = {
+  callbacks: {
+    signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+      // User successfully signed in.
+      // Return type determines whether we continue the redirect automatically
+      // or whether we leave that to developer to handle.
+      return true;
+    },
+    uiShown: function() {
+      // The widget is rendered.
+      // Hide the loader.
+      document.getElementById('loader').style.display = 'none';
+    }
+  },
+  // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+  signInFlow: 'popup',
+  signInSuccessUrl: '<url-to-redirect-to-on-success>',
+  signInOptions: [
+    // Leave the lines as is for the providers you want to offer your users.
+    firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    firebase.auth.PhoneAuthProvider.PROVIDER_ID
+  ]
+};
+
+///////////////////
 //FIREBASE
 ///////////////////
-
+//https://firebase.google.com/docs/auth/web/firebaseui?authuser=0&hl=en
 ////////////////////
 //Series constructor function//
 export class Series {

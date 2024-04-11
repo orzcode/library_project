@@ -1,7 +1,7 @@
 {
   "name": "library_project",
   "version": "1.0.0",
-  "description": "Library project for TOP",
+  "description": "TV Series Watchlist",
   "main": "script.js",
   "type": "module",
   "scripts": {
@@ -54,6 +54,8 @@
     "fastq": "^1.15.0",
     "file-entry-cache": "^6.0.1",
     "find-up": "^5.0.0",
+    "firebase": "^10.6.0",
+    "firebaseui": "^6.1.0",
     "flat-cache": "^3.0.4",
     "flatted": "^3.2.7",
     "fs.realpath": "^1.0.0",
