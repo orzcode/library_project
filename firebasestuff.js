@@ -63,6 +63,9 @@ const uiConfig = {
   autoUpgradeAnonymousUsers: true,
 };
 
+// Initialize the FirebaseUI Widget using Firebase.
+const ui = new firebaseui.auth.AuthUI(auth);
+
 // Is there an email link sign-in?
 if (ui.isPendingRedirect()) {
   ui.start('#firebaseui-auth-container', uiConfig);
@@ -77,13 +80,11 @@ if (
     "#firebaseui-auth-container",
     uiConfig
   );
-} else {
-  // Initialize the FirebaseUI Widget using Firebase.
-  const ui = new firebaseui.auth.AuthUI(auth);
+} else {  
   // The start method will wait until the DOM is loaded.
   ui.start("#firebaseui-auth-container", uiConfig);
 }
 
-export { auth, database, db, uiConfig, uiShown };
+export { auth, database, db, uiConfig };
 
 // https://github.com/firebase/firebaseui-web
