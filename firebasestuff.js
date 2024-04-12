@@ -59,8 +59,14 @@ const uiConfig = {
   },
   // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
   signInFlow: "popup",
-  signInSuccessUrl: "<url-to-redirect-to-on-success>",
+  signInSuccessUrl: '',
+  autoUpgradeAnonymousUsers: true,
 };
+
+// Is there an email link sign-in?
+if (ui.isPendingRedirect()) {
+  ui.start('#firebaseui-auth-container', uiConfig);
+}
 
 // Check for pending redirect
 if (
@@ -78,4 +84,6 @@ if (
   ui.start("#firebaseui-auth-container", uiConfig);
 }
 
-export { auth, database, db, uiConfig };
+export { auth, database, db, uiConfig, uiShown };
+
+// https://github.com/firebase/firebaseui-web
