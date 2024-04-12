@@ -26,12 +26,24 @@ const db = getFirestore(app);
 const uiConfig = {
   signInOptions: [
     {
-      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      // Google provider must be enabled in Firebase Console to support one-tap
+      // sign-up.
+      provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      // Required to enable ID token credentials for this provider.
+      // This can be obtained from the Credentials page of the Google APIs
+      // console. Use the same OAuth client ID used for the Google provider
+      // configured with GCIP or Firebase Auth.
+      clientId: "371898195484-h9u5t427qjv10ei0bpopseu1qhlkrg15.apps.googleusercontent.com"
+	},
+	{
+	  provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
       signInMethod: firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD,
       requireDisplayName: false,
       forceSameDevice: false,
     },
   ],
+  // Required to enable one-tap sign-up credential helper.
+  credentialHelper: firebaseui.auth.CredentialHelper.GOOGLE_YOLO,
   callbacks: {
     signInSuccessWithAuthResult: function (authResult, redirectUrl) {
       // User successfully signed in.
@@ -51,8 +63,14 @@ const uiConfig = {
 };
 
 // Check for pending redirect
-if (firebaseui.auth.AuthUI.getInstance() && firebaseui.auth.AuthUI.getInstance().isPendingRedirect()) {
-  firebaseui.auth.AuthUI.getInstance().start('#firebaseui-auth-container', uiConfig);
+if (
+  firebaseui.auth.AuthUI.getInstance() &&
+  firebaseui.auth.AuthUI.getInstance().isPendingRedirect()
+) {
+  firebaseui.auth.AuthUI.getInstance().start(
+    "#firebaseui-auth-container",
+    uiConfig
+  );
 } else {
   // Initialize the FirebaseUI Widget using Firebase.
   const ui = new firebaseui.auth.AuthUI(auth);
