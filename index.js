@@ -4,21 +4,16 @@ let libraryDiv = document.querySelector("#library");
 
 ///////////////////
 //FIREBASE
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, addDoc } from "firebase/firestore";
-import { getAuth } from 'firebase/auth';
-import {
-  getDatabase,
-  ref,
-  onValue,
-  child,
-  get,
-  push,
-  update,
-  set,
-  increment,
-  runTransaction,
-} from 'firebase/database';
+///////////////////
+import firebase from "firebase/compat/app";
+import * as firebaseui from "firebaseui";
+import "firebaseui/dist/firebaseui.css";
+
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getDatabase } from "firebase/database";
+import { getFirestore } from "firebase/firestore";
+
 const firebaseConfig = {
   apiKey: "AIzaSyCgWOsD40-y422erIMNultdmSBmcP5c_VY",
   authDomain: "tv-series-library.firebaseapp.com",
@@ -29,82 +24,74 @@ const firebaseConfig = {
   appId: "1:371898195484:web:6d181e6ccf75b8410ec9d9",
 };
 
+// Initialize Firebase app
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
 const db = getFirestore(app);
 
-var firebase = require('firebase');
-var firebaseui = require('firebaseui');
-//
-//^^is this right??
-
-
- var ui = new firebaseui.auth.AuthUI(firebase.auth());
-ui.start('#firebaseui-auth-container', {
+const uiConfig = {
   signInOptions: [
     {
       provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
       signInMethod: firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD,
       requireDisplayName: false,
-      forceSameDevice: false
-    }
+      forceSameDevice: false,
+    },
   ],
-  // Other config options...
-  
-});
-// Is there an email link sign-in?
-if (ui.isPendingRedirect()) {
-  ui.start('#firebaseui-auth-container', uiConfig);
-}
-
-var uiConfig = {
   callbacks: {
-    signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+    signInSuccessWithAuthResult: function (authResult, redirectUrl) {
       // User successfully signed in.
       // Return type determines whether we continue the redirect automatically
       // or whether we leave that to developer to handle.
       return true;
     },
-    uiShown: function() {
+    uiShown: function () {
       // The widget is rendered.
       // Hide the loader.
-      document.getElementById('loader').style.display = 'none';
-    }
+      document.getElementById("loader").style.display = "none";
+    },
   },
   // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-  signInFlow: 'popup',
-  signInSuccessUrl: '<url-to-redirect-to-on-success>',
-  signInOptions: [
-    // Leave the lines as is for the providers you want to offer your users.
-    firebase.auth.EmailAuthProvider.PROVIDER_ID,
-    firebase.auth.PhoneAuthProvider.PROVIDER_ID
-  ]
+  signInFlow: "popup",
+  signInSuccessUrl: "<url-to-redirect-to-on-success>",
 };
 
-///////////////////
+// Check for pending redirect
+if (firebaseui.auth.AuthUI.getInstance() && firebaseui.auth.AuthUI.getInstance().isPendingRedirect()) {
+  firebaseui.auth.AuthUI.getInstance().start('#firebaseui-auth-container', uiConfig);
+} else {
+  // Initialize the FirebaseUI Widget using Firebase.
+  const ui = new firebaseui.auth.AuthUI(auth);
+  // The start method will wait until the DOM is loaded.
+  ui.start("#firebaseui-auth-container", uiConfig);
+}
 //FIREBASE
 ///////////////////
 //https://firebase.google.com/docs/auth/web/firebaseui?authuser=0&hl=en
 ////////////////////
+
+
+
+
 //Series constructor function//
 export class Series {
-  constructor(title, complete, link, image){
-  this.title = title;
-  this.complete = complete;
-  this.link = link;
-  this.image = image;
+  constructor(title, complete, link, image) {
+    this.title = title;
+    this.complete = complete;
+    this.link = link;
+    this.image = image;
   }
 }
 
- function formSubmission() {
+function formSubmission() {
   return new Series(
     document.querySelector("dialog h2").innerHTML,
     document.querySelector('input[name="filmingComplete"]:checked').value,
     document.querySelector("dialog a").href,
     document.querySelector("#formImg").src
   );
-};
+}
 
 function toggle(theObj) {
   let card = event.target.closest(".card");
@@ -130,7 +117,7 @@ function toggle(theObj) {
     sendLibrary();
     //sendLib must be IN the timeout func for it to run on time
   }, 300); // wait 300ms (the duration of the transition) before changing the card's state and position
-};
+}
 window.Series = Series;
 ////////////////////////////////////////////////////////////
 //Reconstructs a Series array from raw string data - to use, call this onto a new var
@@ -467,16 +454,20 @@ if (isNaN(currentSchemeIndex)) {
 }
 
 // Set the initial color scheme on page load
-function setColors(){
-if (currentSchemeIndex !== undefined) {
-  let currentScheme = colorSchemes[currentSchemeIndex];
-  document.documentElement.style.setProperty("--header", currentScheme.header);
-  document.documentElement.style.setProperty("--main", currentScheme.main);
-  document.documentElement.style.setProperty(
-    "--highlighted",
-    currentScheme.highlighted
-  );
-}};
+function setColors() {
+  if (currentSchemeIndex !== undefined) {
+    let currentScheme = colorSchemes[currentSchemeIndex];
+    document.documentElement.style.setProperty(
+      "--header",
+      currentScheme.header
+    );
+    document.documentElement.style.setProperty("--main", currentScheme.main);
+    document.documentElement.style.setProperty(
+      "--highlighted",
+      currentScheme.highlighted
+    );
+  }
+}
 setColors();
 
 // Update the color scheme on button click
