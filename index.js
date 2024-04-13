@@ -4,7 +4,6 @@ let libraryDiv = document.querySelector("#library");
 import { auth, database, db, uiConfig } from "./firebasestuff";
 /////////////////////////////////////////////////////////
 
-
 //Series constructor function//
 export class Series {
   constructor(title, complete, link, image) {

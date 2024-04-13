@@ -29,6 +29,7 @@ const uiConfig = {
       // Google provider must be enabled in Firebase Console to support one-tap
       // sign-up.
       provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      credentialHelper: firebaseui.auth.CredentialHelper.GOOGLE_YOLO,
       // Required to enable ID token credentials for this provider.
       // This can be obtained from the Credentials page of the Google APIs
       // console. Use the same OAuth client ID used for the Google provider
@@ -49,18 +50,20 @@ const uiConfig = {
       // User successfully signed in.
       // Return type determines whether we continue the redirect automatically
       // or whether we leave that to developer to handle.
+      console.log("Firebase 'signInSuccessWithAuthResult' callback")
       return true;
     },
     uiShown: function () {
       // The widget is rendered.
       // Hide the loader.
+      console.log("Firebase 'uiShown' callback")
       document.getElementById("loader").style.display = "none";
     },
   },
-  // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-  signInFlow: "popup",
-  signInSuccessUrl: '',
-  autoUpgradeAnonymousUsers: true,
+  // Default is redirect; popup may give a CORS error
+  signInFlow: "redirect",
+  //signInSuccessUrl: '#',
+  autoUpgradeAnonymousUsers: false,
 };
 
 // Initialize the FirebaseUI Widget using Firebase.
