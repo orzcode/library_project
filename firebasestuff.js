@@ -4,8 +4,8 @@ import "firebaseui/dist/firebaseui.css";
 
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getDatabase } from "firebase/database";
-import { getFirestore } from "firebase/firestore";
+//import { getDatabase } from "firebase/database";
+import { initializeFirestore, getFirestore, collection, doc, getDoc, setDoc, addDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCgWOsD40-y422erIMNultdmSBmcP5c_VY",
@@ -20,8 +20,9 @@ const firebaseConfig = {
 // Initialize Firebase app
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const database = getDatabase(app);
+//const database = getDatabase(app);
 const db = getFirestore(app);
+//const db = initializeFirestore(app, { experimentalAutoDetectLongPolling: true });
 
 const uiConfig = {
   signInOptions: [
@@ -88,6 +89,40 @@ if (
   ui.start("#firebaseui-auth-container", uiConfig);
 }
 
-export { auth, database, db, uiConfig };
+
+
+////////////////////////////////////////////////////////
+
+// Add a new document in collection "cities"
+// const setFireStore = await setDoc(doc(db, "cities", "LA"), {
+//   name: "Los Angeles",
+//   state: "CA",
+//   country: "USA"
+// });
+
+// //or maybe
+
+// const addFireSTore = await addDoc(collection(db, "cities"), {
+//   name: "Tokyo",
+//   country: "Japan"
+// });
+// console.log("Document written with ID: ", docRef.id);
+
+////////////////////////////////////////////////////////
+
+// const docRef = doc(db, "cities", "SF");
+// const docSnap = await getDoc(docRef);
+
+// if (docSnap.exists()) {
+//   console.log("Document data:", docSnap.data());
+// } else {
+//   // docSnap.data() will be undefined in this case
+//   console.log("No such document!");
+// }
+
+////////////////////////////////////////////////////////
+
+
+export { auth, uiConfig };
 
 // https://github.com/firebase/firebaseui-web
