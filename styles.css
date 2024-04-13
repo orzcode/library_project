@@ -76,7 +76,7 @@ html {
   overflow-x: hidden;
 }
 html,
-dialog {
+#formDialog {
   user-select: none;
 }
 body {
@@ -365,8 +365,8 @@ em {
   cursor: pointer;
 }
 /*------------------------------------------*/
-/*--Modal Dialog--*/
-dialog {
+/*--Modal #formDialog--*/
+#formDialog {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -390,26 +390,28 @@ dialog {
   background-color: var(--main);
   color: whitesmoke;
   border-color: black;
+
+  margin: 0 !important;
 }
-dialog *:not(input[type="text"]) {
+#formDialog *:not(input[type="text"]) {
   text-shadow: 1px 0px 0px black, -1px 0px 0px black, 0px 1px 0px black,
     0px -1px 0px black;
 }
-/* dialog * {
+/* #formDialog * {
   outline: 1px solid pink;
 } */
 
-dialog::backdrop {
+#formDialog::backdrop {
   background: rgba(0, 0, 0, 0.75);
 }
 /* Note: this will exhibit strange position behavior unless you force reload */
-dialog[open] {
+#formDialog[open] {
   transform: translate(-50%, -50%) scale(1);
   opacity: 1;
   pointer-events: auto;
   visibility: visible;
 }
-dialog:not([open]) {
+#formDialog:not([open]) {
   transform: translate(-50%, -50%) scale(0);
   opacity: 0;
   pointer-events: none;
@@ -417,7 +419,7 @@ dialog:not([open]) {
 }
 /*----------------------------*/
 /*-- Close icon --*/
-dialog svg:nth-child(1) {
+#formDialog svg:nth-child(1) {
   position: absolute;
   top: 8px;
   right: 8px;
@@ -429,14 +431,14 @@ dialog svg:nth-child(1) {
   filter: drop-shadow(1px 1px 1px black);
   fill: whitesmoke;
 }
-dialog svg:nth-child(1):hover {
+#formDialog svg:nth-child(1):hover {
   /* background-color: rgba(255, 0, 0, 0.8); */
   border-radius: 12px;
   padding: 3px;
   fill: firebrick;
   filter: drop-shadow(2px 2px 2px black);
 }
-dialog svg:nth-child(1):active {
+#formDialog svg:nth-child(1):active {
   transform: translate3d(1px, 1px, 0);
   /* background-color: rgba(255, 0, 0, 0.8); */
   border-radius: 12px;
@@ -444,7 +446,7 @@ dialog svg:nth-child(1):active {
   filter: drop-shadow(2px 2px 2px black);
 }
 /*-- Close icon --*/
-dialog img:nth-child(2) {
+#formDialog img:nth-child(2) {
   width: 80%;
   max-width: 42rem;
   min-height: 20rem;
@@ -476,7 +478,7 @@ dialog img:nth-child(2) {
 }
 /*--Fixes weird whitespace with links around images--*/
 
-dialog input[type="text"] {
+#formDialog input[type="text"] {
   border: 2px solid black;
   border-radius: 0.5rem;
   width: 80%;
@@ -484,7 +486,7 @@ dialog input[type="text"] {
   text-align: center;
   font-size: min(calc(2rem + 0.8vw), 4rem);
 }
-dialog input[type="radio"] {
+#formDialog input[type="radio"] {
   height: min(calc(2rem + 0.8vw), 4rem);
   width: min(calc(2rem + 0.8vw), 4rem);
   align-self: center;
@@ -494,7 +496,7 @@ dialog input[type="radio"] {
 label {
   height: 100%;
 }
-dialog form {
+#formDialog form {
   min-width: 80%;
   max-width: 50rem;
   display: flex;
@@ -502,7 +504,7 @@ dialog form {
   gap: min(4rem, 4vw);
   padding-top: 2rem;
 }
-dialog button {
+#formDialog button {
   padding: 0 1rem;
 }
 
@@ -534,20 +536,20 @@ form > div {
   justify-content: center;
   align-items: center;
 }
-/* font sizes for dialog (easier to group like this) */
-dialog h2 {
+/* font sizes for #formDialog (easier to group like this) */
+#formDialog h2 {
   /* font-size: calc(4rem + 1vw); */
   font-size: min(calc(3rem + 0.5vw), 6rem);
 }
-dialog form {
+#formDialog form {
   /* font-size: calc(2.5rem + 0.8vw); */
   font-size: min(calc(2rem + 0.5vw), 4rem);
 }
-dialog a {
+#formDialog a {
   /* font-size: calc(2.5rem + 1vw); */
   font-size: min(calc(1.5rem), 4rem);
 }
-dialog button {
+#formDialog button {
   /* font-size: calc(2rem + 0.8vw); */
   font-size: min(calc(2rem + 0.5vw), 4rem);
 }

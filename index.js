@@ -17,9 +17,9 @@ export class Series {
 
 function formSubmission() {
   return new Series(
-    document.querySelector("dialog h2").innerHTML,
+    document.querySelector("#formDialog h2").innerHTML,
     document.querySelector('input[name="filmingComplete"]:checked').value,
-    document.querySelector("dialog a").href,
+    document.querySelector("#formDialog a").href,
     document.querySelector("#formImg").src
   );
 }
@@ -80,11 +80,11 @@ window.submissionTasks = submissionTasks;
 export function modalOpenTasks() {
   scrollTo(0, 0);
   document.querySelector("form").reset();
-  document.querySelector("dialog").showModal();
+  document.querySelector("#formDialog").showModal();
   document.querySelector("#formImg").src = "cloudNew.svg";
 
-  document.querySelector("dialog h2").innerHTML = "Add a series";
-  document.querySelector("dialog a").style.pointerEvents = "none";
+  document.querySelector("#formDialog h2").innerHTML = "Add a series";
+  document.querySelector("#formDialog a").style.pointerEvents = "none";
 
   document.querySelector("#linkImg").style.display = "none";
 
@@ -124,7 +124,7 @@ export function closeModal() {
     document.querySelector("#header").style.paddingRight = "";
     document.querySelector("#library").style.paddingLeft = "";
   }
-  document.querySelector("dialog").close();
+  document.querySelector("#formDialog").close();
 }
 window.closeModal = closeModal;
 /////////////////////////////////////////////////////////////////////////////////
@@ -160,7 +160,7 @@ renderCards(library);
 //This function runs when you click 'Query'
 /////////////////////
 export function queryData() {
-  document.querySelector("dialog h2").style.visibility = "hidden";
+  document.querySelector("#formDialog h2").style.visibility = "hidden";
   document.querySelector("#linkImg").style.display = "none";
 
   document.querySelector("#filmingComplete").style.opacity = "0.3";
@@ -181,13 +181,13 @@ export function queryData() {
       if (data)
         console.log("API Fetch complete: " + [data.name, data.url, data.image]);
 
-      document.querySelector("dialog h2").innerHTML = data.name;
-      document.querySelector("dialog h2").style.visibility = "visible";
+      document.querySelector("#formDialog h2").innerHTML = data.name;
+      document.querySelector("#formDialog h2").style.visibility = "visible";
       document.querySelector("#title").href = data.url;
 
       document.querySelector("#link").href = data.url;
       document.querySelector("#linkImg").style.display = "block";
-      document.querySelector("dialog a").style.pointerEvents = "auto";
+      document.querySelector("#formDialog a").style.pointerEvents = "auto";
 
       document.querySelector("#filmingComplete").style.opacity = "1";
       document.querySelector("#no").disabled = false;
@@ -201,8 +201,8 @@ export function queryData() {
     .catch((error) => {
       console.error(error);
 
-      document.querySelector("dialog h2").style.visibility = "visible";
-      document.querySelector("dialog h2").innerHTML = `${error.message}`;
+      document.querySelector("#formDialog h2").style.visibility = "visible";
+      document.querySelector("#formDialog h2").innerHTML = `${error.message}`;
 
       document.querySelector("#linkImg").style.display = "none";
 
