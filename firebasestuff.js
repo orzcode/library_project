@@ -63,8 +63,12 @@ const uiConfig = {
   },
   // Default is redirect; popup may give a CORS error
   signInFlow: "redirect",
-  //signInSuccessUrl: '#',
+  signInSuccessUrl: '/',
   autoUpgradeAnonymousUsers: false,
+    // Terms of service url.
+    // tosUrl: '/',
+    // // Privacy policy url.
+    // privacyPolicyUrl: '/',
 };
 
 // Initialize the FirebaseUI Widget using Firebase.
