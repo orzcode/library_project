@@ -2,5 +2,5 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-	base: "/library_project/"
+	base: "/"
   })
