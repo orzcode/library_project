@@ -6,6 +6,7 @@
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
   /*apparently, shouldn't use this*/
+  outline: 1px solid red
 }
 :root {
   --header1: #26343b;

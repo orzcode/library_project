@@ -1,7 +1,7 @@
 let library = [];
 let libraryDiv = document.querySelector("#library");
 /////////////////////////////////////////////////////////
-import { auth, uiConfig } from "./firebasestuff";
+//import { auth, uiConfig } from "./firebasestuff";
 /////////////////////////////////////////////////////////
 
 //Series constructor function//
