@@ -3,7 +3,7 @@ import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
 
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 //import { getDatabase } from "firebase/database";
 import { initializeFirestore, getFirestore, collection, doc, getDoc, setDoc, addDoc } from "firebase/firestore";
 
@@ -58,17 +58,17 @@ const uiConfig = {
       // The widget is rendered.
       // Hide the loader.
       console.log("Firebase 'uiShown' callback")
-      document.getElementById("loader").style.display = "none";
+      //document.getElementById("loader").style.display = "none";
     },
   },
   // Default is redirect; popup may give a CORS error
   signInFlow: "redirect",
-  signInSuccessUrl: '/',
+  signInSuccessUrl: '',
   autoUpgradeAnonymousUsers: false,
     // Terms of service url.
-    // tosUrl: '/',
+     tosUrl: '/',
     // // Privacy policy url.
-    // privacyPolicyUrl: '/',
+     privacyPolicyUrl: '/',
 };
 
 // Initialize the FirebaseUI Widget using Firebase.
@@ -93,6 +93,17 @@ if (
   ui.start("#firebaseui-auth-container", uiConfig);
 }
 
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/auth.user
+    //const uid = user.uid;
+    return true
+  } else {
+    // User is signed out
+    return false
+  }
+});
 
 
 ////////////////////////////////////////////////////////
