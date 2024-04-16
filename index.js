@@ -1,13 +1,21 @@
 let library = [];
-let libraryDiv = document.querySelector("#library");
+const libraryDiv = document.querySelector("#library");
+const core = document.querySelector("#coreContainer");
 /////////////////////////////////////////////////////////
 //import { auth, uiConfig } from "./firebasestuff";
 
 import joePieHtml from './joePieHtml.js';
 import dialogHtml from './dialogHtml.js'
+import libraryHtml from './libraryHtml.js'
+import authHtml from './authHtml.js'
+import loaderHtml from './loaderHtml.js'
+
 document.querySelector('#formDialog').innerHTML = dialogHtml;
 /////////////////////////////////////////////////////////
+core.innerHTML = loaderHtml
 
+
+/////////////////////////////////////////////////////////
 //Series constructor function//
 export class Series {
   constructor(title, complete, link, image) {
@@ -357,8 +365,8 @@ async function getDataFromTVMaze(searchTerm) {
 //Checks if library is empty, displays default image if so//
 function emptyChecker() {
   if (library.length === 0) {
-    //document.querySelector("div#library").innerHTML = joePieHtml;
-    document.querySelector("#joePie").style.display = "flex";
+    document.querySelector("div#library").innerHTML = joePieHtml;
+    //document.querySelector("#joePie").style.display = "flex";
   } else document.querySelector("#joePie").style.display = "none";
 }
 emptyChecker();
