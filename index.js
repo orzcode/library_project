@@ -2,6 +2,10 @@ let library = [];
 let libraryDiv = document.querySelector("#library");
 /////////////////////////////////////////////////////////
 //import { auth, uiConfig } from "./firebasestuff";
+
+import joePieHtml from './joePieHtml.js';
+import dialogHtml from './dialogHtml.js'
+document.querySelector('#formDialog').innerHTML = dialogHtml;
 /////////////////////////////////////////////////////////
 
 //Series constructor function//
@@ -353,6 +357,7 @@ async function getDataFromTVMaze(searchTerm) {
 //Checks if library is empty, displays default image if so//
 function emptyChecker() {
   if (library.length === 0) {
+    //document.querySelector("div#library").innerHTML = joePieHtml;
     document.querySelector("#joePie").style.display = "flex";
   } else document.querySelector("#joePie").style.display = "none";
 }
