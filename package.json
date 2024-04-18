@@ -61,6 +61,7 @@
     "file-entry-cache": "^6.0.1",
     "find-up": "^5.0.0",
     "firebase": "^10.11.0",
+    "firebase-tools": "^13.7.3",
     "firebaseui": "^6.1.0",
     "flat-cache": "^3.0.4",
     "flatted": "^3.2.7",

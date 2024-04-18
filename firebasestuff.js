@@ -1,11 +1,14 @@
 import firebase from "firebase/compat/app";
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
 
 import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-//import { getDatabase } from "firebase/database";
 import { initializeFirestore, getFirestore, collection, doc, getDoc, setDoc, addDoc } from "firebase/firestore";
+
+//import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCgWOsD40-y422erIMNultdmSBmcP5c_VY",
@@ -18,11 +21,18 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase app
+// modular - newer
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-//const database = getDatabase(app);
 const db = getFirestore(app);
+
+//const database = getDatabase(app); <-- realtime db, not firestore
 //const db = initializeFirestore(app, { experimentalAutoDetectLongPolling: true });
+
+//compat - older
+// const app = firebase.initializeApp(firebaseConfig);
+// const auth = firebase.auth(app);
+// const db = firebase.firestore(app);
 
 const uiConfig = {
   signInOptions: [
@@ -30,7 +40,6 @@ const uiConfig = {
       // Google provider must be enabled in Firebase Console to support one-tap
       // sign-up.
       provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      credentialHelper: firebaseui.auth.CredentialHelper.GOOGLE_YOLO,
       // Required to enable ID token credentials for this provider.
       // This can be obtained from the Credentials page of the Google APIs
       // console. Use the same OAuth client ID used for the Google provider
@@ -45,25 +54,35 @@ const uiConfig = {
     },
   ],
   // Required to enable one-tap sign-up credential helper.
-  credentialHelper: firebaseui.auth.CredentialHelper.GOOGLE_YOLO,
+  //credentialHelper: firebaseui.auth.CredentialHelper.GOOGLE_YOLO,
   callbacks: {
     signInSuccessWithAuthResult: function (authResult, redirectUrl) {
       // User successfully signed in.
       // Return type determines whether we continue the redirect automatically
       // or whether we leave that to developer to handle.
-      console.log("Firebase 'signInSuccessWithAuthResult' callback")
+      console.log(authResult)
       return true;
+    },
+    signInFailure: function(error) {
+      // Some unrecoverable error occurred during sign-in.
+      // Return a promise when error handling is completed and FirebaseUI
+      // will reset, clearing any UI. This commonly occurs for error code
+      // 'firebaseui/anonymous-upgrade-merge-conflict' when merge conflict
+      // occurs. Check below for more details on this.
+      console.log(error)
+      return handleUIError(error);
     },
     uiShown: function () {
       // The widget is rendered.
       // Hide the loader.
-      console.log("Firebase 'uiShown' callback")
+      console.log("Firebase 'uiShown' callback - hides the loader text")
       //document.getElementById("loader").style.display = "none";
+      //instead, i can change this to replace loader with auth?
     },
   },
   // Default is redirect; popup may give a CORS error
   signInFlow: "redirect",
-  signInSuccessUrl: '',
+  signInSuccessUrl: 'https://tv-series-library.firebaseapp.com/',
   autoUpgradeAnonymousUsers: false,
     // Terms of service url.
      tosUrl: '/',
@@ -73,8 +92,11 @@ const uiConfig = {
 
 // Initialize the FirebaseUI Widget using Firebase.
 const ui = new firebaseui.auth.AuthUI(auth);
+ui.start("#firebaseui-auth-container", uiConfig);
 
 // Is there an email link sign-in?
+//When redirecting back from Identity Providers like Google and Facebook
+// or email link sign-in, start() method needs to be called to finish the sign-in flow
 if (ui.isPendingRedirect()) {
   ui.start('#firebaseui-auth-container', uiConfig);
 }
@@ -93,14 +115,18 @@ if (
   ui.start("#firebaseui-auth-container", uiConfig);
 }
 
+//firebase.auth(). prepend when using compat
+
 onAuthStateChanged(auth, (user) => {
   if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/auth.user
     //const uid = user.uid;
+    console.log(user)
     return true
   } else {
     // User is signed out
+    console.log(user)
     return false
   }
 });
@@ -138,6 +164,6 @@ onAuthStateChanged(auth, (user) => {
 ////////////////////////////////////////////////////////
 
 
-export { auth, uiConfig };
+export { auth, uiConfig, ui };
 
 // https://github.com/firebase/firebaseui-web

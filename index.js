@@ -2,7 +2,7 @@ let library = [];
 const libraryDiv = document.querySelector("#library");
 const core = document.querySelector("#coreContainer");
 /////////////////////////////////////////////////////////
-import { auth, uiConfig } from "./firebasestuff.js";
+import { auth, uiConfig, ui } from "./firebasestuff.js";
 
 import joePieHtml from './joePieHtml.js';
 import dialogHtml from './dialogHtml.js'
@@ -12,27 +12,29 @@ import loaderHtml from './loaderHtml.js'
 
 document.querySelector('#formDialog').innerHTML = dialogHtml;
 /////////////////////////////////////////////////////////
-core.innerHTML = loaderHtml
+core.innerHTML = loaderHtml;
 
 const user = auth.currentUser;
 console.log(user)
-if(user){
-  //if there is a user show their library
-  core.innerHTML = libraryHtml
-}else {
-  //otherwise show signup
-  core.innerHTML = authHtml
-}
+// if(user){
+//   //if there is a user show their library
+//   core.innerHTML = libraryHtml
+// }else {
+//   //otherwise show signup
+//   core.innerHTML = authHtml
+// }
 
-auth.onAuthStateChanged(user => {
-  if (user) {
-    // User is signed in
-    console.log("User is signed in:", user);
-  } else {
-    // User is signed out
-    console.log("User is signed out");
-  }
-});
+// auth.onAuthStateChanged(user => {
+//   if (user) {
+//     // User is signed in
+//     console.log("User is signed in:", user);
+//   } else {
+//     // User is signed out
+//     console.log("User is signed out");
+//     //core.innerHTML = authHtml;
+//     //ui.start('#firebaseui-auth-container', uiConfig)
+//   }
+// });
 /////////////////////////////////////////////////////////
 //Series constructor function//
 export class Series {
@@ -383,11 +385,11 @@ async function getDataFromTVMaze(searchTerm) {
 //Checks if library is empty, displays default image if so//
 function emptyChecker() {
   if (library.length === 0) {
-    document.querySelector("div#library").innerHTML = joePieHtml;
+    document.querySelector("div#coreContainer").innerHTML = joePieHtml;
     //document.querySelector("#joePie").style.display = "flex";
   } //else document.querySelector("#joePie").style.display = "none";
 }
-emptyChecker();
+//emptyChecker();
 //--------------------------------------------------------//
 // Define an array of color schemes
 const colorSchemes = [
