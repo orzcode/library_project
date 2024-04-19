@@ -12,7 +12,7 @@ import { initializeFirestore, getFirestore, collection, doc, getDoc, setDoc, add
 
 const firebaseConfig = {
   apiKey: "AIzaSyCgWOsD40-y422erIMNultdmSBmcP5c_VY",
-  authDomain: "tv-series-library.firebaseapp.com",
+  authDomain: "tv-series-library.web.app",
   databaseURL: "https://tv-series-library-default-rtdb.firebaseio.com",
   projectId: "tv-series-library",
   storageBucket: "tv-series-library.appspot.com",
@@ -44,8 +44,8 @@ const uiConfig = {
       // This can be obtained from the Credentials page of the Google APIs
       // console. Use the same OAuth client ID used for the Google provider
       // configured with GCIP or Firebase Auth.
-      clientId: "371898195484-h9u5t427qjv10ei0bpopseu1qhlkrg15.apps.googleusercontent.com"
-	},
+      clientId: "371898195484-h9u5t427qjv10ei0bpopseu1qhlkrg15.apps.googleusercontent.com",
+    	},
 	{
 	  provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
       signInMethod: firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD,
@@ -60,7 +60,6 @@ const uiConfig = {
       // User successfully signed in.
       // Return type determines whether we continue the redirect automatically
       // or whether we leave that to developer to handle.
-      console.log(authResult)
       return true;
     },
     signInFailure: function(error) {
@@ -81,13 +80,13 @@ const uiConfig = {
     },
   },
   // Default is redirect; popup may give a CORS error
-  signInFlow: "redirect",
-  signInSuccessUrl: 'https://tv-series-library.firebaseapp.com/',
+  //signInFlow: "redirect",
+  //signInSuccessUrl: 'https://tv-series-library.firebaseapp.com/',
   autoUpgradeAnonymousUsers: false,
     // Terms of service url.
-     tosUrl: '/',
+     //tosUrl: '/',
     // // Privacy policy url.
-     privacyPolicyUrl: '/',
+     //privacyPolicyUrl: '/',
 };
 
 // Initialize the FirebaseUI Widget using Firebase.
@@ -99,37 +98,41 @@ ui.start("#firebaseui-auth-container", uiConfig);
 // or email link sign-in, start() method needs to be called to finish the sign-in flow
 if (ui.isPendingRedirect()) {
   ui.start('#firebaseui-auth-container', uiConfig);
+  console.log("'pending redirect' thing triggered")
 }
 
-// Check for pending redirect
-if (
-  firebaseui.auth.AuthUI.getInstance() &&
-  firebaseui.auth.AuthUI.getInstance().isPendingRedirect()
-) {
-  firebaseui.auth.AuthUI.getInstance().start(
-    "#firebaseui-auth-container",
-    uiConfig
-  );
-} else {  
-  // The start method will wait until the DOM is loaded.
-  ui.start("#firebaseui-auth-container", uiConfig);
-}
+// // Check for pending redirect
+// if (
+//   firebaseui.auth.AuthUI.getInstance() &&
+//   firebaseui.auth.AuthUI.getInstance().isPendingRedirect()
+// ) {
+//   console.log("FUCK2a")
+//   firebaseui.auth.AuthUI.getInstance().start(
+//     "#firebaseui-auth-container",
+//     uiConfig
+//   );
+// } else {  
+//   // The start method will wait until the DOM is loaded.
+//   ui.start("#firebaseui-auth-container", uiConfig);
+//   console.log("FUCK2b")
+// }
 
+
+// https://firebase.google.com/docs/reference/js/auth.user
 //firebase.auth(). prepend when using compat
 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/auth.user
-    //const uid = user.uid;
-    console.log(user)
-    return true
-  } else {
-    // User is signed out
-    console.log(user)
-    return false
-  }
-});
+// onAuthStateChanged(auth, (user) => {
+//   if (user) {
+//     // User is signed in, see docs for a list of available properties    
+//     //const uid = user.uid;
+//     console.log(user.uid)
+//     return true
+//   } else {
+//     // User is signed out
+//     console.log(user)
+//     return false
+//   }
+// });
 
 
 ////////////////////////////////////////////////////////

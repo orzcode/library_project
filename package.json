@@ -9,7 +9,8 @@
     "build": "vite build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "fireb": "firebase deploy"
+    "fireb": "firebase deploy",
+    "g": "npm run build && firebase deploy"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,7 @@
     "eslint": "^8.33.0",
     "eslint-config-prettier": "^8.8.0",
     "gh-pages": "^6.1.1",
-    "vite": "^5.2.8"
+    "vite": "^5.2.9"
   },
   "dependencies": {
     "acorn": "^8.8.2",

@@ -1,3 +1,6 @@
+import cloudNew from './cloudNew.svg';
+import link from './link.svg';
+
 export default `
 <svg
 type="button"
@@ -24,13 +27,13 @@ xmlns="http://www.w3.org/2000/svg"
   />
 </g>
 </svg>
-<img id="formImg" src="cloudNew.svg" alt="upload new series data" />
+<img id="formImg" src="${cloudNew}" alt="upload new series data" />
 <div id="titleAndLink">
 <a id="title" href="www.TVMaze.com" rel="noopener" target="_blank"
   ><h2>Add a series</h2></a
 >
 <a id="link" href="www.TVMaze.com" rel="noopener" target="_blank"
-  ><img id="linkImg" src="link.svg" alt="link to TV Maze for this show"
+  ><img id="linkImg" src="${link}" alt="link to TV Maze for this show"
 /></a>
 </div>
 <form onsubmit="window.queryData();return false">

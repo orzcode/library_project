@@ -1,40 +1,47 @@
+import cloudNew from './cloudNew.svg';
+import ripple from './ripple.svg'
+//For whatever reason, this wasn't working on the dialog.
+//likely because it gets called by a function
+document.querySelector('#formDialog').innerHTML = dialogHtml;
+
 let library = [];
 const libraryDiv = document.querySelector("#library");
 const core = document.querySelector("#coreContainer");
 /////////////////////////////////////////////////////////
 import { auth, uiConfig, ui } from "./firebasestuff.js";
+import { doc } from "firebase/firestore";
 
 import joePieHtml from './joePieHtml.js';
 import dialogHtml from './dialogHtml.js'
 import libraryHtml from './libraryHtml.js'
 import authHtml from './authHtml.js'
 import loaderHtml from './loaderHtml.js'
-
-document.querySelector('#formDialog').innerHTML = dialogHtml;
 /////////////////////////////////////////////////////////
-core.innerHTML = loaderHtml;
+document.querySelector("#fuck").addEventListener("click", function(){ console.log(user); });
+/////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
 
-const user = auth.currentUser;
-console.log(user)
-// if(user){
-//   //if there is a user show their library
-//   core.innerHTML = libraryHtml
-// }else {
-//   //otherwise show signup
-//   core.innerHTML = authHtml
-// }
+core.innerHTML = loaderHtml
 
-// auth.onAuthStateChanged(user => {
-//   if (user) {
-//     // User is signed in
-//     console.log("User is signed in:", user);
-//   } else {
-//     // User is signed out
-//     console.log("User is signed out");
-//     //core.innerHTML = authHtml;
-//     //ui.start('#firebaseui-auth-container', uiConfig)
-//   }
-// });
+
+
+auth.onAuthStateChanged(user => {
+  if (user) {
+    // User is signed in
+    console.log("User is signed in:", user);
+    core.innerHTML = libraryHtml
+  } else {
+    // User is signed out
+    console.log("User is signed out");
+    core.innerHTML = authHtml;
+    ui.start('#firebaseui-auth-container', uiConfig)
+  }
+});
+
+
+
+
 /////////////////////////////////////////////////////////
 //Series constructor function//
 export class Series {
@@ -112,7 +119,7 @@ export function modalOpenTasks() {
   scrollTo(0, 0);
   document.querySelector("form").reset();
   document.querySelector("#formDialog").showModal();
-  document.querySelector("#formImg").src = "cloudNew.svg";
+  document.querySelector("#formImg").src = cloudNew;
 
   document.querySelector("#formDialog h2").innerHTML = "Add a series";
   document.querySelector("#formDialog a").style.pointerEvents = "none";
@@ -129,11 +136,11 @@ export function modalOpenTasks() {
   // document.body.style.position = "sticky";
   document.body.style.overflowY = "hidden";
 
-  if (screen.orientation.type === "landscape-primary") {
-    document.body.style.paddingRight = "15px";
-    document.querySelector("#header").style.width = "calc(100% + 15px)";
-    document.querySelector("#header").style.paddingRight = "15px";
-  }
+  // if (screen.orientation.type === "landscape-primary") {
+  //   document.body.style.paddingRight = "15px";
+  //   document.querySelector("#header").style.width = "calc(100% + 15px)";
+  //   document.querySelector("#header").style.paddingRight = "15px";
+  // }
 
   setTimeout(function () {
     document.getElementById("seriesName").focus();
@@ -149,12 +156,12 @@ export function closeModal() {
   document.body.style.overflowY = "visible";
   // document.body.style.position = "";
 
-  if (screen.orientation.type === "landscape-primary") {
-    document.body.style.paddingRight = "";
-    document.querySelector("#header").style.width = "100%";
-    document.querySelector("#header").style.paddingRight = "";
-    document.querySelector("#library").style.paddingLeft = "";
-  }
+  // if (screen.orientation.type === "landscape-primary") {
+  //   document.body.style.paddingRight = "";
+  //   document.querySelector("#header").style.width = "100%";
+  //   document.querySelector("#header").style.paddingRight = "";
+  //   document.querySelector("#coreContainer").style.paddingLeft = "";
+  // }
   document.querySelector("#formDialog").close();
 }
 window.closeModal = closeModal;
@@ -202,7 +209,7 @@ export function queryData() {
 
   document.querySelector("#saveSeries").disabled = true;
 
-  document.querySelector("#formImg").src = "ripple.svg";
+  document.querySelector("#formImg").src = ripple;
 
   const searchTerm = document.querySelector("#seriesName").value;
   document.querySelector("#seriesName").value = "";
