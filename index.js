@@ -5,8 +5,18 @@ import ripple from './ripple.svg'
 document.querySelector('#formDialog').innerHTML = dialogHtml;
 
 let library = [];
-const libraryDiv = document.querySelector("#library");
+
 const core = document.querySelector("#coreContainer");
+
+const libDivRef = () => document.querySelector("#library");
+// then, whenever you want #library:
+let libraryDiv = libDivRef();
+
+
+
+
+
+
 /////////////////////////////////////////////////////////
 import { auth, uiConfig, ui } from "./firebasestuff.js";
 import { doc } from "firebase/firestore";
@@ -17,7 +27,7 @@ import libraryHtml from './libraryHtml.js'
 import authHtml from './authHtml.js'
 import loaderHtml from './loaderHtml.js'
 /////////////////////////////////////////////////////////
-document.querySelector("#fuck").addEventListener("click", function(){ console.log(user); });
+document.querySelector("#fuck").addEventListener("click", function(){ auth.signOut(); });
 /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
@@ -105,6 +115,12 @@ export function submissionTasks() {
   const card = createCard(obj);
   card.setAttribute("data-complete", obj.complete);
   //IF 'complete' is true, it highlights the card
+
+  core.innerHTML = libraryHtml
+  libraryDiv = libDivRef();
+
+  renderCards(library)
+
   libraryDiv.appendChild(card);
 
   closeModal();
@@ -153,7 +169,7 @@ window.modalOpenTasks = modalOpenTasks;
 
 export function closeModal() {
   // document.body.style.removeProperty('position');
-  document.body.style.overflowY = "visible";
+  //document.body.style.overflowY = "visible";
   // document.body.style.position = "";
 
   // if (screen.orientation.type === "landscape-primary") {
@@ -270,6 +286,8 @@ function renderCards(givenLibrary) {
 //In other words, even though this is a long function, it's all just creating the card structure
 //
 //Note that 'card' here is different in scope!! And is therefore separate. Confusing huh
+
+
 //This function gets called from something else (renderCards)
 function createCard(obj) {
   const card = document.createElement("div");

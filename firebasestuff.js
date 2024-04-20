@@ -101,38 +101,7 @@ if (ui.isPendingRedirect()) {
   console.log("'pending redirect' thing triggered")
 }
 
-// // Check for pending redirect
-// if (
-//   firebaseui.auth.AuthUI.getInstance() &&
-//   firebaseui.auth.AuthUI.getInstance().isPendingRedirect()
-// ) {
-//   console.log("FUCK2a")
-//   firebaseui.auth.AuthUI.getInstance().start(
-//     "#firebaseui-auth-container",
-//     uiConfig
-//   );
-// } else {  
-//   // The start method will wait until the DOM is loaded.
-//   ui.start("#firebaseui-auth-container", uiConfig);
-//   console.log("FUCK2b")
-// }
 
-
-// https://firebase.google.com/docs/reference/js/auth.user
-//firebase.auth(). prepend when using compat
-
-// onAuthStateChanged(auth, (user) => {
-//   if (user) {
-//     // User is signed in, see docs for a list of available properties    
-//     //const uid = user.uid;
-//     console.log(user.uid)
-//     return true
-//   } else {
-//     // User is signed out
-//     console.log(user)
-//     return false
-//   }
-// });
 
 
 ////////////////////////////////////////////////////////

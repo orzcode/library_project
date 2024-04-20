@@ -258,6 +258,14 @@ h1 {
   /*Make sure this value is equal to the .card size width to avoid not-quite-center at smaller sizes*/
 }
 
+#welcome {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 35vh;
+  justify-content: space-around;
+}
+
 #joePie {
   gap: 2rem;
   filter: drop-shadow(1px 1px 1px dimgrey);
