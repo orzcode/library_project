@@ -41,6 +41,7 @@ auth.onAuthStateChanged(user => {
     // User is signed in
     console.log("User is signed in:", user);
     core.innerHTML = libraryHtml
+    document.querySelector("div #header").textContent = "This eventually triggered a few seconds after SIGNED IN"
   } else {
     // User is signed out
     console.log("User is signed out");

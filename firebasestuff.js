@@ -9,7 +9,13 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { initializeFirestore, getFirestore, collection, doc, getDoc, setDoc, addDoc } from "firebase/firestore";
 
 //import { getDatabase } from "firebase/database";
+////////////////////////////////////////////////////////////
 
+const core = document.querySelector("#coreContainer");
+import libraryHtml from './libraryHtml.js'
+import authHtml from './authHtml.js'
+import loaderHtml from './loaderHtml.js'
+//////////////////////////////////////////////////////
 const firebaseConfig = {
   apiKey: "AIzaSyCgWOsD40-y422erIMNultdmSBmcP5c_VY",
   authDomain: "tv-series-library.web.app",
@@ -68,13 +74,12 @@ const uiConfig = {
       // will reset, clearing any UI. This commonly occurs for error code
       // 'firebaseui/anonymous-upgrade-merge-conflict' when merge conflict
       // occurs. Check below for more details on this.
-      console.log(error)
       return handleUIError(error);
     },
     uiShown: function () {
       // The widget is rendered.
       // Hide the loader.
-      console.log("Firebase 'uiShown' callback - hides the loader text")
+      console.log("Firebase 'uiShown' callback")
       //document.getElementById("loader").style.display = "none";
       //instead, i can change this to replace loader with auth?
     },
@@ -91,13 +96,16 @@ const uiConfig = {
 
 // Initialize the FirebaseUI Widget using Firebase.
 const ui = new firebaseui.auth.AuthUI(auth);
-ui.start("#firebaseui-auth-container", uiConfig);
+//ui.start("#firebaseui-auth-container", uiConfig);
 
 // Is there an email link sign-in?
 //When redirecting back from Identity Providers like Google and Facebook
 // or email link sign-in, start() method needs to be called to finish the sign-in flow
 if (ui.isPendingRedirect()) {
+  core.innerHTML = authHtml;
   ui.start('#firebaseui-auth-container', uiConfig);
+  //put loader here?
+  //or dont use authstate?
   console.log("'pending redirect' thing triggered")
 }
 
