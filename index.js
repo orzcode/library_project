@@ -1,5 +1,6 @@
 import cloudNew from './cloudNew.svg';
 import ripple from './ripple.svg'
+import link from './link.svg';
 //For whatever reason, this wasn't working on the dialog.
 //likely because it gets called by a function
 document.querySelector('#formDialog').innerHTML = dialogHtml;
@@ -336,7 +337,7 @@ function createCard(obj) {
   linkP.appendChild(linkStrong);
   linkStrong.appendChild(linkA);
   let linkSvg = document.createElement("img");
-  linkSvg.src = "link.svg";
+  linkSvg.src = link
   linkA.appendChild(linkSvg);
 
   card.appendChild(linkP);
