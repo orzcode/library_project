@@ -6,7 +6,7 @@
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
   /*apparently, shouldn't use this*/
-  outline: 1px solid red
+  /* outline: 1px solid red */
 }
 :root {
   --header1: #26343b;
@@ -199,7 +199,6 @@ button {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  background-color: blue;
   /*This is important for flex-based bottom footer*/
 }
 
@@ -244,6 +243,10 @@ h1 {
   width: 100%;
   align-items: center;
   justify-content: center;
+}
+
+#loader {
+  font-size: clamp(3rem, 5vw, 4.5rem);
 }
 
 #library {
