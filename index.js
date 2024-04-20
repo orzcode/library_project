@@ -208,8 +208,9 @@ function getLibrary() {
 //-----------------------------------------------------------------------------//
 //////////////////////////////////////////////////////////////////////////////////
 //The Magic//
+//Since adding welcome screen, this probably shouldn't run at startup//
 getLibrary();
-renderCards(library);
+//renderCards(library);
 ////////////////////
 
 //This function runs when you click 'Query'
@@ -271,6 +272,7 @@ window.queryData = queryData;
 ////////////////////
 ////////////Actually runs the card-creation function, and then appends that card to the page
 function renderCards(givenLibrary) {
+  libraryDiv = libDivRef();
   if (givenLibrary) {
     givenLibrary.forEach((ObjFromArray) => {
       //Note that 'card' here is different in scope!! And is therefore separate. Confusing huh
