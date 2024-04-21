@@ -119,7 +119,7 @@ button {
   cursor: pointer;
   outline: inherit;
   border: 1px solid black;
-  border-radius: 1.5rem;
+  border-radius: 1rem;
 }
 /* Button base styles */
 .btn {
@@ -127,7 +127,7 @@ button {
   align-items: center;
   justify-content: center;
   padding: 0.5rem 1rem;
-  border-radius: 1.5rem;
+  border-radius: 1rem;
   font-size: 3rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -175,17 +175,18 @@ button {
 /* ---------------------------------------------------- */
 .btn-grad {
   background-image: linear-gradient(
-    to right,
-    var(--header) 10%,
-    #322e2e 45%,
+    to left,
+    var(--header) 80%,
+    #322e2e 50%,
     var(--main) 100%
   );
   transition: 0.5s;
   background-size: 250% auto;
   border-radius: 1rem;
-  width: clamp(3rem, 5vw, 5rem);
-  height: clamp(3rem, 5vw, 5rem);
+  /* width: clamp(3rem, 5vw, 5rem);
+  height: clamp(3rem, 5vw, 5rem); */
   display: block;
+  font-size: clamp(1rem, 2vw, 1.5rem);
 
   position: absolute;
   right: 2.5%;
@@ -413,7 +414,7 @@ em {
   /*Other properties below*/
   width: clamp(394px, 80%, 120rem);
   height: 100%;
-  border-radius: 15px;
+  border-radius: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -471,7 +472,7 @@ em {
 }
 #formDialog svg:nth-child(1):hover {
   /* background-color: rgba(255, 0, 0, 0.8); */
-  border-radius: 12px;
+  border-radius: 1rem;
   padding: 3px;
   fill: firebrick;
   filter: drop-shadow(2px 2px 2px black);
@@ -479,7 +480,7 @@ em {
 #formDialog svg:nth-child(1):active {
   transform: translate3d(1px, 1px, 0);
   /* background-color: rgba(255, 0, 0, 0.8); */
-  border-radius: 12px;
+  border-radius: 1rem;
   padding: 3px;
   filter: drop-shadow(2px 2px 2px black);
 }
@@ -518,7 +519,7 @@ em {
 
 #formDialog input[type="text"] {
   border: 2px solid black;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   width: 80%;
   max-width: 50rem;
   text-align: center;
