@@ -33,7 +33,7 @@ document.querySelector("#signOut").addEventListener("click", function(){ auth.si
 /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
 
-core.innerHTML = loaderHtml
+//core.innerHTML = loaderHtml <<<<<<<<< 1 CHANGE
 
 
 
@@ -59,12 +59,33 @@ async function handleAuthStateChange() {
     ui.start('#firebaseui-auth-container', uiConfig);
   }
 }
-
 // Call the asynchronous function to start monitoring authentication state changes
-handleAuthStateChange();
+//handleAuthStateChange();
 
+// Define an asynchronous function to start FirebaseUI
+async function startFirebaseUI() {
+  return new Promise(resolve => {
+    ui.start('#firebaseui-auth-container', uiConfig, () => {
+      // Introduce a delay of 3 seconds before resolving
+      setTimeout(resolve, 3000);
+    });
+  });
+}
 
+// Check if there's a pending redirect
+if (ui.isPendingRedirect()) {
+  core.innerHTML = authHtml;
+  console.log("'pending redirect' thing triggered");
 
+  // Start FirebaseUI and wait for it to finish
+  startFirebaseUI().then(() => {    
+    // After the delay, proceed with authentication state change handling
+    handleAuthStateChange();
+  });
+} else {
+  // No pending redirect, proceed with authentication state change handling
+  handleAuthStateChange();
+}
 
 /////////////////////////////////////////////////////////
 //Series constructor function//

@@ -1,3 +1,4 @@
+import { handleAuthStateChange } from "./index.js";
 import firebase from "firebase/compat/app";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
@@ -66,6 +67,8 @@ const uiConfig = {
       // User successfully signed in.
       // Return type determines whether we continue the redirect automatically
       // or whether we leave that to developer to handle.
+      console.log(authResult);
+      console.log("should be successful sign in?")
       return true;
     },
     signInFailure: function(error) {
@@ -79,14 +82,14 @@ const uiConfig = {
     uiShown: function () {
       // The widget is rendered.
       // Hide the loader.
-      console.log("Firebase 'uiShown' callback")
+      console.log("Firebase triggered ('uiShown' callback)")
       //document.getElementById("loader").style.display = "none";
       //instead, i can change this to replace loader with auth?
     },
   },
   // Default is redirect; popup may give a CORS error
   //signInFlow: "redirect",
-  //signInSuccessUrl: 'https://tv-series-library.firebaseapp.com/',
+  signInSuccessUrl: 'https://tv-series-library.web.app/',
   autoUpgradeAnonymousUsers: false,
     // Terms of service url.
      //tosUrl: '/',
@@ -101,13 +104,26 @@ const ui = new firebaseui.auth.AuthUI(auth);
 // Is there an email link sign-in?
 //When redirecting back from Identity Providers like Google and Facebook
 // or email link sign-in, start() method needs to be called to finish the sign-in flow
-if (ui.isPendingRedirect()) {
-  core.innerHTML = authHtml;
-  ui.start('#firebaseui-auth-container', uiConfig);
-  //put loader here?
-  //or dont use authstate?
-  console.log("'pending redirect' thing triggered")
-}
+// if (ui.isPendingRedirect()) {
+//   core.innerHTML = authHtml;
+//   ui.start('#firebaseui-auth-container', uiConfig);
+//   //put loader here?
+//   //or dont use authstate?
+//   console.log("'pending redirect' thing triggered")
+// } else {
+//   //core.innerHTML = authHtml;
+//   //ui.start('#firebaseui-auth-container', uiConfig);
+// }
+
+
+
+
+
+
+
+
+
+
 
 
 
