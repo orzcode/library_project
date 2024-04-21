@@ -66,10 +66,10 @@ const uiConfig = {
     signInSuccessWithAuthResult: function (authResult, redirectUrl) {
       // User successfully signed in.
       // Return type determines whether we continue the redirect automatically
-      // or whether we leave that to developer to handle.
-      console.log(authResult);
-      console.log("should be successful sign in?")
-      return true;
+      // If it returns true, then after signing in, user will be redirected to the URL that is specified 
+      // by signInSuccessUrl. When it returns false, the user will stay on the same page.
+      console.log ("signInSuccess triggered: ", authResult)
+      return false;
     },
     signInFailure: function(error) {
       // Some unrecoverable error occurred during sign-in.
