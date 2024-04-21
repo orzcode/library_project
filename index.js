@@ -67,7 +67,10 @@ async function startFirebaseUI() {
   return new Promise(resolve => {
     ui.start('#firebaseui-auth-container', uiConfig, () => {
       // Introduce a delay of 3 seconds before resolving
-      setTimeout(resolve, 3000);
+      setTimeout(resolve, 100);
+      //////////////////
+      // no longer nmeeded?!?!
+      //////////////////
     });
   });
 }
