@@ -28,7 +28,7 @@ import libraryHtml from './libraryHtml.js'
 import authHtml from './authHtml.js'
 import loaderHtml from './loaderHtml.js'
 /////////////////////////////////////////////////////////
-document.querySelector("#signOut").addEventListener("click", function(){ auth.signOut(); });
+document.querySelector("#signOut").addEventListener("click", function(){ auth.signOut(); document.querySelector("#signOut").style.display = "none" });
 /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
@@ -37,19 +37,31 @@ core.innerHTML = loaderHtml
 
 
 
-auth.onAuthStateChanged(user => {
+// Define an asynchronous function to handle the authentication state change
+async function handleAuthStateChange() {
+  // Display loader while waiting for authentication state change
+  core.innerHTML = loaderHtml;
+
+  // Wait for the authentication state to change
+  const user = await new Promise(resolve => {
+    auth.onAuthStateChanged(resolve);
+  });
+
   if (user) {
     // User is signed in
     console.log("User is signed in:", user);
-    core.innerHTML = libraryHtml
-    document.querySelector("div #header").textContent = "This eventually triggered a few seconds after SIGNED IN"
+    core.innerHTML = libraryHtml;
   } else {
     // User is signed out
     console.log("User is signed out");
+
     core.innerHTML = authHtml;
-    ui.start('#firebaseui-auth-container', uiConfig)
+    ui.start('#firebaseui-auth-container', uiConfig);
   }
-});
+}
+
+// Call the asynchronous function to start monitoring authentication state changes
+handleAuthStateChange();
 
 
 
