@@ -28,7 +28,7 @@ import libraryHtml from './libraryHtml.js'
 import authHtml from './authHtml.js'
 import loaderHtml from './loaderHtml.js'
 /////////////////////////////////////////////////////////
-document.querySelector("#fuck").addEventListener("click", function(){ auth.signOut(); });
+document.querySelector("#signOut").addEventListener("click", function(){ auth.signOut(); });
 /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////

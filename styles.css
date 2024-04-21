@@ -193,6 +193,7 @@ button {
 }
 .btn-grad:hover {
   background-position: right center; /* change the direction of the change here */
+  filter: brightness(1.4);
 }
 /* ---------------------------------------------------- */
 #container {
@@ -225,7 +226,7 @@ h1 {
   /* flex-basis: 100vw; */
 }
 
-#fuck {
+#signOut {
   position: absolute;
   left: 2.5%;
 
@@ -240,6 +241,11 @@ h1 {
   letter-spacing: 0.1rem;
   transition: all 0.1s ease-in-out;
   z-index: 1;
+}
+
+#signOut:hover{
+  background-color: var(--btnPrimary);
+  filter: brightness(110%);
 }
 
 #header2 {
