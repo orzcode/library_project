@@ -30,6 +30,10 @@ const libDivRef = () => document.querySelector("#library");
 let libraryDiv = libDivRef();
 /////////////////////////////////////////////////////////
 core.innerHTML = loaderHtml
+// Loader needed in all 3 cases:
+// Pageload into a signed-out state
+// Pageload into a signed-in state
+// Pageload into a redirect
 /////////////////////////////////////////////////////////
 
 // REQUIRED FOR FIREBASE UI UPON A SIGN-IN REDIRECT
@@ -38,11 +42,9 @@ core.innerHTML = loaderHtml
 // Runs on page load in order to check if a redirect
 if (ui.isPendingRedirect()) {
   //If they ARE loading from a redirect:
-  //Show loader - append Auth & start UI - hide Auth - (run Auth Check) 
+  //Loader already shown - append Auth & start UI - hide Auth - (run Auth Check) 
 
   console.log("'pending redirect' triggered");
-
-  core.innerHTML = loaderHtml
 
   core.insertAdjacentHTML("beforeend", authHtml);
   // Start FirebaseUI
@@ -55,13 +57,10 @@ if (ui.isPendingRedirect()) {
   authCheck();
 }
 
+
+
 // Check Auth State - I.E - decide to show login or not show login
 async function authCheck() {
-  // Display loader while waiting for auth check
-  
-  // possibly redundant?
-  //core.innerHTML = loaderHtml;
-
   // Wait for the auth check
   const user = await new Promise(resolve => {
     auth.onAuthStateChanged(resolve);
