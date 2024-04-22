@@ -1,3 +1,10 @@
+document.addEventListener('DOMContentLoaded', function () {
+  var link = document.getElementById('font-style');
+  link.onload = function () {
+      this.rel = 'stylesheet';
+  };
+});
+////////////////////////////////////////////////////////
 export { authCheck }
 
 import cloudNew from './cloudNew.svg';

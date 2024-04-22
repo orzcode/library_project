@@ -94,13 +94,6 @@ body {
   src: local("A-OTF Shin Go Pro R"),
     url("AOTFShinGoProRegular.woff") format("woff");
 }
-@font-face {
-  font-family: "A-OTF Shin Go Pro L";
-  font-style: normal;
-  font-weight: normal;
-  src: local("A-OTF Shin Go Pro L"),
-    url("AOTFShinGoProLight.woff") format("woff");
-}
 
 li {
   list-style-type: none;
