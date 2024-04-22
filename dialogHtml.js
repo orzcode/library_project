@@ -51,7 +51,7 @@ xmlns="http://www.w3.org/2000/svg"
 </div>
 
 <div id="filmingComplete">
-  <div><label for="filmingComplete">Filming complete?</label></div>
+  <div><legend for="filmingComplete">Filming complete?</legend></div>
 
   <div id="radioButtons">
 	<div>

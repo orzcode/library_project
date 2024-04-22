@@ -1,3 +1,5 @@
+export { handleAuthStateChange }
+
 import cloudNew from './cloudNew.svg';
 import ripple from './ripple.svg'
 import link from './link.svg';
