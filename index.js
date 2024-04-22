@@ -30,18 +30,20 @@ import libraryHtml from './libraryHtml.js'
 import authHtml from './authHtml.js'
 import loaderHtml from './loaderHtml.js'
 /////////////////////////////////////////////////////////
-document.querySelector("#signOut").addEventListener("click", function(){ auth.signOut(); document.querySelector("#signOut").style.display = "none" });
+document.querySelector("#signOut").addEventListener("click", signOut );
 /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
 
-//core.innerHTML = loaderHtml <<<<<<<<< 1 CHANGE
+core.innerHTML = loaderHtml
 
 
 
 // Define an asynchronous function to handle the authentication state change
 async function handleAuthStateChange() {
   // Display loader while waiting for authentication state change
+  
+  //possibly redundant? it's redundant IF user is already logged in
   core.innerHTML = loaderHtml;
 
   // Wait for the authentication state to change
@@ -51,11 +53,17 @@ async function handleAuthStateChange() {
 
   if (user) {
     // User is signed in
-    console.log("User is signed in:", user);
+    console.log("Checked: User is signed in:", user.email);
     core.innerHTML = libraryHtml;
+
+    document.querySelector("#signOut").style.display = "inline-flex"
+
+    getLibrary();
+    renderCards(library)
+
   } else {
     // User is signed out
-    console.log("User is signed out");
+    console.log("Checked: User is signed out");
 
     core.innerHTML = authHtml;
     ui.start('#firebaseui-auth-container', uiConfig);
@@ -65,31 +73,39 @@ async function handleAuthStateChange() {
 //handleAuthStateChange();
 
 // Define an asynchronous function to start FirebaseUI
-async function startFirebaseUI() {
-  return new Promise(resolve => {
-    ui.start('#firebaseui-auth-container', uiConfig, () => {
-      // Introduce a delay of 3 seconds before resolving
-      setTimeout(resolve, 100);
-      //////////////////
-      // no longer nmeeded?!?!
-      //////////////////
-    });
-  });
-}
+// async function startFirebaseUI() {
+//   return new Promise(resolve => {
+//     ui.start('#firebaseui-auth-container', uiConfig, () => {
+//       // Introduce a delay of 3 seconds before resolving
+//       setTimeout(resolve, 100);
+//       //////////////////
+//       // no longer nmeeded?!?!
+//       //////////////////
+//     });
+//   });
+// }
 
 // Check if there's a pending redirect
 if (ui.isPendingRedirect()) {
   core.innerHTML = authHtml;
   console.log("'pending redirect' thing triggered");
 
-  // Start FirebaseUI and wait for it to finish
-  startFirebaseUI().then(() => {    
-    // After the delay, proceed with authentication state change handling
-    handleAuthStateChange();
-  });
+  // Start FirebaseUI
+   ui.start("#firebaseui-auth-container", uiConfig)
+
+    //handleAuthStateChange();
+
 } else {
   // No pending redirect, proceed with authentication state change handling
   handleAuthStateChange();
+}
+/////////////////////////////////////////////////////////
+function signOut() {
+  auth.signOut();
+  document.querySelector("#signOut").style.display = "none";
+
+  location.reload()
+  //maybe just refresh internal container
 }
 
 /////////////////////////////////////////////////////////
