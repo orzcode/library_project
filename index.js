@@ -1,25 +1,12 @@
-export { handleAuthStateChange }
+export { authCheck }
 
 import cloudNew from './cloudNew.svg';
 import ripple from './ripple.svg'
 import link from './link.svg';
-//For whatever reason, this wasn't working on the dialog.
-//likely because it gets called by a function
-document.querySelector('#formDialog').innerHTML = dialogHtml;
+//For some reason, imports on the dialog file weren't working.
+//likely because the dialog gets called by a function?
 
-let library = [];
-
-const core = document.querySelector("#coreContainer");
-
-const libDivRef = () => document.querySelector("#library");
-// then, whenever you want #library:
-let libraryDiv = libDivRef();
-
-
-
-
-
-
+////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
 import { auth, uiConfig, ui } from "./firebasestuff.js";
 import { doc } from "firebase/firestore";
@@ -31,22 +18,51 @@ import authHtml from './authHtml.js'
 import loaderHtml from './loaderHtml.js'
 /////////////////////////////////////////////////////////
 document.querySelector("#signOut").addEventListener("click", signOut );
-/////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////
 
+document.querySelector('#formDialog').innerHTML = dialogHtml;
+const core = document.querySelector("#coreContainer");
+
+/////////////////////////////////////////////////////////
+let library = [];
+
+const libDivRef = () => document.querySelector("#library");
+// then, whenever you want #library:
+let libraryDiv = libDivRef();
+/////////////////////////////////////////////////////////
 core.innerHTML = loaderHtml
+/////////////////////////////////////////////////////////
 
+// REQUIRED FOR FIREBASE UI UPON A SIGN-IN REDIRECT
+// AUTH DIV MUST BE PRESENT
+//
+// Runs on page load in order to check if a redirect
+if (ui.isPendingRedirect()) {
+  //If they ARE loading from a redirect:
+  //Show loader - append Auth & start UI - hide Auth - (run Auth Check) 
 
+  console.log("'pending redirect' triggered");
 
-// Define an asynchronous function to handle the authentication state change
-async function handleAuthStateChange() {
-  // Display loader while waiting for authentication state change
+  core.innerHTML = loaderHtml
+
+  core.insertAdjacentHTML("beforeend", authHtml);
+  // Start FirebaseUI
+   ui.start("#firebaseui-auth-container", uiConfig)
+    //also, authCheck() gets run --BY-- firebaseUI upon success
+
+  document.querySelector("#welcome").style.display = "none";
+} else {
+  // Not a redirect, proceed with auth check
+  authCheck();
+}
+
+// Check Auth State - I.E - decide to show login or not show login
+async function authCheck() {
+  // Display loader while waiting for auth check
   
-  //possibly redundant? it's redundant IF user is already logged in
-  core.innerHTML = loaderHtml;
+  // possibly redundant?
+  //core.innerHTML = loaderHtml;
 
-  // Wait for the authentication state to change
+  // Wait for the auth check
   const user = await new Promise(resolve => {
     auth.onAuthStateChanged(resolve);
   });
@@ -69,36 +85,9 @@ async function handleAuthStateChange() {
     ui.start('#firebaseui-auth-container', uiConfig);
   }
 }
-// Call the asynchronous function to start monitoring authentication state changes
-//handleAuthStateChange();
 
-// Define an asynchronous function to start FirebaseUI
-// async function startFirebaseUI() {
-//   return new Promise(resolve => {
-//     ui.start('#firebaseui-auth-container', uiConfig, () => {
-//       // Introduce a delay of 3 seconds before resolving
-//       setTimeout(resolve, 100);
-//       //////////////////
-//       // no longer nmeeded?!?!
-//       //////////////////
-//     });
-//   });
-// }
 
-// Check if there's a pending redirect
-if (ui.isPendingRedirect()) {
-  core.innerHTML = authHtml;
-  console.log("'pending redirect' thing triggered");
 
-  // Start FirebaseUI
-   ui.start("#firebaseui-auth-container", uiConfig)
-
-    //handleAuthStateChange();
-
-} else {
-  // No pending redirect, proceed with authentication state change handling
-  handleAuthStateChange();
-}
 /////////////////////////////////////////////////////////
 function signOut() {
   auth.signOut();
@@ -107,7 +96,6 @@ function signOut() {
   location.reload()
   //maybe just refresh internal container
 }
-
 /////////////////////////////////////////////////////////
 //Series constructor function//
 export class Series {

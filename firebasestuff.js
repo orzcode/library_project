@@ -1,4 +1,5 @@
-import { handleAuthStateChange } from "./index.js";
+import { authCheck } from "./index.js";
+
 import firebase from "firebase/compat/app";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
@@ -12,10 +13,11 @@ import { initializeFirestore, getFirestore, collection, doc, getDoc, setDoc, add
 //import { getDatabase } from "firebase/database";
 ////////////////////////////////////////////////////////////
 
-const core = document.querySelector("#coreContainer");
-import libraryHtml from './libraryHtml.js'
-import authHtml from './authHtml.js'
-import loaderHtml from './loaderHtml.js'
+// const core = document.querySelector("#coreContainer");
+// import libraryHtml from './libraryHtml.js'
+// import authHtml from './authHtml.js'
+// import loaderHtml from './loaderHtml.js'
+
 //////////////////////////////////////////////////////
 const firebaseConfig = {
   apiKey: "AIzaSyCgWOsD40-y422erIMNultdmSBmcP5c_VY",
@@ -60,16 +62,18 @@ const uiConfig = {
       forceSameDevice: false,
     },
   ],
+
   // Required to enable one-tap sign-up credential helper.
   //credentialHelper: firebaseui.auth.CredentialHelper.GOOGLE_YOLO,
+
   callbacks: {
     signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-      // User successfully signed in.
-      // Return type determines whether we continue the redirect automatically
+      // TRIGGERS UPON SUCCESSFUL -INITIAL- SIGN-IN VIA THE UI
+      //
       // If it returns true, then after signing in, user will be redirected to the URL that is specified 
       // by signInSuccessUrl. When it returns false, the user will stay on the same page.
       console.log ("signInSuccessWithAuthResult: ", authResult.user.email)
-      handleAuthStateChange();
+      authCheck();
       return false;
     },
     signInFailure: function(error) {
@@ -83,13 +87,12 @@ const uiConfig = {
     uiShown: function () {
       // The widget is rendered.
       // Hide the loader.
-      console.log("Firebase triggered ('uiShown' callback)")
+      console.log("Firebase triggered  ('uiShown' callback)")
       //document.getElementById("loader").style.display = "none";
-      //instead, i can change this to replace loader with auth?
     },
   },
   // Default is redirect; popup may give a CORS error
-  //signInFlow: "redirect",
+  //signInFlow: "popup",
   signInSuccessUrl: 'https://tv-series-library.web.app/',
   autoUpgradeAnonymousUsers: false,
     // Terms of service url.
@@ -98,32 +101,13 @@ const uiConfig = {
      //privacyPolicyUrl: '/',
 };
 
-// Initialize the FirebaseUI Widget using Firebase.
+// Initialize the FirebaseUI Widget using Firebase. AUTH DIV MUST BE PRESENT, BUT CAN BE UN-DISPLAYED
 const ui = new firebaseui.auth.AuthUI(auth);
+// Start by executing:
 //ui.start("#firebaseui-auth-container", uiConfig);
 
-// Is there an email link sign-in?
-//When redirecting back from Identity Providers like Google and Facebook
-// or email link sign-in, start() method needs to be called to finish the sign-in flow
-// if (ui.isPendingRedirect()) {
-//   core.innerHTML = authHtml;
-//   ui.start('#firebaseui-auth-container', uiConfig);
-//   //put loader here?
-//   //or dont use authstate?
-//   console.log("'pending redirect' thing triggered")
-// } else {
-//   //core.innerHTML = authHtml;
-//   //ui.start('#firebaseui-auth-container', uiConfig);
-// }
-
-
-
-
-
-
-
-
-
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
 
 
 
