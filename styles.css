@@ -92,7 +92,7 @@ body {
   font-style: normal;
   font-weight: normal;
   src: local("twsans"),
-    url("twsans.otf") format("otf");
+    url("twsans.otf") format("opentype");
 }
 /* @font-face {
   font-family: "A-OTF Shin Go Pro R";
