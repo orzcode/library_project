@@ -351,15 +351,8 @@ function createCard(obj) {
 
   card.appendChild(banner);
 
-  // const titleP = document.createElement("p");
-  // const titleStrong = document.createElement("strong");
-  // titleStrong.textContent = obj.title;
-  // titleStrong.className = "title";
-  // titleP.appendChild(titleStrong);
-
-  // card.appendChild(titleP);
-
   const completeP = document.createElement("p");
+  completeP.classList.add("card1stRowText")
   const completeStrong = document.createElement("strong");
   completeStrong.textContent = "Filming: ";
   completeP.appendChild(completeStrong);
@@ -378,6 +371,7 @@ function createCard(obj) {
   card.appendChild(completeP);
 
   const linkP = document.createElement("p");
+  linkP.classList.add("card2ndRowText")
   const linkStrong = document.createElement("strong");
   const linkA = document.createElement("a");
   linkA.textContent = "Link";
