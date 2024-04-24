@@ -1,46 +1,27 @@
 ////////////////////////////////////////////////////////
 export { authCheck }
-
-import cloudNew from './cloudNew.svg';
-import ripple from './ripple.svg'
-import link from './link.svg';
-//For some reason, imports on the dialog file weren't working.
-//likely because the dialog gets called by a function?
-
 ////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////
 import { auth, uiConfig, ui } from "./firebasestuff.js";
 import { doc } from "firebase/firestore";
 
-import joePieHtml from './joePieHtml.js';
-import dialogHtml from './dialogHtml.js'
-import libraryHtml from './libraryHtml.js'
-import authHtml from './authHtml.js'
-import loaderHtml from './loaderHtml.js'
+import cloudNew from './cloudNew.svg';
+import ripple from './ripple.svg';
+import link from './link.svg'
 /////////////////////////////////////////////////////////
-document.querySelector("#signOut").addEventListener("click", signOut );
-
-document.querySelector('#formDialog').innerHTML = dialogHtml;
+const signOutButton = document.querySelector("#signOut")
+signOutButton.addEventListener("click", signOut );
 
 const core = document.querySelector("#coreContainer");
 
-
-
-/////////////////////////////////////////////////////////
 let library = [];
 
-const libDivRef = () => document.querySelector("#library");
-// then, whenever you want #library:
-let libraryDiv = libDivRef();
+const libraryDiv = document.querySelector("#library");
 /////////////////////////////////////////////////////////
-//core.innerHTML = loaderHtml  --temp disable while testing display version
 // Loader needed in all 3 cases:
 // Pageload into a signed-out state
 // Pageload into a signed-in state
 // Pageload into a redirect
 /////////////////////////////////////////////////////////
-// core.insertAdjacentHTML("afterbegin", joePieHtml);
-// document.querySelector("#joePie").style.display = "none" --disable while testing display version
 
 
 //////////////////////////////////////////////
@@ -57,12 +38,13 @@ if (ui.isPendingRedirect()) {
 
   console.log("'pending redirect' triggered");
 
-  core.insertAdjacentHTML("beforeend", authHtml);
+  displaySwitch("auth")
   // Start FirebaseUI
    ui.start("#firebaseui-auth-container", uiConfig)
-    //also, authCheck() gets run --BY-- firebaseUI upon success
+    //also, authCheck() gets run BY firebaseUI upon success
 
-  document.querySelector("#welcome").style.display = "none";
+  displaySwitch("loader")
+  // Switches to loader while loading/checking user auth
 } else {
   // Not a redirect, proceed with auth check
   authCheck();
@@ -84,15 +66,13 @@ async function authCheck() {
     getLibrary();
 
     if(!emptyChecker()){
-    // core.innerHTML = libraryHtml;
+      //if library isn't empty, then:
     displaySwitch("library")
     renderCards(library)
     }
 
-    document.querySelector("#signOut").style.display = "inline-flex"
-
-   
-
+    signOutButton.style.display = "inline-flex"
+    //and show the sign out button
   } else {
     // User is signed out
     console.log("Checked: User is signed out");
@@ -102,15 +82,13 @@ async function authCheck() {
   }
 }
 
-
-
 /////////////////////////////////////////////////////////
 function signOut() {
   auth.signOut();
-  document.querySelector("#signOut").style.display = "none";
+  signOutButton.style.display = "none";
 
   location.reload()
-  //maybe just refresh internal container
+  //refreshes page
 }
 /////////////////////////////////////////////////////////
 //Series constructor function//
@@ -169,7 +147,6 @@ function reSeries(unconstructedArray) {
   } else return;
 }
 ///////////////////
-//clean this up?
 export function submissionTasks() {
   const obj = formSubmission();
   const card = createCard(obj);
@@ -177,7 +154,6 @@ export function submissionTasks() {
   //IF 'complete' is true, it highlights the card
 
   displaySwitch("library")
-  libraryDiv = libDivRef();
 
   renderCards(library)
 
@@ -192,10 +168,11 @@ window.submissionTasks = submissionTasks;
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 export function modalOpenTasks() {
+  
   scrollTo(0, 0);
   document.querySelector("form").reset();
   document.querySelector("#formDialog").showModal();
-  document.querySelector("#formImg").src = cloudNew;
+  document.querySelector("#formImg").src = cloudNew
 
   document.querySelector("#formDialog h2").innerHTML = "Add a series";
   document.querySelector("#formDialog a").style.pointerEvents = "none";
@@ -323,7 +300,7 @@ export function queryData() {
       document.querySelector("#linkImg").style.display = "none";
 
       document.querySelector("#saveSeries").disabled = true;
-      document.querySelector("#formImg").src = "cloudError.svg";
+      document.querySelector("#formImg").src = "./cloudError.svg";
     });
 }
 window.queryData = queryData;
@@ -365,7 +342,6 @@ function displaySwitch(mode) {
 
 ////////////Actually runs the card-creation function, and then appends that card to the page
 function renderCards(givenLibrary) {
-  libraryDiv = libDivRef();
   if (givenLibrary) {
     givenLibrary.forEach((ObjFromArray) => {
       //Note that 'card' here is different in scope!! And is therefore separate. Confusing huh
