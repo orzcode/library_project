@@ -41,13 +41,38 @@
           Add a show
         </button>
       </div>
+
+
       
       <div id="coreContainer">
-        <div id="library">
 
+<div id="loader">Loading...</div>
+
+<div id="joePie" style="display: none;">
+  <div id="joePieSVG">
+    <img src="./mug-cropped.svg" alt="coffee mug" />
+    <img src="./pie-cropped.svg" alt="huckleberry pie" />
+  </div>
+  <h2>Library is empty!</h2>
+</div>
+
+<div id="welcome" style="display: none;">
+  <div>
+    <h2>Watchlist 📺</h2>
+    <p>A tracker for your TV shows</p>
+  </div>
+  <div>
+    
+    <div id="firebaseui-auth-container"></div>
+  </div>
+</div>
+        <div id="library" style="display: none;">
+          <!-- cards get put here via function-->
         </div>
 
       </div>
+
+
 
       <div id="footer">
         Created by Orz

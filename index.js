@@ -1,9 +1,3 @@
-// document.addEventListener('DOMContentLoaded', function () {
-//   var link = document.getElementById('font-style');
-//   link.onload = function () {
-//       this.rel = 'stylesheet';
-//   };
-// });
 ////////////////////////////////////////////////////////
 export { authCheck }
 
@@ -27,7 +21,10 @@ import loaderHtml from './loaderHtml.js'
 document.querySelector("#signOut").addEventListener("click", signOut );
 
 document.querySelector('#formDialog').innerHTML = dialogHtml;
+
 const core = document.querySelector("#coreContainer");
+
+
 
 /////////////////////////////////////////////////////////
 let library = [];
@@ -36,12 +33,19 @@ const libDivRef = () => document.querySelector("#library");
 // then, whenever you want #library:
 let libraryDiv = libDivRef();
 /////////////////////////////////////////////////////////
-core.innerHTML = loaderHtml
+//core.innerHTML = loaderHtml  --temp disable while testing display version
 // Loader needed in all 3 cases:
 // Pageload into a signed-out state
 // Pageload into a signed-in state
 // Pageload into a redirect
 /////////////////////////////////////////////////////////
+// core.insertAdjacentHTML("afterbegin", joePieHtml);
+// document.querySelector("#joePie").style.display = "none" --disable while testing display version
+
+
+//////////////////////////////////////////////
+//---------- INITIAL STARTUP FLOW ----------//
+//////////////////////////////////////////////
 
 // REQUIRED FOR FIREBASE UI UPON A SIGN-IN REDIRECT
 // AUTH DIV MUST BE PRESENT
@@ -76,18 +80,24 @@ async function authCheck() {
   if (user) {
     // User is signed in
     console.log("Checked: User is signed in:", user.email);
-    core.innerHTML = libraryHtml;
+
+    getLibrary();
+
+    if(!emptyChecker()){
+    // core.innerHTML = libraryHtml;
+    displaySwitch("library")
+    renderCards(library)
+    }
 
     document.querySelector("#signOut").style.display = "inline-flex"
 
-    getLibrary();
-    renderCards(library)
+   
 
   } else {
     // User is signed out
     console.log("Checked: User is signed out");
 
-    core.innerHTML = authHtml;
+    displaySwitch("auth")
     ui.start('#firebaseui-auth-container', uiConfig);
   }
 }
@@ -166,7 +176,7 @@ export function submissionTasks() {
   card.setAttribute("data-complete", obj.complete);
   //IF 'complete' is true, it highlights the card
 
-  core.innerHTML = libraryHtml
+  displaySwitch("library")
   libraryDiv = libDivRef();
 
   renderCards(library)
@@ -237,7 +247,8 @@ window.closeModal = closeModal;
 function sendLibrary() {
   localStorage.setItem("localContent", JSON.stringify(library));
   //set a localStorage item called "localContent", set it as a stringified library[]
-  emptyChecker();
+  //emptyChecker();
+  //moved to card remove
 }
 function getLibrary() {
   if (localStorage.getItem("localContent") !== null) {
@@ -317,8 +328,41 @@ export function queryData() {
 }
 window.queryData = queryData;
 ////////////////////
+//Checks if library is empty, displays default image if so//
+function emptyChecker() {
+  console.log("Empty checker triggered")
+  if (library.length === 0) {
+    //document.querySelector("div#coreContainer").innerHTML = joePieHtml;
 
+    //document.querySelector("#joePie").style.display = "flex";
+    displaySwitch("joePie")
+    return true
+   } else displaySwitch("library")
+  return false
+}
+//emptyChecker();
 ////////////////////
+function displaySwitch(mode) {
+  document.querySelector("#joePie").style.display = "none";
+  document.querySelector("#welcome").style.display = "none";
+  document.querySelector("#loader").style.display = "none";
+  document.querySelector("#library").style.display = "none";
+  switch(mode) {
+    case "joePie":
+      document.querySelector("#joePie").style.display = "flex";
+      break;
+    case "auth":
+      document.querySelector("#welcome").style.display = "flex";
+      break;
+    case "loader":
+      document.querySelector("#loader").style.display = "block";
+      break;
+    case "library":
+      document.querySelector("#library").style.display = "grid";
+      break;
+  }
+}
+
 ////////////Actually runs the card-creation function, and then appends that card to the page
 function renderCards(givenLibrary) {
   libraryDiv = libDivRef();
@@ -418,6 +462,7 @@ function createCard(obj) {
     if (index !== -1) {
       library.splice(index, 1);
       sendLibrary();
+      emptyChecker();
     }
     //finds the right object in the array (based on title) and removes from Library natively
     //then runs the sendLibrary function to remove from remote
@@ -453,14 +498,7 @@ async function getDataFromTVMaze(searchTerm) {
   }
 }
 //--------------------------------------------------------//
-//Checks if library is empty, displays default image if so//
-function emptyChecker() {
-  if (library.length === 0) {
-    document.querySelector("div#coreContainer").innerHTML = joePieHtml;
-    //document.querySelector("#joePie").style.display = "flex";
-  } //else document.querySelector("#joePie").style.display = "none";
-}
-//emptyChecker();
+
 //--------------------------------------------------------//
 // Define an array of color schemes
 const colorSchemes = [
