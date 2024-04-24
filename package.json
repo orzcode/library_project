@@ -91,6 +91,7 @@
     "minimatch": "^3.1.2",
     "ms": "^2.1.2",
     "natural-compare": "^1.4.0",
+    "npm": "^10.5.2",
     "once": "^1.4.0",
     "optionator": "^0.9.1",
     "p-limit": "^3.1.0",
