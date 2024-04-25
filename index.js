@@ -27,10 +27,11 @@ const libraryDiv = document.querySelector("#library");
 // REQUIRED FOR FIREBASE UI UPON A SIGN-IN REDIRECT
 // AUTH DIV MUST BE PRESENT
 //
-// Runs on page load in order to check if a redirect
+// Runs on page load in order to check if a redirect from Auth provider
 if (ui.isPendingRedirect()) {
   //If they ARE loading from a redirect:
-  //Loader already shown - append Auth & start UI - hide Auth - (run Auth Check) 
+  //Loader already shown natively on pageload 
+  //append Auth & start UI - hide Auth - (run Auth Check) 
 
   console.log("'pending redirect' triggered");
 
@@ -40,12 +41,12 @@ if (ui.isPendingRedirect()) {
     //also, authCheck() gets run BY firebaseUI upon success
 
   displaySwitch("loader")
-  // Switches to loader while loading/checking user auth
+  // Switches to loader while loading/checking user auth...
+    //...which then re-displays as appropriate (see below)
 } else {
   // Not a redirect, proceed with auth check
   authCheck();
 }
-
 
 
 // Check Auth State - I.E - decide to show login or not show login
@@ -58,6 +59,10 @@ async function authCheck() {
   if (user) {
     // User is signed in
     console.log("Checked: User is signed in:", user.email);
+
+    //"Add a show" header is hidden initially
+    //this loads it upon user sign-in
+    document.querySelector("#header2").style.display = "flex";
 
     getLibrary();
 
