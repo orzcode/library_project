@@ -8,7 +8,7 @@ import "firebaseui/dist/firebaseui.css";
 
 import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { initializeFirestore, getFirestore, collection, doc, getDoc, setDoc, addDoc } from "firebase/firestore";
+import { initializeFirestore, getFirestore, collection, doc, getDoc, setDoc, addDoc, Timestamp } from "firebase/firestore";
 
 //import { getDatabase } from "firebase/database";
 ////////////////////////////////////////////////////////////
@@ -109,6 +109,7 @@ const ui = new firebaseui.auth.AuthUI(auth);
 
 
 ////////////////////////////////////////////////////////
+//To create or overwrite a single document, use the following language-specific set() methods:
 
 // Add a new document in collection "cities"
 // const setFireStore = await setDoc(doc(db, "cities", "LA"), {
@@ -117,7 +118,9 @@ const ui = new firebaseui.auth.AuthUI(auth);
 //   country: "USA"
 // });
 
-// //or maybe
+// When you use set() to create a document, you must specify an ID for the document to create. For example:
+// But sometimes there isn't a meaningful ID for the document, and it's more convenient to let
+// Firestoreauto-generate an ID for you. You can do this by calling the following language-specific add() methods:
 
 // const addFireSTore = await addDoc(collection(db, "cities"), {
 //   name: "Tokyo",
@@ -125,7 +128,11 @@ const ui = new firebaseui.auth.AuthUI(auth);
 // });
 // console.log("Document written with ID: ", docRef.id);
 
+//Behind the scenes, .add(...) and .doc().set(...) are completely equivalent, so you can use whichever is more convenient.
+
 ////////////////////////////////////////////////////////
+
+//The following example shows how to retrieve the contents of a single document using get():
 
 // const docRef = doc(db, "cities", "SF");
 // const docSnap = await getDoc(docRef);
