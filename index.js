@@ -7,8 +7,6 @@ import { doc } from "firebase/firestore";
 const signOutButton = document.querySelector("#signOut")
 signOutButton.addEventListener("click", signOut );
 
-const core = document.querySelector("#coreContainer");
-
 let library = [];
 
 const libraryDiv = document.querySelector("#library");
@@ -19,6 +17,15 @@ const libraryDiv = document.querySelector("#library");
 // Pageload into a redirect
 /////////////////////////////////////////////////////////
 
+// Session-based Library[] is the go-between, from which cards are rendered, everything saved etc.
+// A pure array of objects; structured Series data.
+
+// localstorage.localContent and/or firebase are the remote 'saved' versions
+// which are encoded as a string - must be decoded back to Series array first
+// Which is why the library[] exists - that's where it gets put.
+
+// I.E: upon first sign-in or any change (card create, toggle, delete)
+// the remote is GET or SENT to pull/push (with encoding/decoding applied too)
 
 //////////////////////////////////////////////
 //---------- INITIAL STARTUP FLOW ----------//
@@ -133,7 +140,9 @@ function toggle(theObj) {
     card.style.opacity = 1;
     card.style.transform = "scale(1)";
     sendLibrary();
-    //sendLib must be IN the timeout func for it to run on time
+    //(sendLibrary must be IN the timeout func for it to run on time)
+    //as you can see, this updates the object in the session-based Library[]; prior to sending
+
   }, 300); // wait 300ms (the duration of the transition) before changing the card's state and position
 }
 window.Series = Series;
@@ -148,22 +157,24 @@ function reSeries(unconstructedArray) {
   } else return;
 }
 ///////////////////
+// Runs when hitting 'Save' from the dialog screen
 export function submissionTasks() {
   const obj = formSubmission();
   const card = createCard(obj);
   card.setAttribute("data-complete", obj.complete);
   //IF 'complete' is true, it highlights the card
 
+  library.push(obj);
+
   displaySwitch("library")
 
-  renderCards(library)
-
   libraryDiv.appendChild(card);
+    //adds/renders a single card visually; local session-based Library[] & saved version below
 
   closeModal();
-
-  library.push(obj);
+  
   sendLibrary();
+    //updates/saves to remote (localstorage or DB)
 }
 window.submissionTasks = submissionTasks;
 /////////////////////////////////////////////////////////////////////////////////
@@ -225,8 +236,7 @@ window.closeModal = closeModal;
 function sendLibrary() {
   localStorage.setItem("localContent", JSON.stringify(library));
   //set a localStorage item called "localContent", set it as a stringified library[]
-  //emptyChecker();
-  //moved to card remove
+  //I.E: takes whatever is in the session-based Library[] and saves/sends
 }
 function getLibrary() {
   if (localStorage.getItem("localContent") !== null) {
@@ -244,12 +254,7 @@ function getLibrary() {
   } else return;
 }
 //-----------------------------------------------------------------------------//
-//////////////////////////////////////////////////////////////////////////////////
-//The Magic//
-//Since adding welcome screen, this probably shouldn't run at startup//
-getLibrary();
-//renderCards(library);
-////////////////////
+
 
 //This function runs when you click 'Query'
 /////////////////////
@@ -341,7 +346,8 @@ function displaySwitch(mode) {
   }
 }
 
-////////////Actually runs the card-creation function, and then appends that card to the page
+// Actually runs the card-creation function, and then appends that card to the page
+// Renders based on the session-based Library[]
 function renderCards(givenLibrary) {
   if (givenLibrary) {
     givenLibrary.forEach((ObjFromArray) => {
@@ -351,11 +357,12 @@ function renderCards(givenLibrary) {
       card.setAttribute("data-complete", ObjFromArray.complete);
       //IF 'complete' is true, it highlights the card
       libraryDiv.appendChild(card);
+      //dont be confused - it's appending EVERY child (of the session-based Library[])
     });
   } else return;
 }
 ///////
-////////Creates a card based on array object, but doesn't append tp page yet////////////
+////////Creates a card based on array object, but doesn't append to page yet////////////
 //In other words, even though this is a long function, it's all just creating the card structure
 //
 //Note that 'card' here is different in scope!! And is therefore separate. Confusing huh
@@ -443,6 +450,7 @@ function createCard(obj) {
     }
     //finds the right object in the array (based on title) and removes from Library natively
     //then runs the sendLibrary function to remove from remote
+    //naturally if this was the last item, it'd need to check for an empty library too
   }
   ////////////////
   linkP.appendChild(removeStrong);
