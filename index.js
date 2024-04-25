@@ -70,7 +70,7 @@ async function authCheck() {
     //"Add a show" header is hidden initially
     //this loads it upon user sign-in
     document.querySelector("#header2").style.display = "flex";
-
+    console.log(document.querySelectorAll('#coreContainer *'))
     getLibrary();
 
     if(!emptyChecker()){
@@ -324,12 +324,14 @@ function emptyChecker() {
   return false
 }
 //emptyChecker();
-////////////////////
+////////////////////////////////////////////////////////////
 function displaySwitch(mode) {
   document.querySelector("#joePie").style.display = "none";
   document.querySelector("#welcome").style.display = "none";
   document.querySelector("#loader").style.display = "none";
   document.querySelector("#library").style.display = "none";
+  //document.querySelector("dialog.mdl-dialog.firebaseui-dialog.firebaseui-id-dialog").style.display = "none";
+
   switch(mode) {
     case "joePie":
       document.querySelector("#joePie").style.display = "flex";
@@ -345,7 +347,7 @@ function displaySwitch(mode) {
       break;
   }
 }
-
+////////////////////////////////////////////////////////////
 // Actually runs the card-creation function, and then appends that card to the page
 // Renders based on the session-based Library[]
 function renderCards(givenLibrary) {

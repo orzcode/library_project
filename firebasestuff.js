@@ -13,11 +13,6 @@ import { initializeFirestore, getFirestore, collection, doc, getDoc, setDoc, add
 //import { getDatabase } from "firebase/database";
 ////////////////////////////////////////////////////////////
 
-// const core = document.querySelector("#coreContainer");
-// import libraryHtml from './libraryHtml.js'
-// import authHtml from './authHtml.js'
-// import loaderHtml from './loaderHtml.js'
-
 //////////////////////////////////////////////////////
 const firebaseConfig = {
   apiKey: "AIzaSyCgWOsD40-y422erIMNultdmSBmcP5c_VY",

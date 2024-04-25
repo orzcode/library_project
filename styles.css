@@ -81,6 +81,12 @@ html,
 #formDialog {
   user-select: none;
 }
+.mdl-card {
+  user-select: auto;
+  caret-color: auto;
+  /* this is the firebase container */
+}
+
 body {
   font-size: 2rem;
   /* font-size: calc(1.5rem + 0.4vw); */
