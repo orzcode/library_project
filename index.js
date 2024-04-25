@@ -3,10 +3,6 @@ export { authCheck }
 ////////////////////////////////////////////////////////
 import { auth, uiConfig, ui } from "./firebasestuff.js";
 import { doc } from "firebase/firestore";
-
-import cloudNew from './cloudNew.svg';
-import ripple from './ripple.svg';
-import link from './link.svg'
 /////////////////////////////////////////////////////////
 const signOutButton = document.querySelector("#signOut")
 signOutButton.addEventListener("click", signOut );
@@ -172,7 +168,7 @@ export function modalOpenTasks() {
   scrollTo(0, 0);
   document.querySelector("form").reset();
   document.querySelector("#formDialog").showModal();
-  document.querySelector("#formImg").src = cloudNew
+  document.querySelector("#formImg").src = "./cloudNew.svg"
 
   document.querySelector("#formDialog h2").innerHTML = "Add a series";
   document.querySelector("#formDialog a").style.pointerEvents = "none";
@@ -264,7 +260,7 @@ export function queryData() {
 
   document.querySelector("#saveSeries").disabled = true;
 
-  document.querySelector("#formImg").src = ripple;
+  document.querySelector("#formImg").src = "./ripple.svg";
 
   const searchTerm = document.querySelector("#seriesName").value;
   document.querySelector("#seriesName").value = "";
@@ -399,7 +395,7 @@ function createCard(obj) {
   linkP.appendChild(linkStrong);
   linkStrong.appendChild(linkA);
   let linkSvg = document.createElement("img");
-  linkSvg.src = link
+  linkSvg.src = "./link.svg"
   linkA.appendChild(linkSvg);
 
   card.appendChild(linkP);
