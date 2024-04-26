@@ -70,7 +70,6 @@ async function authCheck() {
     //"Add a show" header is hidden initially
     //this loads it upon user sign-in
     document.querySelector("#header2").style.display = "flex";
-    console.log(document.querySelectorAll('#coreContainer *'))
     getLibrary();
 
     if(!emptyChecker()){
@@ -313,7 +312,6 @@ window.queryData = queryData;
 ////////////////////
 //Checks if library is empty, displays default image if so//
 function emptyChecker() {
-  console.log("Empty checker triggered")
   if (library.length === 0) {
     //document.querySelector("div#coreContainer").innerHTML = joePieHtml;
 

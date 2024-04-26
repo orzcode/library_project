@@ -12,7 +12,14 @@ import { initializeFirestore, getFirestore, collection, doc, getDoc, setDoc, add
 
 //import { getDatabase } from "firebase/database";
 ////////////////////////////////////////////////////////////
+// var admin = require("firebase-admin");
 
+// var serviceAccount = require("path/to/serviceAccountKey.json");
+
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+//   databaseURL: "https://tv-series-library-default-rtdb.firebaseio.com"
+// });
 //////////////////////////////////////////////////////
 const firebaseConfig = {
   apiKey: "AIzaSyCgWOsD40-y422erIMNultdmSBmcP5c_VY",
@@ -29,9 +36,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+//const db = initializeFirestore(app, { experimentalAutoDetectLongPolling: true });
 
 //const database = getDatabase(app); <-- realtime db, not firestore
-//const db = initializeFirestore(app, { experimentalAutoDetectLongPolling: true });
 
 //compat - older
 // const app = firebase.initializeApp(firebaseConfig);
@@ -118,6 +125,21 @@ const ui = new firebaseui.auth.AuthUI(auth);
 //   country: "USA"
 // });
 
+const setFireStore = async () => {
+  try {
+    await setDoc(doc(db, "cities", "LA"), {
+      name: "Los Angeles",
+      state: "CA",
+      country: "USA"
+    });
+    console.log("Document successfully written!", );
+  } catch (e) {
+    console.error("Error writing document: ", e);
+  }
+};
+
+document.querySelector("#test").addEventListener("click", setFireStore);
+
 // When you use set() to create a document, you must specify an ID for the document to create. For example:
 // But sometimes there isn't a meaningful ID for the document, and it's more convenient to let
 // Firestoreauto-generate an ID for you. You can do this by calling the following language-specific add() methods:
@@ -134,7 +156,7 @@ const ui = new firebaseui.auth.AuthUI(auth);
 
 //The following example shows how to retrieve the contents of a single document using get():
 
-// const docRef = doc(db, "cities", "SF");
+// const docRef = doc(db, "cities", "LA");
 // const docSnap = await getDoc(docRef);
 
 // if (docSnap.exists()) {
@@ -143,6 +165,18 @@ const ui = new firebaseui.auth.AuthUI(auth);
 //   // docSnap.data() will be undefined in this case
 //   console.log("No such document!");
 // }
+
+document.querySelector("#test2").addEventListener("click", async () => {
+  const docRef = doc(db, "cities", "LA");
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+  } else {
+    console.log("No such document!");
+  }
+});
+
 
 ////////////////////////////////////////////////////////
 
