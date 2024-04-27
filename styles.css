@@ -87,6 +87,15 @@ html,
   /* this is the firebase container */
 }
 
+.mdl-dialog /*.firebaseui-dialog .firebaseui-id-dialog*/ {
+  /* this is the email link sign-in redirect container */
+  /* display, position might interfere with other dialogs */
+  
+  /* display: none !important;
+  position: static !important; */
+  opacity: 0 !important;
+}
+
 body {
   font-size: 2rem;
   /* font-size: calc(1.5rem + 0.4vw); */
@@ -97,8 +106,7 @@ body {
   font-family: "twsans";
   font-style: normal;
   font-weight: normal;
-  src: local("twsans"),
-    url("twsans.otf") format("opentype");
+  src: local("twsans"), url("twsans.otf") format("opentype");
 }
 /* @font-face {
   font-family: "A-OTF Shin Go Pro R";
@@ -249,7 +257,7 @@ h1 {
   z-index: 1;
 }
 
-#signOut:hover{
+#signOut:hover {
   background-color: var(--btnPrimary);
   filter: brightness(110%);
 }
@@ -383,7 +391,8 @@ h1 {
   display: flex;
   gap: 3rem;
 }
-p.card1stRowText, p.card2ndRowText {
+p.card1stRowText,
+p.card2ndRowText {
   padding-top: 1.2rem;
 }
 .card p:last-of-type {
