@@ -117,6 +117,12 @@ html,
 .firebaseui-input::selection {
   background: rgba(25, 25, 25, 0.25) !important
 }
+.firebaseui-text{
+  color: whitesmoke !important;
+}
+.firebaseui-subtitle {
+  color: whitesmoke !important
+}
 
 .mdl-card {
   user-select: auto;
