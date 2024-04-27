@@ -81,20 +81,82 @@ html,
 #formDialog {
   user-select: none;
 }
+
+.mdl-card form {
+  /* this is the firebase container for email link sign-in when entering email*/
+  background-color: var(--header);
+  color: whitesmoke;
+  border-radius: 1rem;
+  font-family: Lato;
+}
+.firebaseui-container {
+  /* god forsaken 'container' that sits behind the form */
+  background-color: transparent !important;
+}
+.firebaseui-title, .firebaseui-card-header {
+  color: whitesmoke !important;
+  font-family: Lato !important;
+  filter: drop-shadow(0px 0px 0px transparent) !important;
+}
+.firebaseui-form-actions button {
+  background-color: var(--btnPrimary);
+  filter: brightness(110%) saturate(1.1);
+  border-radius: 1rem;
+  border: 1px solid black;
+}
+.firebaseui-form-actions button:hover {
+  background-color: var(--btnPrimary);
+  filter: brightness(140%);
+}
+
+.firebaseui-text, .firebaseui-textfield, .firebaseui-textfield label, .firebaseui-input, input:-internal-autofill-selected{
+  color: whitesmoke !important;
+  background-color: transparent !important;
+  font-family: Lato;
+}
+.firebaseui-input::selection {
+  background: rgba(25, 25, 25, 0.25) !important
+}
+
 .mdl-card {
   user-select: auto;
   caret-color: auto;
-  /* this is the firebase container */
+
+  background-color: var(--header);
+  color: whitesmoke;
+  border-radius: 1rem;
+  /* this is the firebase container for email link sign-in after entering email*/
 }
 
 .mdl-dialog /*.firebaseui-dialog .firebaseui-id-dialog*/ {
   /* this is the email link sign-in redirect container */
   /* display, position might interfere with other dialogs */
-  
-  /* display: none !important;
-  position: static !important; */
-  opacity: 0 !important;
+
+  /* opacity: 0 !important; */
+  top: -40% !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+
+  background-color: var(--header);
+  color: whitesmoke !important;
+  border-radius: 1rem;
 }
+.mdl-dialog * {
+  color: whitesmoke !important
+}
+
+#firebaseui-auth-container {
+  background-color: none;
+}
+#firebaseui-auth-container button {
+  background-color: var(--header);
+  color: whitesmoke;
+  border-radius: 1rem;
+}
+
+
+
 
 body {
   font-size: 2rem;
@@ -126,7 +188,6 @@ a {
 /* ---------------------------------------------------- */
 button {
   padding: 0;
-  border: none;
   background: none;
   color: inherit;
   font: inherit;
