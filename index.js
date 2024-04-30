@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////
 export { authCheck }
 ////////////////////////////////////////////////////////
-import { auth, uiConfig, ui } from "./firebasestuff.js";
+import { auth, uiConfig, ui, checkUserLibrary } from "./firebasestuff.js";
 import { doc } from "firebase/firestore";
 /////////////////////////////////////////////////////////
 const signOutButton = document.querySelector("#signOut")
@@ -65,7 +65,9 @@ async function authCheck() {
 
   if (user) {
     // User is signed in
-    console.log("Checked: User is signed in:", user.email);
+    console.log("authCheck(): User is signed in:", user.email, user.uid);
+
+    //console.log(checkUserLibrary(user.uid))
 
     //"Add a show" header is hidden initially
     //this loads it upon user sign-in
