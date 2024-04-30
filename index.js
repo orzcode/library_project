@@ -1,8 +1,7 @@
 ////////////////////////////////////////////////////////
 export { authCheck }
 ////////////////////////////////////////////////////////
-import { auth, uiConfig, ui, checkUserLibrary } from "./firebasestuff.js";
-import { doc } from "firebase/firestore";
+import { auth, uiConfig, ui, UserLibrary } from "./firebasestuff.js";
 /////////////////////////////////////////////////////////
 const signOutButton = document.querySelector("#signOut")
 signOutButton.addEventListener("click", signOut );
@@ -62,12 +61,13 @@ async function authCheck() {
   const user = await new Promise(resolve => {
     auth.onAuthStateChanged(resolve);
   });
-
+  
   if (user) {
     // User is signed in
     console.log("authCheck(): User is signed in:", user.email, user.uid);
 
-    //console.log(checkUserLibrary(user.uid))
+    UserLibrary.setUserId(user.uid)
+    //sets this user's ID for automatic library get/save operations
 
     //"Add a show" header is hidden initially
     //this loads it upon user sign-in

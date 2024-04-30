@@ -19,18 +19,6 @@ import {
   addDoc,
   serverTimestamp,
 } from "firebase/firestore";
-import { normalize } from "uri-js";
-
-//import { getDatabase } from "firebase/database";
-////////////////////////////////////////////////////////////
-// var admin = require("firebase-admin");
-
-// var serviceAccount = require("path/to/serviceAccountKey.json");
-
-// admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount),
-//   databaseURL: "https://tv-series-library-default-rtdb.firebaseio.com"
-// });
 //////////////////////////////////////////////////////
 const firebaseConfig = {
   apiKey: "AIzaSyCgWOsD40-y422erIMNultdmSBmcP5c_VY",
@@ -47,9 +35,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-//const db = initializeFirestore(app, { experimentalAutoDetectLongPolling: true });
-
-//const database = getDatabase(app); <-- realtime db, not firestore
 
 //compat - older
 // const app = firebase.initializeApp(firebaseConfig);
@@ -86,11 +71,17 @@ const uiConfig = {
       //
       // If it returns true, then after signing in, user will be redirected to the URL that is specified
       // by signInSuccessUrl. When it returns false, the user will stay on the same page.
-      console.log("Firebase Sign-in: ", authResult.user.email, authResult.user.uid);
+      console.log(
+        "Firebase Sign-in: ",
+        authResult.user.email,
+        authResult.user.uid
+      );
 
-      checkUserExists(authResult.user.uid)
+      checkUserExists(authResult.user.uid);
+      //check if user exists in Firebase, and creates empty library for them if not
 
-      authCheck();
+      authCheck(authResult.user.uid);
+
       return false;
     },
     signInFailure: function (error) {
@@ -133,20 +124,53 @@ const createUserLibrary = async (userId) => {
   console.log("User Library JSON string field created!");
 };
 
-const updateUserLibrary = async (userId, data) => {
-  await updateDoc(doc(db, "users", userId), {
-    libraryJSONString: data,
-    timestamp: serverTimestamp(),
-  });
-  console.log("User Library JSON string updated!");
-};
-
-// document.querySelector("#test").addEventListener("click", () => {
-//   const userId = "wcQtEPBFJJN9hpRYyc02AFwNfNv1"; // Replace with the actual user ID
-//   updateUserLibrary(userId, "CUNT");
-// });
-
 ////////////////////////////////////////////////////////
+
+const UserLibrary = (() => {
+  let userId = null;
+
+  const setUserId = (newUserId) => {
+    userId = newUserId;
+  };
+  const getUserId = () => {
+    return userId;
+  };
+
+  const getUserLibrary = async () => {
+    const userRef = doc(db, "users", getUserId());
+
+    const userDocSnapshot = await getDoc(userRef);
+
+    const data = userDocSnapshot.data().libraryJSONString;
+
+    return data;
+    //returns the JSON string, ready to be de-coded into an object library
+  };
+
+  const updateUserLibrary = async (data) => {
+    //this only gets called during normal operation with already signed-in user
+    //so should probably take the UserID automatically? Maybe?
+    await updateDoc(doc(db, "users", getUserId()), {
+      libraryJSONString: data,
+      timestamp: serverTimestamp(),
+    });
+    console.log("User Library JSON string updated!");
+  };
+
+  return {
+    setUserId,
+    getUserLibrary,
+    updateUserLibrary,
+  };
+})();
+
+//usage: UserLibrary.getUserLibrary() to get a string of their library
+
+document.querySelector("#test").addEventListener("click", function () {
+  UserLibrary.getUserLibrary();
+});
+////////////////////////////////////////////////////////
+
 const checkUserExists = async (userId) => {
   // Checks to see if the given userID has a library ("document") already
   // If yes - do nothing.
@@ -163,8 +187,7 @@ const checkUserExists = async (userId) => {
     console.log("User exists! Document data:");
     console.log(data);
     //if yes, does nothing. It exists, it will get called upon later
-  } 
-  else {
+  } else {
     if (!userDocSnapshot.exists()) {
       console.log("No such user!");
       //if no, then create uid.libraryJson and init as null
@@ -174,13 +197,6 @@ const checkUserExists = async (userId) => {
   }
 };
 
-// Example usage:
-// document.querySelector("#test2").addEventListener("click", () => {
-//   const userId = "wcQtEPBFJJN9hpRYyc02AFwNfNv3"; // Replace with the actual user ID
-//   checkUserExists(userId);
-// });
 ////////////////////////////////////////////////////////
 
-export { auth, uiConfig, ui, checkUserLibrary };
-
-// https://github.com/firebase/firebaseui-web
+export { auth, uiConfig, ui, UserLibrary };
