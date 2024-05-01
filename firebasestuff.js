@@ -77,10 +77,11 @@ const uiConfig = {
         authResult.user.uid
       );
 
-      checkUserExists(authResult.user.uid);
-      //check if user exists in Firebase, and creates empty library for them if not
-
-      authCheck(authResult.user.uid);
+      checkUserExists(authResult.user.uid).then(() => {
+        //Have to wait for checkUser / Library creation (called by checkUser)
+        //to finish first before proceeding, else it comes up 'undefined'
+        authCheck(authResult.user.uid);
+      });
 
       return false;
     },
@@ -95,7 +96,7 @@ const uiConfig = {
     uiShown: function () {
       // The widget is rendered.
       // Hide the loader.
-      console.log("Firebase triggered  ('uiShown' callback)");
+      console.log("Firebase triggered");
       //document.getElementById("loader").style.display = "none";
     },
   },
@@ -117,11 +118,21 @@ const ui = new firebaseui.auth.AuthUI(auth);
 ////////////////////////////////////////////////////////
 
 const createUserLibrary = async (userId) => {
+  const preExisting = localStorage.getItem("localContent");
+  let data = null;
+
+  if (preExisting != null && preExisting != undefined && preExisting != []) {
+    data = preExisting;
+  } else {
+    data = null;
+  }
+  //should in theory port/transfer the pre-existing local storage to Firebase?
+
   //ONLY CALL THIS IF THE USER LIBRARY IS NON-EXISTENT
   await setDoc(doc(db, "users", userId), {
-    libraryJSONString: null,
+    libraryJSONString: data,
   });
-  console.log("User Library JSON string field created!");
+  //console.log("User Library created on Firebase!", data);
 };
 
 ////////////////////////////////////////////////////////
@@ -137,13 +148,16 @@ const UserLibrary = (() => {
   };
 
   const getUserLibrary = async () => {
+    //usage: UserLibrary.getUserLibrary() to get a string of their library
     const userRef = doc(db, "users", getUserId());
 
     const userDocSnapshot = await getDoc(userRef);
 
-    const data = userDocSnapshot.data().libraryJSONString;
+    let data = userDocSnapshot.data();
 
-    return data;
+    let libraryString = data.libraryJSONString;
+
+    return libraryString;
     //returns the JSON string, ready to be de-coded into an object library
   };
 
@@ -154,7 +168,7 @@ const UserLibrary = (() => {
       libraryJSONString: data,
       timestamp: serverTimestamp(),
     });
-    console.log("User Library JSON string updated!");
+    //console.log("User Library updated on Firebase!");
   };
 
   return {
@@ -164,11 +178,10 @@ const UserLibrary = (() => {
   };
 })();
 
-//usage: UserLibrary.getUserLibrary() to get a string of their library
 
-document.querySelector("#test").addEventListener("click", function () {
-  UserLibrary.getUserLibrary();
-});
+// document.querySelector("#test").addEventListener("click", function () {
+//   UserLibrary.getUserLibrary();
+// });
 ////////////////////////////////////////////////////////
 
 const checkUserExists = async (userId) => {
@@ -184,16 +197,16 @@ const checkUserExists = async (userId) => {
 
   // Check if the user / document exists
   if (userDocSnapshot.exists() && data.libraryJSONString != null) {
-    console.log("User exists! Document data:");
-    console.log(data);
+    // console.log("User exists! Document data:");
+    // console.log(data);
     //if yes, does nothing. It exists, it will get called upon later
   } else {
     if (!userDocSnapshot.exists()) {
-      console.log("No such user!");
+      //console.log("No such user! Creating Library on Firebase...");
       //if no, then create uid.libraryJson and init as null
       //this takes place WITHIN the else - a double check measure
       await createUserLibrary(userId);
-    } else console.log("User exists and library is still null - ready to use");
+    } //else console.log("User exists and library is still null - ready to use");
   }
 };
 

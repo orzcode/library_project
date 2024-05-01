@@ -1,10 +1,10 @@
 ////////////////////////////////////////////////////////
-export { authCheck }
+export { authCheck };
 ////////////////////////////////////////////////////////
 import { auth, uiConfig, ui, UserLibrary } from "./firebasestuff.js";
 /////////////////////////////////////////////////////////
-const signOutButton = document.querySelector("#signOut")
-signOutButton.addEventListener("click", signOut );
+const signOutButton = document.querySelector("#signOut");
+signOutButton.addEventListener("click", signOut);
 
 let library = [];
 
@@ -36,58 +36,58 @@ const libraryDiv = document.querySelector("#library");
 // Runs on page load in order to check if a redirect from Auth provider
 if (ui.isPendingRedirect()) {
   //If they ARE loading from a redirect:
-  //Loader already shown natively on pageload 
-  //append Auth & start UI - hide Auth - (run Auth Check) 
+  //Loader already shown natively on pageload
+  //append Auth & start UI - hide Auth - (run Auth Check)
 
   console.log("'pending redirect' triggered");
 
-  displaySwitch("auth")
+  displaySwitch("auth");
   // Start FirebaseUI
-   ui.start("#firebaseui-auth-container", uiConfig)
-    //also, authCheck() gets run BY firebaseUI upon success
+  ui.start("#firebaseui-auth-container", uiConfig);
+  //also, authCheck() gets run BY firebaseUI upon success
 
-  displaySwitch("loader")
+  displaySwitch("loader");
   // Switches to loader while loading/checking user auth...
-    //...which then re-displays as appropriate (see below)
+  //...which then re-displays as appropriate (see below)
 } else {
   // Not a redirect, proceed with auth check
   authCheck();
 }
 
-
 // Check Auth State - I.E - decide to show login or not show login
 async function authCheck() {
   // Wait for the auth check
-  const user = await new Promise(resolve => {
+  const user = await new Promise((resolve) => {
     auth.onAuthStateChanged(resolve);
   });
-  
+
   if (user) {
     // User is signed in
     console.log("authCheck(): User is signed in:", user.email, user.uid);
 
-    UserLibrary.setUserId(user.uid)
+    UserLibrary.setUserId(user.uid);
     //sets this user's ID for automatic library get/save operations
 
     //"Add a show" header is hidden initially
     //this loads it upon user sign-in
     document.querySelector("#header2").style.display = "flex";
-    getLibrary();
 
-    if(!emptyChecker()){
-      //if library isn't empty, then:
-    displaySwitch("library")
-    renderCards(library)
-    }
+    getLibrary().then(() => {
+      if (!emptyChecker()) {
+        //if library isn't empty, then:
+        displaySwitch("library");
+        renderCards(library);
+      }
+    });
 
-    signOutButton.style.display = "inline-flex"
+    signOutButton.style.display = "inline-flex";
     //and show the sign out button
   } else {
     // User is signed out
     console.log("Checked: User is signed out");
 
-    displaySwitch("auth")
-    ui.start('#firebaseui-auth-container', uiConfig);
+    displaySwitch("auth");
+    ui.start("#firebaseui-auth-container", uiConfig);
   }
 }
 
@@ -96,7 +96,7 @@ function signOut() {
   auth.signOut();
   signOutButton.style.display = "none";
 
-  location.reload()
+  location.reload();
   //refreshes page
 }
 /////////////////////////////////////////////////////////
@@ -143,7 +143,6 @@ function toggle(theObj) {
     sendLibrary();
     //(sendLibrary must be IN the timeout func for it to run on time)
     //as you can see, this updates the object in the session-based Library[]; prior to sending
-
   }, 300); // wait 300ms (the duration of the transition) before changing the card's state and position
 }
 window.Series = Series;
@@ -167,25 +166,24 @@ export function submissionTasks() {
 
   library.push(obj);
 
-  displaySwitch("library")
+  displaySwitch("library");
 
   libraryDiv.appendChild(card);
-    //adds/renders a single card visually; local session-based Library[] & saved version below
+  //adds/renders a single card visually; local session-based Library[] & saved version below
 
   closeModal();
-  
+
   sendLibrary();
-    //updates/saves to remote (localstorage or DB)
+  //updates/saves to remote (localstorage or DB)
 }
 window.submissionTasks = submissionTasks;
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 export function modalOpenTasks() {
-  
   scrollTo(0, 0);
   document.querySelector("form").reset();
   document.querySelector("#formDialog").showModal();
-  document.querySelector("#formImg").src = "./cloudNew.svg"
+  document.querySelector("#formImg").src = "./cloudNew.svg";
 
   document.querySelector("#formDialog h2").innerHTML = "Add a series";
   document.querySelector("#formDialog a").style.pointerEvents = "none";
@@ -234,28 +232,45 @@ window.closeModal = closeModal;
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------//
-function sendLibrary() {
-  localStorage.setItem("localContent", JSON.stringify(library));
-  //set a localStorage item called "localContent", set it as a stringified library[]
-  //I.E: takes whatever is in the session-based Library[] and saves/sends
+async function sendLibrary() {
+  const data = JSON.stringify(library);
+
+  if (data != []) {
+    localStorage.setItem("localContent", data);
+    //set a localStorage item called "localContent", set it as a stringified library[]
+    //I.E: takes whatever is in the session-based Library[] and saves/sends
+    UserLibrary.updateUserLibrary(data);
+    //also updates firebase Library
+  } else return;
 }
-function getLibrary() {
-  if (localStorage.getItem("localContent") !== null) {
-    let data = localStorage.getItem("localContent");
-    //get localStorage item "localContent" (which is a string)
+
+async function getLibrary() {
+  let firebaseData = await UserLibrary.getUserLibrary();
+
+  let localData = localStorage.getItem("localContent");
+
+  // Parse and convert data to array of objects
+  const rematerialize = (data) => {
     data = JSON.parse(data);
-    //parses (de-strings) library
-    //IMPORTANTLY, still needs to be MAPPED to a proper array of objects using 'reSeries':
     data = reSeries(data);
-    //NOTE: called "data", but it's effectively the library[]
+    // Add to library
     data.forEach((ObjFromArray) => {
       library.push(ObjFromArray);
     });
-    //runs through each obj in the pulled data and pushes to library[] (cant just push whole thing)
-  } else return;
+  };
+
+  if (firebaseData !== null && firebaseData !== undefined) {
+    // If Firebase Library has data, use it
+    rematerialize(firebaseData);
+  } else if (localData !== null && localData != undefined) {
+    // If Firebase Library doesn't have data but localStorage does, use localStorage data
+    rematerialize(localData);
+  } else {
+    // If neither Firebase Library nor localStorage have data, return
+    return;
+  }
 }
 //-----------------------------------------------------------------------------//
-
 
 //This function runs when you click 'Query'
 /////////////////////
@@ -315,13 +330,10 @@ window.queryData = queryData;
 //Checks if library is empty, displays default image if so//
 function emptyChecker() {
   if (library.length === 0) {
-    //document.querySelector("div#coreContainer").innerHTML = joePieHtml;
-
-    //document.querySelector("#joePie").style.display = "flex";
-    displaySwitch("joePie")
-    return true
-   } else displaySwitch("library")
-  return false
+    displaySwitch("joePie");
+    return true;
+  } else displaySwitch("library");
+  return false;
 }
 //emptyChecker();
 ////////////////////////////////////////////////////////////
@@ -332,7 +344,7 @@ function displaySwitch(mode) {
   document.querySelector("#library").style.display = "none";
   //document.querySelector("dialog.mdl-dialog.firebaseui-dialog.firebaseui-id-dialog").style.display = "none";
 
-  switch(mode) {
+  switch (mode) {
     case "joePie":
       document.querySelector("#joePie").style.display = "flex";
       break;
@@ -351,6 +363,7 @@ function displaySwitch(mode) {
 // Actually runs the card-creation function, and then appends that card to the page
 // Renders based on the session-based Library[]
 function renderCards(givenLibrary) {
+  console.log(givenLibrary);
   if (givenLibrary) {
     givenLibrary.forEach((ObjFromArray) => {
       //Note that 'card' here is different in scope!! And is therefore separate. Confusing huh
@@ -369,7 +382,6 @@ function renderCards(givenLibrary) {
 //
 //Note that 'card' here is different in scope!! And is therefore separate. Confusing huh
 
-
 //This function gets called from something else (renderCards)
 function createCard(obj) {
   const card = document.createElement("div");
@@ -382,7 +394,7 @@ function createCard(obj) {
   card.appendChild(banner);
 
   const completeP = document.createElement("p");
-  completeP.classList.add("card1stRowText")
+  completeP.classList.add("card1stRowText");
   const completeStrong = document.createElement("strong");
   completeStrong.textContent = "Filming: ";
   completeP.appendChild(completeStrong);
@@ -401,7 +413,7 @@ function createCard(obj) {
   card.appendChild(completeP);
 
   const linkP = document.createElement("p");
-  linkP.classList.add("card2ndRowText")
+  linkP.classList.add("card2ndRowText");
   const linkStrong = document.createElement("strong");
   const linkA = document.createElement("a");
   linkA.textContent = "Link";
@@ -409,7 +421,7 @@ function createCard(obj) {
   linkP.appendChild(linkStrong);
   linkStrong.appendChild(linkA);
   let linkSvg = document.createElement("img");
-  linkSvg.src = "./link.svg"
+  linkSvg.src = "./link.svg";
   linkA.appendChild(linkSvg);
 
   card.appendChild(linkP);
