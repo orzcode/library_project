@@ -7,16 +7,13 @@ import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
 
 import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import {
-  initializeFirestore,
   getFirestore,
-  collection,
   doc,
   getDoc,
   setDoc,
   updateDoc,
-  addDoc,
   serverTimestamp,
 } from "firebase/firestore";
 //////////////////////////////////////////////////////
@@ -178,10 +175,6 @@ const UserLibrary = (() => {
   };
 })();
 
-
-// document.querySelector("#test").addEventListener("click", function () {
-//   UserLibrary.getUserLibrary();
-// });
 ////////////////////////////////////////////////////////
 
 const checkUserExists = async (userId) => {

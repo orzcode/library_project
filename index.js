@@ -6,6 +6,10 @@ import { auth, uiConfig, ui, UserLibrary } from "./firebasestuff.js";
 const signOutButton = document.querySelector("#signOut");
 signOutButton.addEventListener("click", signOut);
 
+// document.querySelector("#test").addEventListener("click", function () {
+//   UserLibrary.getUserLibrary();
+// });
+
 let library = [];
 
 const libraryDiv = document.querySelector("#library");
