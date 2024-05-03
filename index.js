@@ -1,19 +1,11 @@
 import setColors from "./colors.js";
-setColors()
+setColors();
 ////////////////////////////////////////////////////////
 export { authCheck };
 ////////////////////////////////////////////////////////
 import { auth, uiConfig, ui, UserLibrary } from "./firebasestuff.js";
 /////////////////////////////////////////////////////////
-const signOutButton = document.querySelector("#signOut");
-signOutButton.addEventListener("click", signOut);
-
-// document.querySelector("#test").addEventListener("click", function () {
-//   UserLibrary.getUserLibrary();
-// });
-
 let library = [];
-
 const libraryDiv = document.querySelector("#library");
 /////////////////////////////////////////////////////////
 // Loader needed in all 3 cases:
@@ -74,17 +66,8 @@ async function authCheck() {
     UserLibrary.setUserId(user.uid);
     //sets this user's ID for automatic library get/save operations
 
-    //"Add a show" header is hidden initially
-    //this loads it upon user sign-in
-    document.querySelector("#header2").style.display = "flex";
-
-    getLibrary().then(() => {
-      if (!emptyChecker()) {
-        //if library isn't empty, then:
-        displaySwitch("library");
-        renderCards(library);
-      }
-    });
+    await initialEntry()
+    //Initial load-up of library/exiting welcome screen
 
     signOutButton.style.display = "inline-flex";
     //and show the sign out button
@@ -96,15 +79,58 @@ async function authCheck() {
     ui.start("#firebaseui-auth-container", uiConfig);
   }
 }
-
 /////////////////////////////////////////////////////////
-function signOut() {
-  auth.signOut();
-  signOutButton.style.display = "none";
+/////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
+const signOutButton = document.querySelector("#signOut");
+signOutButton.addEventListener("click", function() {
+  signInOut("out");
+});
+const signInButton = document.querySelector("#signIn");
+signInButton.addEventListener("click", function() {
+  signInOut("in");
+});
 
+document
+  .querySelector(".authBtnsDiv")
+  .appendChild(document.querySelector("#demoMode"));
+document.querySelector("#demoMode").addEventListener("click", demoButton);
+
+async function demoButton() {
+  await initialEntry()
+  signInButton.style.display = "inline-flex";
+  //show the sign-in button
+}
+
+async function initialEntry() {
+  await getLibrary().then(() => {
+    //"Add a show" header is hidden initially
+    //this loads it upon user sign-in
+    //could change to 'opacity' so it jars less?
+    document.querySelector("#header2").style.display = "flex";
+
+    if (!emptyChecker()) {
+      //if library isn't empty, then:
+      displaySwitch("library");
+      renderCards(library);
+    }
+  });
+}
+function signInOut(type) {
+  switch (type) {
+    case "out":
+      auth.signOut();
+      signOutButton.style.display = "none";
+      break;
+    case "in":
+      signInButton.style.display = "none";
+      break;
+  }
   location.reload();
   //refreshes page
 }
+/////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
 //Series constructor function//
 export class Series {
@@ -203,14 +229,7 @@ export function modalOpenTasks() {
   document.querySelector("#no").style.cursor = "not-allowed";
 
   document.querySelector("#saveSeries").disabled = true;
-  // document.body.style.position = "sticky";
   document.body.style.overflowY = "hidden";
-
-  // if (screen.orientation.type === "landscape-primary") {
-  //   document.body.style.paddingRight = "15px";
-  //   document.querySelector("#header").style.width = "calc(100% + 15px)";
-  //   document.querySelector("#header").style.paddingRight = "15px";
-  // }
 
   setTimeout(function () {
     document.getElementById("seriesName").focus();
@@ -218,20 +237,8 @@ export function modalOpenTasks() {
   //Sets focus to input field on modal load - needs a timeout for some reason
 }
 window.modalOpenTasks = modalOpenTasks;
-//--this is some wacky shit, and on mobile, it seems to move to the LEFT
-//"fixed" this with viewport size checking.
 
 export function closeModal() {
-  // document.body.style.removeProperty('position');
-  //document.body.style.overflowY = "visible";
-  // document.body.style.position = "";
-
-  // if (screen.orientation.type === "landscape-primary") {
-  //   document.body.style.paddingRight = "";
-  //   document.querySelector("#header").style.width = "100%";
-  //   document.querySelector("#header").style.paddingRight = "";
-  //   document.querySelector("#coreContainer").style.paddingLeft = "";
-  // }
   document.querySelector("#formDialog").close();
 }
 window.closeModal = closeModal;
@@ -265,7 +272,7 @@ async function getLibrary() {
     });
   };
 
-  if (firebaseData !== null && firebaseData !== undefined) {
+  if (firebaseData !== null && firebaseData !== undefined && !(firebaseData instanceof Error)) {
     // If Firebase Library has data, use it
     rematerialize(firebaseData);
   } else if (localData !== null && localData != undefined) {
@@ -348,7 +355,6 @@ function displaySwitch(mode) {
   document.querySelector("#welcome").style.display = "none";
   document.querySelector("#loader").style.display = "none";
   document.querySelector("#library").style.display = "none";
-  //document.querySelector("dialog.mdl-dialog.firebaseui-dialog.firebaseui-id-dialog").style.display = "none";
 
   switch (mode) {
     case "joePie":
@@ -369,7 +375,6 @@ function displaySwitch(mode) {
 // Actually runs the card-creation function, and then appends that card to the page
 // Renders based on the session-based Library[]
 function renderCards(givenLibrary) {
-  console.log(givenLibrary);
   if (givenLibrary) {
     givenLibrary.forEach((ObjFromArray) => {
       //Note that 'card' here is different in scope!! And is therefore separate. Confusing huh
@@ -487,7 +492,6 @@ async function getDataFromTVMaze(searchTerm) {
   try {
     const response = await fetch(searchUrl);
     if (!response.ok) {
-      // throw new Error(`API error: ${response.status}`);
       throw new Error(`No result for "${searchTerm}"`);
     }
     const data = await response.json();
@@ -503,5 +507,3 @@ async function getDataFromTVMaze(searchTerm) {
   }
 }
 //--------------------------------------------------------//
-
-

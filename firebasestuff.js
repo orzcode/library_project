@@ -33,11 +33,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-//compat - older
-// const app = firebase.initializeApp(firebaseConfig);
-// const auth = firebase.auth(app);
-// const db = firebase.firestore(app);
-
 const uiConfig = {
   signInOptions: [
     {
@@ -145,17 +140,23 @@ const UserLibrary = (() => {
   };
 
   const getUserLibrary = async () => {
-    //usage: UserLibrary.getUserLibrary() to get a string of their library
-    const userRef = doc(db, "users", getUserId());
-
-    const userDocSnapshot = await getDoc(userRef);
-
-    let data = userDocSnapshot.data();
-
-    let libraryString = data.libraryJSONString;
-
-    return libraryString;
-    //returns the JSON string, ready to be de-coded into an object library
+    try {
+      //usage: UserLibrary.getUserLibrary() to get a string of their library
+      const userRef = doc(db, "users", getUserId());
+  
+      const userDocSnapshot = await getDoc(userRef);
+  
+      let data = userDocSnapshot.data();
+  
+      let libraryString = data.libraryJSONString;
+  
+      return libraryString;
+      //returns the JSON string, ready to be de-coded into an object library
+    } catch (error) {
+      console.error("Firebase retrieval rejected - not logged in");
+      // Logs the rejection, and returns an ERROR so it can be handled elsewhere
+      return error;
+    }
   };
 
   const updateUserLibrary = async (data) => {
@@ -165,7 +166,6 @@ const UserLibrary = (() => {
       libraryJSONString: data,
       timestamp: serverTimestamp(),
     });
-    //console.log("User Library updated on Firebase!");
   };
 
   return {

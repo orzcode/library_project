@@ -82,6 +82,9 @@ html,
   user-select: none;
 }
 
+
+/* ---------------------------------------------------- */
+/* ---------------------------------------------------- */
 .mdl-card form {
   /* this is the firebase container for email link sign-in when entering email*/
   background-color: var(--header);
@@ -160,36 +163,23 @@ html,
   color: whitesmoke;
   border-radius: 1rem;
 }
-
-
-
-
+/* ---------------------------------------------------- */
+/* ---------------------------------------------------- */
 body {
   font-size: 2rem;
   /* font-size: calc(1.5rem + 0.4vw); */
   /* FONTSIZE TRICK-- 1 rem = 10 px here, usually 1 rem = 16px */
   /* FONTSIZE - Adding the 0.4 is for responsivity */
 }
-@font-face {
-  font-family: "twsans";
-  font-style: normal;
-  font-weight: normal;
-  src: local("twsans"), url("twsans.otf") format("opentype");
-}
-/* @font-face {
-  font-family: "A-OTF Shin Go Pro R";
-  font-style: normal;
-  font-weight: normal;
-  src: local("A-OTF Shin Go Pro R"),
-    url("AOTFShinGoProRegular.woff") format("woff");
-} */
-
 li {
   list-style-type: none;
 }
 a {
   text-decoration: none;
   color: inherit;
+}
+input {
+  caret-color: auto;
 }
 /* ---------------------------------------------------- */
 button {
@@ -307,7 +297,7 @@ h1 {
   /* flex-basis: 100vw; */
 }
 
-#signOut {
+#signOut, #signIn {
   position: absolute;
   left: 2.5%;
 
@@ -324,7 +314,7 @@ h1 {
   z-index: 1;
 }
 
-#signOut:hover {
+#signOut:hover, #signIn:hover {
   background-color: var(--btnPrimary);
   filter: brightness(110%);
 }
@@ -373,6 +363,17 @@ h1 {
   flex-direction: column;
   min-height: 35vh;
   justify-content: space-around;
+}
+#demoMode {
+  width: 19.5rem;
+  height: 4rem;
+  font-size: 1.8rem;
+  text-transform: none;
+  box-shadow: 0 2px 2px #00000024,0 3px 1px -2px #0003,0 1px 5px #0000001f;
+  border-color: transparent;
+  outline-color: transparent;
+  background-color: var(--btnPrimary);
+  letter-spacing: 0.15rem;
 }
 
 #joePie {
