@@ -13,9 +13,9 @@ const colorSchemes = [
 	  highlighted: "54, 34, 31",
 	},
 	{
-	  header: "#771c11",
-	  main: "#342321",
-	  highlighted: "119, 28, 17",
+	  header: "#48560e",
+	  main: "#2f3b1e",
+	  highlighted: "84, 100, 18",
 	},
   ];
   
