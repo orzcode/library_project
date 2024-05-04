@@ -1,6 +1,6 @@
 {
 	"name": "Watchlist",
-	"short_name": "Watchlist",
+	"short_name": "Watchlist - TV Series Library",
 	"start_url": "index.html",
 	"icons": [
 	  {
