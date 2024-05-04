@@ -1,0 +1,21 @@
+{
+	"name": "Watchlist",
+	"short_name": "Watchlist",
+	"start_url": "index.html",
+	"icons": [
+	  {
+	  "src": "icon-larger.png",
+	  "sizes": "192x192",
+	  "type": "image/png",
+	  "purpose": "maskable"
+	  },
+	  {
+	  "src": "icon-masked.png",
+	  "sizes": "192x192",
+	  "type": "image/png",
+	  "purpose": "maskable"
+	  }
+   ],
+	"theme_color": "#525252",
+	"background_color": "#525252"
+  }
