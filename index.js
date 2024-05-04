@@ -40,7 +40,7 @@ if (ui.isPendingRedirect()) {
   //Loader already shown natively on pageload
   //append Auth & start UI - hide Auth - (run Auth Check)
 
-  console.log("'pending redirect' triggered");
+  console.log("'Firebase redirect' triggered");
 
   displaySwitch("auth");
   // Start FirebaseUI
@@ -64,7 +64,7 @@ async function authCheck() {
 
   if (user) {
     // User is signed in
-    console.log("authCheck(): User is signed in:", user.email, user.uid);
+    console.log("authCheck(): User is signed in");//, user.email, user.uid)
 
     UserLibrary.setUserId(user.uid);
     //sets this user's ID for automatic library get/save operations

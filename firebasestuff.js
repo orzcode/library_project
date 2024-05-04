@@ -63,11 +63,11 @@ const uiConfig = {
       //
       // If it returns true, then after signing in, user will be redirected to the URL that is specified
       // by signInSuccessUrl. When it returns false, the user will stay on the same page.
-      console.log(
-        "Firebase Sign-in: ",
-        authResult.user.email,
-        authResult.user.uid
-      );
+      // console.log(
+      //   "Firebase Sign-in: ",
+      //   authResult.user.email,
+      //   authResult.user.uid
+      // );
 
       checkUserExists(authResult.user.uid).then(() => {
         //Have to wait for checkUser / Library creation (called by checkUser)
